@@ -1,6 +1,9 @@
 <template>
   <v-container fluid>
-    <v-alert v-show="isStarted" type="info">
+    <v-alert
+      v-show="isStarted"
+      type="info"
+    >
       After Node-RED is started, it cannot be update.
     </v-alert>
 
@@ -32,7 +35,7 @@
       prepend-icon="mdiPaperclip"
       :disabled="!hasOwned || loadingCopy || loadingReset"
       @click="select"
-    ></v-text-field>
+    />
 
     <v-row class="mb-5">
       <v-btn
@@ -44,7 +47,11 @@
         @click="copy"
       >
         Upload
-        <v-icon right dark icon="mdiCloudUpload" />
+        <v-icon
+          right
+          dark
+          icon="mdiCloudUpload"
+        />
       </v-btn>
       <v-btn
         v-show="!isStarted"
@@ -58,7 +65,12 @@
       </v-btn>
     </v-row>
 
-    <v-alert v-show="!isStarted" outlined color="blue-grey" icon="mdiSchool">
+    <v-alert
+      v-show="!isStarted"
+      outlined
+      color="blue-grey"
+      icon="mdiSchool"
+    >
       <div class="title">
         How to update the node-module for custom node RED.
       </div>
@@ -69,8 +81,7 @@
             <a
               href="https://github.com/okhiroyuki/redmobile-modules-generator"
               target="_blank"
-              >a reference</a
-            >.
+            >a reference</a>.
           </li>
           <li>
             Set the generated <strong>node_modules.zip</strong> to the Android
@@ -80,7 +91,7 @@
           <li>Press upload button to automatically restart the system.</li>
           <li>it will be reflected after reboot.</li>
         </ol>
-        <br />
+        <br>
         <strong>Note: </strong>
         <p>
           Reset to initialize to the preset contents. Be sure to reboot in this
@@ -89,10 +100,18 @@
       </div>
     </v-alert>
 
-    <v-snackbar v-model="snackbar" :timeout="timeout">
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+    >
       {{ snackbarText }}
-      <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+      <template #action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
           Close
         </v-btn>
       </template>
@@ -120,10 +139,6 @@ export default {
     mdiSchool,
     mdiPaperclip,
   }),
-  async created() {
-    const result = await this.$root.canPurchase();
-    this.canPurchase = result;
-  },
   computed: {
     isStarted() {
       return this.$root.status === "started";
@@ -131,6 +146,10 @@ export default {
     hasOwned() {
       return this.$root.owned;
     },
+  },
+  async created() {
+    const result = await this.$root.canPurchase();
+    this.canPurchase = result;
   },
   methods: {
     async select() {

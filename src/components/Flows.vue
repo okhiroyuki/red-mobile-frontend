@@ -1,6 +1,9 @@
 <template>
   <v-container fluid>
-    <v-alert v-show="disabled" type="info">
+    <v-alert
+      v-show="disabled"
+      type="info"
+    >
       After Node-RED is up and running, flow data can be updated.
     </v-alert>
 
@@ -19,26 +22,44 @@
       @click="upload"
     >
       Upload
-      <v-icon right dark icon="mdiCloudUpload" />
+      <v-icon
+        right
+        dark
+        icon="mdiCloudUpload"
+      />
     </v-btn>
 
-    <v-alert v-show="!disabled" outlined color="blue-grey" icon="mdiSchool">
-      <div class="title">Importing and Exporting Flows</div>
+    <v-alert
+      v-show="!disabled"
+      outlined
+      color="blue-grey"
+      icon="mdiSchool"
+    >
+      <div class="title">
+        Importing and Exporting Flows
+      </div>
       <div>
         Flows can be imported and exported from the editor using their JSON
-        format, making it very easy to share flows with others.<br />For more
+        format, making it very easy to share flows with others.<br>For more
         information, please refer to
         <a
           href="https://nodered.org/docs/user-guide/editor/workspace/import-export"
           target="_blank"
-          >here</a
-        >.
+        >here</a>.
       </div>
     </v-alert>
-    <v-snackbar v-model="snackbar" :timeout="timeout">
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+    >
       {{ snackbarText }}
-      <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+      <template #action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
           Close
         </v-btn>
       </template>

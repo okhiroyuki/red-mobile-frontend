@@ -3,14 +3,11 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ["eslint:recommended", "plugin:vue/essential"],
+  extends: ["eslint:recommended", "plugin:vue/vue3-recommended"],
   parserOptions: {
-    ecmaVersion: 12,
-    sourceType: "module",
     parser: "@babel/eslint-parser",
     requireConfigFile: false,
   },
-  plugins: ["vue"],
   rules: {
     quotes: ["error", "double"],
     "comma-dangle": ["error", "only-multiline"],

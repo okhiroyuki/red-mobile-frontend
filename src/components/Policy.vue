@@ -1,6 +1,6 @@
 <template>
   <v-card :loading="isLoading">
-    <v-card-text v-html="data"> </v-card-text>
+    <v-card-text>{{ data }} </v-card-text>
   </v-card>
 </template>
 

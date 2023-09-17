@@ -2,7 +2,10 @@
   <v-card>
     <v-list>
       <template v-for="(item, index) in items">
-        <v-divider v-if="item.divider" :key="index" />
+        <v-divider
+          v-if="item.divider"
+          :key="index"
+        />
         <v-list-item
           v-else
           :key="item.title"

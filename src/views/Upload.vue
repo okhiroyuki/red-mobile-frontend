@@ -41,7 +41,7 @@ export default {
       this.select = n;
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     selectWatch();
   },
 };

@@ -2,13 +2,19 @@
   <v-list nav>
     <v-list-item>
       <v-avatar size="36px">
-        <v-img alt="Avatar" src="@/assets/logo.png" />
+        <v-img
+          alt="Avatar"
+          src="@/assets/logo.png"
+        />
       </v-avatar>
       <v-list-item-content> RedMobile </v-list-item-content>
     </v-list-item>
     <v-divider />
 
-    <v-list-item-group v-model="selectedItem" active-class="text--accent-4">
+    <v-list-item-group
+      v-model="selectedItem"
+      active-class="text--accent-4"
+    >
       <v-list-item
         v-for="(item, i) in items"
         :key="i"
@@ -22,7 +28,10 @@
         <v-list-item-content>
           <v-list-item-title v-text="item.text" />
         </v-list-item-content>
-        <v-icon v-if="item.subIcon" icon="item.subIcon" />
+        <v-icon
+          v-if="item.subIcon"
+          icon="item.subIcon"
+        />
       </v-list-item>
       <v-list-item>
         <v-list-item-icon>
@@ -53,6 +62,7 @@ export default {
     // eslint-disable-next-line vue/require-default-prop
     version: String,
   },
+  emits: ["event-click"],
   data: () => ({
     selectedItem: 1,
     mdiInformationVariant,

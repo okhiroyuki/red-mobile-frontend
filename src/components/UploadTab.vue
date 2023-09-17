@@ -1,6 +1,14 @@
 <template>
-  <v-tabs v-model="model" fixed-tabs>
-    <v-tab v-for="(item, i) in items" :key="i" :href="`#tab-${i}`" @click="click(`${i}`)">
+  <v-tabs
+    v-model="model"
+    fixed-tabs
+  >
+    <v-tab
+      v-for="(item, i) in items"
+      :key="i"
+      :href="`#tab-${i}`"
+      @click="click(`${i}`)"
+    >
       {{ item.title }}
     </v-tab>
   </v-tabs>

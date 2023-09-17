@@ -6,7 +6,13 @@
       label="Env file"
       @change="selectedFile"
     />
-    <v-textarea solo name="input-7-4" label="Data" :value="readData" disabled />
+    <v-textarea
+      solo
+      name="input-7-4"
+      label="Data"
+      :value="readData"
+      disabled
+    />
     <v-row class="mb-5">
       <v-btn
         class="ma-1 white--text"
@@ -16,7 +22,11 @@
         @click="clickUpload"
       >
         Upload
-        <v-icon right dark icon="mdiCloudUpload" />
+        <v-icon
+          right
+          dark
+          icon="mdiCloudUpload"
+        />
       </v-btn>
       <v-btn
         class="ma-1 white--text"
@@ -27,8 +37,14 @@
         Reset
       </v-btn>
     </v-row>
-    <v-alert outlined color="blue-grey" icon="mdiSchool">
-      <div class="title">Using environment variables</div>
+    <v-alert
+      outlined
+      color="blue-grey"
+      icon="mdiSchool"
+    >
+      <div class="title">
+        Using environment variables
+      </div>
       <div>
         <p>
           Please prepare env.txt. Environment variables should be added on a new
@@ -37,11 +53,11 @@
         </p>
         <p>For example:</p>
         <blockquote>
-          DB_HOST=localhost<br />
-          DB_USER=root<br />
-          DB_PASS=s1mpl3<br />
+          DB_HOST=localhost<br>
+          DB_USER=root<br>
+          DB_PASS=s1mpl3<br>
         </blockquote>
-        <br />
+        <br>
         <p>
           Environment variables will always be overwritten. If you want to
           delete the content, please RESET.
@@ -51,15 +67,22 @@
           <a
             href="https://nodered.org/docs/user-guide/environment-variables"
             target="_blank"
-            >here</a
-          >.
+          >here</a>.
         </p>
       </div>
     </v-alert>
-    <v-snackbar v-model="snackbar" :timeout="timeout">
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+    >
       {{ snackbarText }}
-      <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+      <template #action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
           Close
         </v-btn>
       </template>

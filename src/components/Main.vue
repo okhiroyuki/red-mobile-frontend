@@ -35,23 +35,31 @@
     </v-row>
     <v-row no-gutters>
       <v-col>
-        <v-checkbox class="mt-0 mr-1" v-model="keepAwake" label="keepAwake" />
-      </v-col>
-      <v-col>
-        <v-checkbox class="mt-0 mr-1" v-model="autoStart" label="AutoStart" />
+        <v-checkbox
+          v-model="keepAwake"
+          class="mt-0 mr-1"
+          label="keepAwake"
+        />
       </v-col>
       <v-col>
         <v-checkbox
+          v-model="autoStart"
           class="mt-0 mr-1"
+          label="AutoStart"
+        />
+      </v-col>
+      <v-col>
+        <v-checkbox
           v-model="env"
+          class="mt-0 mr-1"
           label="CustomEnv"
           disabled
         />
       </v-col>
       <v-col>
         <v-checkbox
-          class="mt-0 mr-1"
           v-model="hasModules"
+          class="mt-0 mr-1"
           label="CustomModules"
           disabled
         />
@@ -70,7 +78,10 @@
           @click="click"
         >
           {{ buttonTitle }}
-          <v-icon v-if="isStarted" icon="mdiOpenInNew" />
+          <v-icon
+            v-if="isStarted"
+            icon="mdiOpenInNew"
+          />
         </v-btn>
       </v-col>
     </v-row>
@@ -84,25 +95,38 @@
         fixed
         @click="dashboard"
       >
-        <v-icon color="white" icon="mdiChartBox" />
+        <v-icon
+          color="white"
+          icon="mdiChartBox"
+        />
       </v-btn>
     </v-fab-transition>
     <div class="mt-5">
       <v-alert
+        v-show="!hasPermission"
         border="left"
         colored-border
         type="info"
         elevation="2"
-        v-show="!hasPermission"
       >
         Check the permissions required to use the app in Menu >
-        <router-link to="/setting">Setting</router-link>.
+        <router-link to="/setting">
+          Setting
+        </router-link>.
       </v-alert>
     </div>
-    <v-snackbar v-model="snackbar" :timeout="timeout">
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+    >
       {{ snackbarText }}
-      <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+      <template #action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
           Close
         </v-btn>
       </template>
@@ -214,7 +238,7 @@ export default {
       this.setLoading();
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     ipWatch();
     statusWatch();
   },

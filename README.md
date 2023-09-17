@@ -1,5 +1,12 @@
 # redmobile-frontend
 
+## Prepare
+
+```zsh
+nodenv isntall
+npm i -g @vue/cli
+```
+
 ## Project setup
 
 ```bash

@@ -1,18 +1,16 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="$root.sidebar" absolute temporary app>
-      <NavList :version="version" @event-click="closeDrawer" />
-    </v-navigation-drawer>
-
     <v-app-bar color="red darken-4" dark app>
-      <v-app-bar-nav-icon @click="navClick">
-        <v-icon v-text="appIcon" />
-      </v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="navClick" :icon="appIcon" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <template v-if="showTab" v-slot:extension>
         <Tab />
       </template>
     </v-app-bar>
+
+    <v-navigation-drawer v-model="$root.sidebar" absolute temporary>
+      <NavList :version="version" @event-click="closeDrawer" />
+    </v-navigation-drawer>
 
     <v-main>
       <v-container fluid>
@@ -29,6 +27,7 @@
 <script>
 import NavList from "@/components/NavList.vue";
 import Tab from "@/components/UploadTab.vue";
+import { mdiMenu } from "@mdi/js";
 
 export default {
   components: {
@@ -38,7 +37,7 @@ export default {
   data: () => ({
     navigation: false,
     title: "RedMobile",
-    appIcon: "mdi-menu",
+    appIcon: mdiMenu,
     showTab: false,
     selectTab: 0,
     version: "",
@@ -58,7 +57,7 @@ export default {
     // eslint-disable-next-line no-unused-vars
     navClick(e) {
       this.version = this.$root.getVersion();
-      if (this.appIcon === "mdi-menu") {
+      if (this.appIcon === mdiMenu) {
         this.$root.sidebar = true;
       } else {
         this.$router.push({ path: "/" });

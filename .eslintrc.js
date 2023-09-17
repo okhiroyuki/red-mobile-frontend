@@ -3,17 +3,21 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ["eslint:recommended", "plugin:vue/essential", "airbnb-base"],
+  extends: ["eslint:recommended", "plugin:vue/essential"],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: "module",
-    parser: "babel-eslint",
+    parser: "@babel/eslint-parser",
+    requireConfigFile: false,
   },
   plugins: ["vue"],
   rules: {
     quotes: ["error", "double"],
     "comma-dangle": ["error", "only-multiline"],
     "operator-linebreak": ["error", "after"],
+    "vue/multi-word-component-names": "off",
+    "vue/no-reserved-component-names": "off",
+    "vue/no-v-text-v-html-on-component": "off",
   },
   globals: {
     cordova: true,

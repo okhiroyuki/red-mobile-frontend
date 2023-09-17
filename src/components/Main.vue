@@ -2,14 +2,19 @@
   <v-container fluid>
     <v-row no-gutters>
       <v-col>
-        <v-text-field v-model="username" type="text" :disabled="disabled" label="Username" />
+        <v-text-field
+          v-model="username"
+          type="text"
+          :disabled="disabled"
+          label="Username"
+        />
       </v-col>
     </v-row>
     <v-row no-gutters>
       <v-col>
         <v-text-field
           v-model="password"
-          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          :append-icon="show ? 'mdiEye' : 'mdiEyeOff'"
           :type="show ? 'text' : 'password'"
           label="Password"
           :disabled="disabled"
@@ -36,10 +41,20 @@
         <v-checkbox class="mt-0 mr-1" v-model="autoStart" label="AutoStart" />
       </v-col>
       <v-col>
-        <v-checkbox class="mt-0 mr-1" v-model="env" label="CustomEnv" disabled />
+        <v-checkbox
+          class="mt-0 mr-1"
+          v-model="env"
+          label="CustomEnv"
+          disabled
+        />
       </v-col>
       <v-col>
-        <v-checkbox class="mt-0 mr-1" v-model="hasModules" label="CustomModules" disabled />
+        <v-checkbox
+          class="mt-0 mr-1"
+          v-model="hasModules"
+          label="CustomModules"
+          disabled
+        />
       </v-col>
     </v-row>
     <v-row class="mt-1">
@@ -55,17 +70,31 @@
           @click="click"
         >
           {{ buttonTitle }}
-          <v-icon v-if="isStarted"> mdi-open-in-new </v-icon>
+          <v-icon v-if="isStarted" icon="mdiOpenInNew" />
         </v-btn>
       </v-col>
     </v-row>
     <v-fab-transition>
-      <v-btn v-show="isStarted" color="red darken-3" fab bottom right fixed @click="dashboard">
-        <v-icon color="white"> mdi-chart-box </v-icon>
+      <v-btn
+        v-show="isStarted"
+        color="red darken-3"
+        fab
+        bottom
+        right
+        fixed
+        @click="dashboard"
+      >
+        <v-icon color="white" icon="mdiChartBox" />
       </v-btn>
     </v-fab-transition>
     <div class="mt-5">
-      <v-alert border="left" colored-border type="info" elevation="2" v-show="!hasPermission">
+      <v-alert
+        border="left"
+        colored-border
+        type="info"
+        elevation="2"
+        v-show="!hasPermission"
+      >
         Check the permissions required to use the app in Menu >
         <router-link to="/setting">Setting</router-link>.
       </v-alert>
@@ -73,19 +102,27 @@
     <v-snackbar v-model="snackbar" :timeout="timeout">
       {{ snackbarText }}
       <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
       </template>
     </v-snackbar>
   </v-container>
 </template>
 
 <script>
+import { mdiChartBox, mdiOpenInNew, mdiEye, mdiEyeOff } from "@mdi/js";
+
 let vm;
 let ipWatch;
 let statusWatch;
 
 export default {
   data: () => ({
+    mdiChartBox,
+    mdiOpenInNew,
+    mdiEye,
+    mdiEyeOff,
     show: false,
     username: "",
     password: "",

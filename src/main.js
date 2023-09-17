@@ -1,4 +1,4 @@
-import Vue from "vue";
+import { createApp, h } from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import App from "./App.vue";
@@ -10,15 +10,13 @@ import * as Modules from "./cordova/modules";
 import vuetify from "./plugins/vuetify";
 import router from "./router";
 
-Vue.use(VueAxios, axios);
-Vue.config.productionTip = false;
-
 let ip;
 let status;
 let selectTab;
 let owned;
 let hasModules;
 let sidebar;
+
 const permission = {
   camera: false,
   mic: false,
@@ -27,8 +25,8 @@ const permission = {
   bluetooth: false,
 };
 
-new Vue({
-  data: {
+const app = createApp({
+  data: () => ({
     ip,
     status,
     selectTab,
@@ -36,7 +34,7 @@ new Vue({
     hasModules,
     permission,
     sidebar,
-  },
+  }),
 
   beforeCreate() {
     sidebar = false;
@@ -113,8 +111,13 @@ new Vue({
       return Util.requestReview();
     },
   },
+  render() {
+    return h(App);
+  },
+});
 
-  vuetify,
-  router,
-  render: (h) => h(App),
-}).$mount("#app");
+app.config.productionTip = false;
+app.use(VueAxios, axios);
+app.use(router);
+app.use(vuetify);
+app.mount("#app");

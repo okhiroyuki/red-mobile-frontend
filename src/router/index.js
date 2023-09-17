@@ -1,8 +1,6 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-
-Vue.use(VueRouter);
+import { mdiMenu, mdiArrowLeft } from "@mdi/js";
 
 const routes = [
   {
@@ -11,7 +9,7 @@ const routes = [
     component: Home,
     meta: {
       title: "RedMobile",
-      icon: "mdi-menu",
+      icon: mdiMenu,
       tab: false,
     },
   },
@@ -20,47 +18,51 @@ const routes = [
     name: "Upload",
     meta: {
       title: "Upload",
-      icon: "mdi-arrow-left",
+      icon: mdiArrowLeft,
       tab: true,
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/Upload.vue"),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Upload.vue"),
   },
   {
     path: "/setting",
     name: "Setting",
     meta: {
       title: "Setting",
-      icon: "mdi-arrow-left",
+      icon: mdiArrowLeft,
       tab: false,
     },
-    component: () => import(/* webpackChunkName: "about" */ "../views/Setting.vue"),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Setting.vue"),
   },
   {
     path: "/license",
     name: "License",
     meta: {
       title: "License",
-      icon: "mdi-arrow-left",
+      icon: mdiArrowLeft,
       tab: false,
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/License.vue"),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/License.vue"),
   },
   {
     path: "/forum",
     name: "Forum",
     meta: {
       title: "Forum",
-      icon: "mdi-arrow-left",
+      icon: mdiArrowLeft,
       tab: false,
     },
     beforeEnter() {
-      window.location = "https://groups.google.com/forum/?hl=ja#!forum/redmobile-apps";
+      window.location =
+        "https://groups.google.com/forum/?hl=ja#!forum/redmobile-apps";
     },
   },
   {
@@ -68,14 +70,16 @@ const routes = [
     name: "Privacy Policy",
     meta: {
       title: "Privacy Policy",
-      icon: "mdi-arrow-left",
+      icon: mdiArrowLeft,
       tab: false,
     },
-    component: () => import(/* webpackChunkName: "about" */ "../views/Policy.vue"),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Policy.vue"),
   },
 ];
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
 });
 

@@ -12,15 +12,24 @@
       elevation="2"
     >
       <p>To use this feature, you need to purchase a subscription.</p>
-      <p>If you can't press the buy button, please select another tab and come back.</p>
-      <v-btn color="primary" :disabled="purchase || !canPurchase" @click="order"> Purchase </v-btn>
+      <p>
+        If you can't press the buy button, please select another tab and come
+        back.
+      </p>
+      <v-btn
+        color="primary"
+        :disabled="purchase || !canPurchase"
+        @click="order"
+      >
+        Purchase
+      </v-btn>
     </v-alert>
 
     <v-text-field
       v-show="!isStarted"
       label="modules"
       :value="filename"
-      prepend-icon="mdi-paperclip"
+      prepend-icon="mdiPaperclip"
       :disabled="!hasOwned || loadingCopy || loadingReset"
       @click="select"
     ></v-text-field>
@@ -35,7 +44,7 @@
         @click="copy"
       >
         Upload
-        <v-icon right dark> mdi-cloud-upload </v-icon>
+        <v-icon right dark icon="mdiCloudUpload" />
       </v-btn>
       <v-btn
         v-show="!isStarted"
@@ -49,37 +58,51 @@
       </v-btn>
     </v-row>
 
-    <v-alert v-show="!isStarted" outlined color="blue-grey" icon="mdi-school">
-      <div class="title">How to update the node-module for custom node RED.</div>
+    <v-alert v-show="!isStarted" outlined color="blue-grey" icon="mdiSchool">
+      <div class="title">
+        How to update the node-module for custom node RED.
+      </div>
       <div>
         <ol>
           <li>
             Generate <strong>node_modules.zip</strong> using this as
-            <a href="https://github.com/okhiroyuki/redmobile-modules-generator" target="_blank"
+            <a
+              href="https://github.com/okhiroyuki/redmobile-modules-generator"
+              target="_blank"
               >a reference</a
             >.
           </li>
-          <li>Set the generated <strong>node_modules.zip</strong> to the Android device.</li>
+          <li>
+            Set the generated <strong>node_modules.zip</strong> to the Android
+            device.
+          </li>
           <li>Select the <strong>node_modules.zip</strong> file.</li>
           <li>Press upload button to automatically restart the system.</li>
           <li>it will be reflected after reboot.</li>
         </ol>
         <br />
         <strong>Note: </strong>
-        <p>Reset to initialize to the preset contents. Be sure to reboot in this case as well.</p>
+        <p>
+          Reset to initialize to the preset contents. Be sure to reboot in this
+          case as well.
+        </p>
       </div>
     </v-alert>
 
     <v-snackbar v-model="snackbar" :timeout="timeout">
       {{ snackbarText }}
       <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
       </template>
     </v-snackbar>
   </v-container>
 </template>
 
 <script>
+import { mdiCloudUpload, mdiSchool, mdiPaperclip } from "@mdi/js";
+
 export default {
   data: () => ({
     uri: "",
@@ -93,6 +116,9 @@ export default {
     purchase: false,
     canPurchase: false,
     loadingPurchase: false,
+    mdiCloudUpload,
+    mdiSchool,
+    mdiPaperclip,
   }),
   async created() {
     const result = await this.$root.canPurchase();

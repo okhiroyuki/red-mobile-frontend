@@ -1,6 +1,11 @@
 <template>
   <v-container fluid>
-    <v-file-input v-model="filename" accept="*" label="Env file" @change="selectedFile" />
+    <v-file-input
+      v-model="filename"
+      accept="*"
+      label="Env file"
+      @change="selectedFile"
+    />
     <v-textarea solo name="input-7-4" label="Data" :value="readData" disabled />
     <v-row class="mb-5">
       <v-btn
@@ -11,7 +16,7 @@
         @click="clickUpload"
       >
         Upload
-        <v-icon right dark> mdi-cloud-upload </v-icon>
+        <v-icon right dark icon="mdiCloudUpload" />
       </v-btn>
       <v-btn
         class="ma-1 white--text"
@@ -22,11 +27,12 @@
         Reset
       </v-btn>
     </v-row>
-    <v-alert outlined color="blue-grey" icon="mdi-school">
+    <v-alert outlined color="blue-grey" icon="mdiSchool">
       <div class="title">Using environment variables</div>
       <div>
         <p>
-          Please prepare env.txt. Environment variables should be added on a new line in the form of
+          Please prepare env.txt. Environment variables should be added on a new
+          line in the form of
           <code>NAME=VALUE</code>.
         </p>
         <p>For example:</p>
@@ -37,12 +43,14 @@
         </blockquote>
         <br />
         <p>
-          Environment variables will always be overwritten. If you want to delete the content,
-          please RESET.
+          Environment variables will always be overwritten. If you want to
+          delete the content, please RESET.
         </p>
         <p>
           To use environment variables in Node-RED, see
-          <a href="https://nodered.org/docs/user-guide/environment-variables" target="_blank"
+          <a
+            href="https://nodered.org/docs/user-guide/environment-variables"
+            target="_blank"
             >here</a
           >.
         </p>
@@ -51,13 +59,17 @@
     <v-snackbar v-model="snackbar" :timeout="timeout">
       {{ snackbarText }}
       <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
       </template>
     </v-snackbar>
   </v-container>
 </template>
 
 <script>
+import { mdiCloudUpload, mdiSchool } from "@mdi/js";
+
 export default {
   data: () => ({
     filename: null,
@@ -68,6 +80,8 @@ export default {
     snackbarText: "",
     timeout: 2000,
     readData: "",
+    mdiCloudUpload,
+    mdiSchool,
   }),
   created() {
     this.disabledReset = !this.$root.hasEnv();

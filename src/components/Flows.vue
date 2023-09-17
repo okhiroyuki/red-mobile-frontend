@@ -19,15 +19,18 @@
       @click="upload"
     >
       Upload
-      <v-icon right dark> mdi-cloud-upload </v-icon>
+      <v-icon right dark icon="mdiCloudUpload" />
     </v-btn>
 
-    <v-alert v-show="!disabled" outlined color="blue-grey" icon="mdi-school">
+    <v-alert v-show="!disabled" outlined color="blue-grey" icon="mdiSchool">
       <div class="title">Importing and Exporting Flows</div>
       <div>
-        Flows can be imported and exported from the editor using their JSON format, making it very
-        easy to share flows with others.<br />For more information, please refer to
-        <a href="https://nodered.org/docs/user-guide/editor/workspace/import-export" target="_blank"
+        Flows can be imported and exported from the editor using their JSON
+        format, making it very easy to share flows with others.<br />For more
+        information, please refer to
+        <a
+          href="https://nodered.org/docs/user-guide/editor/workspace/import-export"
+          target="_blank"
           >here</a
         >.
       </div>
@@ -35,13 +38,17 @@
     <v-snackbar v-model="snackbar" :timeout="timeout">
       {{ snackbarText }}
       <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
       </template>
     </v-snackbar>
   </v-container>
 </template>
 
 <script>
+import { mdiCloudUpload, mdiSchool } from "@mdi/js";
+
 export default {
   data: () => ({
     data: "",
@@ -50,6 +57,8 @@ export default {
     snackbar: false,
     snackbarText: "",
     timeout: 2000,
+    mdiCloudUpload,
+    mdiSchool,
   }),
   computed: {
     disabled() {

@@ -26,7 +26,7 @@
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-vue": "6.2.2",
+    "eslint-plugin-vue": "9.17.0",
     "sass": "1.58.3",
     "sass-loader": "8.0.2",
     "vue-cli-plugin-cordova": "2.4.1",

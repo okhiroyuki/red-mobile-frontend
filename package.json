@@ -1,0 +1,46 @@
+{
+  "name": "red-mobile-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build --dest src-cordova/dist",
+    "lint": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint",
+    "cordova-build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
+    "cordova-build-only-www-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-only-www-android",
+    "cordova-prepare": "vue-cli-service cordova-prepare",
+    "cordova-serve-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-serve-android"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "core-js": "^3.11.0",
+    "vue": "^2.6.11",
+    "vue-axios": "^3.2.4",
+    "vue-router": "^3.5.1",
+    "vuetify": "^2.4.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.12",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "^4.5.12",
+    "@vue/cli-service": "^4.5.12",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "sass": "^1.32.11",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-cordova": "~2.4.1",
+    "vue-cli-plugin-vuetify": "^2.3.1",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

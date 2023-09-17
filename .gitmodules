@@ -1,0 +1,3 @@
+[submodule "src-cordova"]
+	path = src-cordova
+	url = git@github.com:okhiroyuki/red-mobile-backend.git

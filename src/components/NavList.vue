@@ -26,7 +26,9 @@
           <v-icon icon="item.icon" />
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title v-text="item.text" />
+          <v-list-item-title>
+            {{ item.text }}
+          </v-list-item-title>
         </v-list-item-content>
         <v-icon
           v-if="item.subIcon"
@@ -38,7 +40,9 @@
           <v-icon icon="mdiInformationVariant" />
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title v-text="getVersion" />
+          <v-list-item-title>
+            {{ getVersion }}
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list-item-group>

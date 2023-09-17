@@ -1,15 +1,15 @@
 <template>
-  <Main />
+  <LicenseComponent />
 </template>
 
 <script>
 // @ is an alias to /src
-import Main from "@/components/License.vue";
+import LicenseComponent from "@/components/LicenseComponent.vue";
 
 export default {
-  name: "License",
+  name: "LicenseView",
   components: {
-    Main,
+    LicenseComponent,
   },
 };
 </script>

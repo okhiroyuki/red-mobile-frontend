@@ -1,15 +1,15 @@
 <template>
-  <Main />
+  <SettingComponent />
 </template>
 
 <script>
 // @ is an alias to /src
-import Main from "@/components/Setting.vue";
+import SettingComponent from "@/components/SettingComponent.vue";
 
 export default {
-  name: "Setting",
+  name: "SettingView",
   components: {
-    Main,
+    SettingComponent,
   },
 };
 </script>

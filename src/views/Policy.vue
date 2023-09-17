@@ -1,15 +1,15 @@
 <template>
-  <Main />
+  <PolicyComponent />
 </template>
 
 <script>
 // @ is an alias to /src
-import Main from "@/components/Policy.vue";
+import PolicyComponent from "@/components/PolicyComponent.vue";
 
 export default {
-  name: "Policy",
+  name: "PolicyView",
   components: {
-    Main,
+    PolicyComponent,
   },
 };
 </script>

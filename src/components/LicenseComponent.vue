@@ -11,8 +11,9 @@
           :key="item.title"
           :href="item.url"
           target="_blank"
-          v-text="item.title"
-        />
+        >
+          {{ item.title }}
+        </v-list-item>
       </template>
     </v-list>
   </v-card>

@@ -12,9 +12,9 @@ module.exports = {
     quotes: ["error", "double"],
     "comma-dangle": ["error", "only-multiline"],
     "operator-linebreak": ["error", "after"],
-    "vue/multi-word-component-names": "off",
-    "vue/no-reserved-component-names": "off",
-    "vue/no-v-text-v-html-on-component": "off",
+    // "vue/multi-word-component-names": "off",
+    // "vue/no-reserved-component-names": "off",
+    // "vue/no-v-text-v-html-on-component": "off",
   },
   globals: {
     cordova: true,

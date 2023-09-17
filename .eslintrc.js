@@ -3,19 +3,12 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ["eslint:recommended", "plugin:vue/vue3-recommended"],
+  extends: ["eslint:recommended", "plugin:vue/vue3-essential"],
   parserOptions: {
     parser: "@babel/eslint-parser",
     requireConfigFile: false,
   },
-  rules: {
-    quotes: ["error", "double"],
-    "comma-dangle": ["error", "only-multiline"],
-    "operator-linebreak": ["error", "after"],
-    // "vue/multi-word-component-names": "off",
-    // "vue/no-reserved-component-names": "off",
-    // "vue/no-v-text-v-html-on-component": "off",
-  },
+  rules: {},
   globals: {
     cordova: true,
     nodejs: true,

@@ -1,32 +1,15 @@
 <template>
   <v-app>
-    <v-app-bar
-      color="red darken-4"
-      dark
-      app
-    >
-      <v-app-bar-nav-icon
-        :icon="appIcon"
-        @click="navClick"
-      />
+    <v-app-bar color="red darken-4" dark app>
+      <v-app-bar-nav-icon :icon="appIcon" @click="navClick" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
-      <template
-        v-if="showTab"
-        #extension
-      >
+      <template v-if="showTab" #extension>
         <Tab />
       </template>
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="$root.sidebar"
-      absolute
-      temporary
-    >
-      <NavList
-        :version="version"
-        @event-click="closeDrawer"
-      />
+    <v-navigation-drawer v-model="$root.sidebar" absolute temporary>
+      <NavList :version="version" @event-click="closeDrawer" />
     </v-navigation-drawer>
 
     <v-main>
@@ -35,15 +18,8 @@
       </v-container>
     </v-main>
 
-    <v-footer
-      padless
-      color="red darken-4"
-      app
-    >
-      <v-col
-        class="text-center"
-        cols="12"
-      />
+    <v-footer padless color="red darken-4" app>
+      <v-col class="text-center" cols="12" />
     </v-footer>
   </v-app>
 </template>

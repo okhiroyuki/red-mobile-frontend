@@ -1,7 +1,8 @@
 function validationVolume(volume) {
   if (volume < 0) {
     return 0;
-  } if (volume > 100) {
+  }
+  if (volume > 100) {
     return 100;
   }
   return volume;

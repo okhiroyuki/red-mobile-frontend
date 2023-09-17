@@ -57,11 +57,15 @@ export function startWatch(json) {
       const options = {
         frequency: Number(json.opts.freq),
       };
-      watchId = navigator.magnetometer.watchMagnetometer((result) => {
-        onSuccess(json.id, result);
-      }, (error) => {
-        onError(json.id, error);
-      }, options);
+      watchId = navigator.magnetometer.watchMagnetometer(
+        (result) => {
+          onSuccess(json.id, result);
+        },
+        (error) => {
+          onError(json.id, error);
+        },
+        options,
+      );
       callbackSuccess(json.id, method);
     } else {
       callbackError(json.id, method, "Already subscribed");

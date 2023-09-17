@@ -26,20 +26,28 @@ function sendError(id, error) {
 function start(json) {
   const options = json.payload;
   options.showPartial = false;
-  window.plugins.speechRecognition.requestPermission(() => {
-    window.plugins.speechRecognition.isRecognitionAvailable(
-      () => window.plugins.speechRecognition.startListening((results) => {
-        sendSuccess(json.id, results);
-      }, (error) => {
-        sendError(json.id, error);
-      }, options),
-      (error) => {
-        sendError(json.id, error);
-      },
-    );
-  }, (error) => {
-    sendError(json.id, error);
-  });
+  window.plugins.speechRecognition.requestPermission(
+    () => {
+      window.plugins.speechRecognition.isRecognitionAvailable(
+        () =>
+          window.plugins.speechRecognition.startListening(
+            (results) => {
+              sendSuccess(json.id, results);
+            },
+            (error) => {
+              sendError(json.id, error);
+            },
+            options,
+          ),
+        (error) => {
+          sendError(json.id, error);
+        },
+      );
+    },
+    (error) => {
+      sendError(json.id, error);
+    },
+  );
 }
 
 export default function startIfNeeded(json) {

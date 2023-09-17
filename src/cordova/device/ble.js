@@ -63,98 +63,126 @@ function scan(json) {
     } else {
       const timeout = json.opts.timeout * 1000 || 5000;
       devices = [];
-      bluetoothle.startScan((_result) => {
-        if (_result.status === "scanStarted") {
-          // eslint-disable-next-line no-console
-          console.log("scanStarted");
-        } else if (_result.status === "scanResult") {
-          if (!devices.some((device) => device.address === _result.address)) {
-            devices.push(_result);
+      bluetoothle.startScan(
+        (_result) => {
+          if (_result.status === "scanStarted") {
+            // eslint-disable-next-line no-console
+            console.log("scanStarted");
+          } else if (_result.status === "scanResult") {
+            if (!devices.some((device) => device.address === _result.address)) {
+              devices.push(_result);
+            }
           }
-        }
-      }, (err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }, {
-        services: [],
-        allowDuplicates: false,
-      });
-      setTimeout(bluetoothle.stopScan,
-        timeout, () => {
+        },
+        (err) => {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        },
+        {
+          services: [],
+          allowDuplicates: false,
+        },
+      );
+      setTimeout(
+        bluetoothle.stopScan,
+        timeout,
+        () => {
           sendSuccess(json, devices);
-        }, (err) => {
+        },
+        (err) => {
           sendError(json, err.message);
-        });
+        },
+      );
     }
   });
 }
 
 function discover(json, resolve, reject) {
-  bluetoothle.discover((result) => {
-    resolve(result);
-  }, (err) => {
-    reject(err);
-  }, {
-    address: getAddress(json),
-    clearCache: true,
-  });
+  bluetoothle.discover(
+    (result) => {
+      resolve(result);
+    },
+    (err) => {
+      reject(err);
+    },
+    {
+      address: getAddress(json),
+      clearCache: true,
+    },
+  );
 }
 
 function isDiscover(json, resolve, reject) {
-  bluetoothle.isDiscovered((result) => {
-    if (!result.isDiscovered) {
-      discover(json, resolve, reject);
-    } else {
-      resolve({ message: "connected" });
-    }
-  }, (err) => {
-    reject(err);
-  }, {
-    address: getAddress(json),
-  });
+  bluetoothle.isDiscovered(
+    (result) => {
+      if (!result.isDiscovered) {
+        discover(json, resolve, reject);
+      } else {
+        resolve({ message: "connected" });
+      }
+    },
+    (err) => {
+      reject(err);
+    },
+    {
+      address: getAddress(json),
+    },
+  );
 }
 
 function reconnect(json, resolve, reject) {
-  bluetoothle.reconnect((result) => {
-    if (result.status === "connected") {
-      resolve(result);
-    } else {
-      reject({
-        message: "connect failure",
-      });
-    }
-  }, (err) => {
-    reject(err);
-  }, {
-    address: getAddress(json),
-  });
+  bluetoothle.reconnect(
+    (result) => {
+      if (result.status === "connected") {
+        resolve(result);
+      } else {
+        reject({
+          message: "connect failure",
+        });
+      }
+    },
+    (err) => {
+      reject(err);
+    },
+    {
+      address: getAddress(json),
+    },
+  );
 }
 
 function close(json, reject) {
-  bluetoothle.close(() => {
-    reject({
-      message: "Please try again",
-    });
-  }, (err) => {
-    reject(err);
-  }, {
-    address: getAddress(json),
-  });
+  bluetoothle.close(
+    () => {
+      reject({
+        message: "Please try again",
+      });
+    },
+    (err) => {
+      reject(err);
+    },
+    {
+      address: getAddress(json),
+    },
+  );
 }
 
 function connect(json) {
   return new Promise((resolve, reject) => {
-    bluetoothle.connect((result) => {
-      if (result.status === "connected") {
-        isDiscover(json, resolve, reject);
-      } else {
-        reconnect(json, resolve, reject);
-      }
-    }, () => {
-      close(json, reject);
-    }, {
-      address: getAddress(json),
-    });
+    bluetoothle.connect(
+      (result) => {
+        if (result.status === "connected") {
+          isDiscover(json, resolve, reject);
+        } else {
+          reconnect(json, resolve, reject);
+        }
+      },
+      () => {
+        close(json, reject);
+      },
+      {
+        address: getAddress(json),
+      },
+    );
   });
 }
 
@@ -165,138 +193,179 @@ function write(json) {
     service: getService(json),
     characteristic: getCharacteristic(json),
   };
-  bluetoothle.write((result) => {
-    sendSuccess(json, result);
-  }, (err) => {
-    sendError(json, err.message);
-  }, params);
+  bluetoothle.write(
+    (result) => {
+      sendSuccess(json, result);
+    },
+    (err) => {
+      sendError(json, err.message);
+    },
+    params,
+  );
 }
 
 function read(json) {
-  bluetoothle.read((result) => {
-    sendSuccess(json, result);
-  }, (err) => {
-    sendError(json, err.message);
-  }, {
-    address: getAddress(json),
-    service: getService(json),
-    characteristic: getCharacteristic(json),
-  });
+  bluetoothle.read(
+    (result) => {
+      sendSuccess(json, result);
+    },
+    (err) => {
+      sendError(json, err.message);
+    },
+    {
+      address: getAddress(json),
+      service: getService(json),
+      characteristic: getCharacteristic(json),
+    },
+  );
 }
 
 function unsubscribe(json) {
-  bluetoothle.unsubscribe((result) => {
-    sendSuccess(json, result);
-  }, (err) => {
-    sendError(json, err.message);
-  }, {
-    address: getAddress(json),
-    service: getService(json),
-    characteristic: getCharacteristic(json),
-  });
+  bluetoothle.unsubscribe(
+    (result) => {
+      sendSuccess(json, result);
+    },
+    (err) => {
+      sendError(json, err.message);
+    },
+    {
+      address: getAddress(json),
+      service: getService(json),
+      characteristic: getCharacteristic(json),
+    },
+  );
 }
 
 function subscribe(json) {
-  bluetoothle.subscribe((result) => {
-    if (result.status === "subscribed") {
-      sendSuccess(json, result);
-    } else {
-      sendWs(json.id, result);
-    }
-  }, (err) => {
-    sendError(json, err.message);
-  }, {
-    address: getAddress(json),
-    service: getService(json),
-    characteristic: getCharacteristic(json),
-  });
+  bluetoothle.subscribe(
+    (result) => {
+      if (result.status === "subscribed") {
+        sendSuccess(json, result);
+      } else {
+        sendWs(json.id, result);
+      }
+    },
+    (err) => {
+      sendError(json, err.message);
+    },
+    {
+      address: getAddress(json),
+      service: getService(json),
+      characteristic: getCharacteristic(json),
+    },
+  );
 }
 
 function disconnect(json) {
-  bluetoothle.disconnect((result) => {
-    sendSuccess(json, result);
-  }, (err) => {
-    sendError(json, err.message);
-  }, {
-    address: getAddress(json),
-  });
+  bluetoothle.disconnect(
+    (result) => {
+      sendSuccess(json, result);
+    },
+    (err) => {
+      sendError(json, err.message);
+    },
+    {
+      address: getAddress(json),
+    },
+  );
 }
 
 export function init() {
-  bluetoothle.initialize(() => {
-    // eslint-disable-next-line no-console
-    // console.log(JSON.stringify(result1));
-    bluetoothle.getAdapterInfo(() => {
+  bluetoothle.initialize(
+    () => {
       // eslint-disable-next-line no-console
-      // console.log(JSON.stringify(result2));
-    });
-  }, {
-    request: false,
-    statusReceiver: false,
-    restoreKey: "bluetoothleplugin",
-  });
+      // console.log(JSON.stringify(result1));
+      bluetoothle.getAdapterInfo(() => {
+        // eslint-disable-next-line no-console
+        // console.log(JSON.stringify(result2));
+      });
+    },
+    {
+      request: false,
+      statusReceiver: false,
+      restoreKey: "bluetoothleplugin",
+    },
+  );
 }
 
 function prepare() {
   return new Promise((resolve, reject) => {
-    bluetoothle.hasPermission((result1) => {
-      if (result1.hasPermission) {
-        enable(resolve, reject);
-      } else {
-        bluetoothle.requestPermission((result2) => {
-          if (result2.requestPermission) {
-            enable(resolve, reject);
-          } else {
-            reject(new Error("No permission"));
-          }
-        }, (err) => {
-          reject(err);
-        });
-      }
-    }, (err) => {
-      reject(err);
-    });
+    bluetoothle.hasPermission(
+      (result1) => {
+        if (result1.hasPermission) {
+          enable(resolve, reject);
+        } else {
+          bluetoothle.requestPermission(
+            (result2) => {
+              if (result2.requestPermission) {
+                enable(resolve, reject);
+              } else {
+                reject(new Error("No permission"));
+              }
+            },
+            (err) => {
+              reject(err);
+            },
+          );
+        }
+      },
+      (err) => {
+        reject(err);
+      },
+    );
   });
 }
 
 export function startIfNeeded(json) {
   if (json.method === "ble-scan") {
-    prepare().then(() => {
-      scan(json);
-    }).catch((err) => {
-      sendError(json, err.message);
-    });
-  } else if (json.method === "ble-connect") {
-    prepare().then(() => {
-      connect(json).then((result) => {
-        sendSuccess(json, result);
-      }).catch((err) => {
+    prepare()
+      .then(() => {
+        scan(json);
+      })
+      .catch((err) => {
         sendError(json, err.message);
       });
-    }).catch((err) => {
-      sendError(json, err.message);
-    });
+  } else if (json.method === "ble-connect") {
+    prepare()
+      .then(() => {
+        connect(json)
+          .then((result) => {
+            sendSuccess(json, result);
+          })
+          .catch((err) => {
+            sendError(json, err.message);
+          });
+      })
+      .catch((err) => {
+        sendError(json, err.message);
+      });
   } else if (json.method === "ble-disconnect") {
-    prepare().then(() => {
-      disconnect(json);
-    }).catch((err) => {
-      sendError(json, err.message);
-    });
+    prepare()
+      .then(() => {
+        disconnect(json);
+      })
+      .catch((err) => {
+        sendError(json, err.message);
+      });
   } else if (json.method === "ble-write") {
     write(json);
   } else if (json.method === "ble-read") {
     read(json);
   } else if (json.method === "ble-subscribe") {
-    prepare().then(() => {
-      subscribe(json);
-    }).catch((err) => {
-      sendError(json, err.message);
-    });
+    prepare()
+      .then(() => {
+        subscribe(json);
+      })
+      .catch((err) => {
+        sendError(json, err.message);
+      });
   } else if (json.method === "ble-unsubscribe") {
-    prepare().then(() => {
-      unsubscribe(json);
-    }).catch((err) => {
-      sendError(json, err.message);
-    });
+    prepare()
+      .then(() => {
+        unsubscribe(json);
+      })
+      .catch((err) => {
+        sendError(json, err.message);
+      });
   }
 }

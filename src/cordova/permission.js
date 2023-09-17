@@ -24,11 +24,14 @@ function checkMicPermission() {
 }
 
 function checkBluetoothPermission() {
-  permissions.checkPermission(permissions.BLUETOOTH_CONNECT, (connectStatus) => {
-    permissions.checkPermission(permissions.BLUETOOTH_SCAN, (scanStatus) => {
-      setPermission("bluetooth", connectStatus && scanStatus);
-    });
-  });
+  permissions.checkPermission(
+    permissions.BLUETOOTH_CONNECT,
+    (connectStatus) => {
+      permissions.checkPermission(permissions.BLUETOOTH_SCAN, (scanStatus) => {
+        setPermission("bluetooth", connectStatus && scanStatus);
+      });
+    },
+  );
 }
 
 function checkLocationPermission() {
@@ -62,11 +65,17 @@ export function requestMicPermission() {
 }
 
 export function requestBluetoothPermission() {
-  permissions.requestPermission(permissions.BLUETOOTH_CONNECT, (connectStatus) => {
-    permissions.requestPermission(permissions.BLUETOOTH_SCAN, (scanStatus) => {
-      setPermission("bluetooth", connectStatus && scanStatus);
-    });
-  });
+  permissions.requestPermission(
+    permissions.BLUETOOTH_CONNECT,
+    (connectStatus) => {
+      permissions.requestPermission(
+        permissions.BLUETOOTH_SCAN,
+        (scanStatus) => {
+          setPermission("bluetooth", connectStatus && scanStatus);
+        },
+      );
+    },
+  );
 }
 
 export function init(_vue, _permissions) {

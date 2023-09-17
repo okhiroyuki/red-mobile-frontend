@@ -1,8 +1,5 @@
 <template>
-  <v-tabs
-    v-model="model"
-    fixed-tabs
-  >
+  <v-tabs v-model="model" fixed-tabs>
     <v-tab
       v-for="(item, i) in items"
       :key="i"

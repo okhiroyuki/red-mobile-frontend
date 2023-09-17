@@ -22,7 +22,10 @@ function owned() {
 
 export function init(_vue) {
   const {
-    store, ProductType, Platform, LogLevel
+    store,
+    ProductType,
+    Platform,
+    LogLevel,
     // eslint-disable-next-line no-undef
   } = CdvPurchase;
   Vue = _vue;

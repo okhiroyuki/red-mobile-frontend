@@ -1,9 +1,6 @@
 <template>
   <v-container fluid>
-    <v-alert
-      v-show="isStarted"
-      type="info"
-    >
+    <v-alert v-show="isStarted" type="info">
       After Node-RED is started, it cannot be update.
     </v-alert>
 
@@ -47,11 +44,7 @@
         @click="copy"
       >
         Upload
-        <v-icon
-          right
-          dark
-          icon="mdiCloudUpload"
-        />
+        <v-icon right dark icon="mdiCloudUpload" />
       </v-btn>
       <v-btn
         v-show="!isStarted"
@@ -65,12 +58,7 @@
       </v-btn>
     </v-row>
 
-    <v-alert
-      v-show="!isStarted"
-      outlined
-      color="blue-grey"
-      icon="mdiSchool"
-    >
+    <v-alert v-show="!isStarted" outlined color="blue-grey" icon="mdiSchool">
       <div class="title">
         How to update the node-module for custom node RED.
       </div>
@@ -81,7 +69,8 @@
             <a
               href="https://github.com/okhiroyuki/redmobile-modules-generator"
               target="_blank"
-            >a reference</a>.
+              >a reference</a
+            >.
           </li>
           <li>
             Set the generated <strong>node_modules.zip</strong> to the Android
@@ -91,7 +80,7 @@
           <li>Press upload button to automatically restart the system.</li>
           <li>it will be reflected after reboot.</li>
         </ol>
-        <br>
+        <br />
         <strong>Note: </strong>
         <p>
           Reset to initialize to the preset contents. Be sure to reboot in this
@@ -100,18 +89,10 @@
       </div>
     </v-alert>
 
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="timeout"
-    >
+    <v-snackbar v-model="snackbar" :timeout="timeout">
       {{ snackbarText }}
       <template #action="{ attrs }">
-        <v-btn
-          color="white"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>

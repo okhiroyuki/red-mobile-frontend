@@ -51,11 +51,15 @@ export function startWatch(json) {
       const options = {
         frequency: Number(json.opts.freq),
       };
-      watchId = navigator.proximity.watchProximity((result) => {
-        onSuccess(json.id, result);
-      }, (err) => {
-        onError(json.id, err);
-      }, options);
+      watchId = navigator.proximity.watchProximity(
+        (result) => {
+          onSuccess(json.id, result);
+        },
+        (err) => {
+          onError(json.id, err);
+        },
+        options,
+      );
       callbackSuccess(json.id, method);
     } else {
       callbackError(json.id, method, "Already subscribed");

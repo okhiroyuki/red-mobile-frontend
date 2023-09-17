@@ -41,11 +41,14 @@ function sendError(error, json) {
   isStarted = false;
 }
 function stop(json) {
-  DBMeter.stop(() => {
-    stopSuccess(json);
-  }, (err) => {
-    sendError(err, json);
-  });
+  DBMeter.stop(
+    () => {
+      stopSuccess(json);
+    },
+    (err) => {
+      sendError(err, json);
+    },
+  );
 }
 
 function startSuccess(db, json) {
@@ -62,11 +65,14 @@ function start(json) {
   dbs = [];
   timestamp = new Date().getTime();
   canStop = true;
-  DBMeter.start((db) => {
-    startSuccess(db, json);
-  }, (err) => {
-    sendError(err, json);
-  });
+  DBMeter.start(
+    (db) => {
+      startSuccess(db, json);
+    },
+    (err) => {
+      sendError(err, json);
+    },
+  );
 }
 
 export default function startIfNeeded(json) {

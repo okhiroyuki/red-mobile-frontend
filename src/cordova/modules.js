@@ -13,10 +13,10 @@ export function remove() {
       (backupEntry) => {
         backupEntry.remove(
           () => resolve(),
-          (error) => reject(error)
+          (error) => reject(error),
         );
       },
-      (error) => reject(error)
+      (error) => reject(error),
     );
   });
 }
@@ -33,12 +33,12 @@ export function copy(uri) {
               parentEntry,
               BACKUP_ZIP,
               () => resolve(),
-              (error) => reject(error)
+              (error) => reject(error),
             );
           },
-          (error) => reject(error)
+          (error) => reject(error),
         );
-      }
+      },
     );
   });
 }
@@ -54,11 +54,11 @@ export function hasModules(_vue) {
         },
         () => {
           Vue.$root.hasModules = false;
-        }
+        },
       );
     },
     () => {
       Vue.$root.hasModules = false;
-    }
+    },
   );
 }

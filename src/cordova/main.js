@@ -136,7 +136,7 @@ function logEvent(name, params) {
   // console.log(JSON.stringify(params));
   if (params.event) {
     // colon + space+ -
-    const replaceName = params.event.replaceAll(/\.|\s|-/ig, "_");
+    const replaceName = params.event.replaceAll(/\.|\s|-/gi, "_");
     FirebasePlugin.logEvent(replaceName, params);
   } else {
     FirebasePlugin.logEvent(name, params);

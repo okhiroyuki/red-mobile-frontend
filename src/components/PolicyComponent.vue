@@ -24,7 +24,7 @@ export default {
       },
       (err) => {
         this.data = err.message;
-      }
+      },
     );
   },
 };

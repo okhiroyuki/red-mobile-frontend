@@ -35,18 +35,10 @@
     </v-row>
     <v-row no-gutters>
       <v-col>
-        <v-checkbox
-          v-model="keepAwake"
-          class="mt-0 mr-1"
-          label="keepAwake"
-        />
+        <v-checkbox v-model="keepAwake" class="mt-0 mr-1" label="keepAwake" />
       </v-col>
       <v-col>
-        <v-checkbox
-          v-model="autoStart"
-          class="mt-0 mr-1"
-          label="AutoStart"
-        />
+        <v-checkbox v-model="autoStart" class="mt-0 mr-1" label="AutoStart" />
       </v-col>
       <v-col>
         <v-checkbox
@@ -78,10 +70,7 @@
           @click="click"
         >
           {{ buttonTitle }}
-          <v-icon
-            v-if="isStarted"
-            icon="mdiOpenInNew"
-          />
+          <v-icon v-if="isStarted" icon="mdiOpenInNew" />
         </v-btn>
       </v-col>
     </v-row>
@@ -95,10 +84,7 @@
         fixed
         @click="dashboard"
       >
-        <v-icon
-          color="white"
-          icon="mdiChartBox"
-        />
+        <v-icon color="white" icon="mdiChartBox" />
       </v-btn>
     </v-fab-transition>
     <div class="mt-5">
@@ -110,23 +96,13 @@
         elevation="2"
       >
         Check the permissions required to use the app in Menu >
-        <router-link to="/setting">
-          Setting
-        </router-link>.
+        <router-link to="/setting"> Setting </router-link>.
       </v-alert>
     </div>
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="timeout"
-    >
+    <v-snackbar v-model="snackbar" :timeout="timeout">
       {{ snackbarText }}
       <template #action="{ attrs }">
-        <v-btn
-          color="white"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>

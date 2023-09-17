@@ -60,10 +60,13 @@ export function startWatch(json) {
 export function stopWatch(json) {
   if (canExec(json)) {
     const method = "sensor-unsubscribe";
-    nfc.disableReaderMode(() => {
-      callbackSuccess(json.id, method);
-    }, () => {
-      callbackError(json.id, method, "Not subscribed");
-    });
+    nfc.disableReaderMode(
+      () => {
+        callbackSuccess(json.id, method);
+      },
+      () => {
+        callbackError(json.id, method, "Not subscribed");
+      },
+    );
   }
 }

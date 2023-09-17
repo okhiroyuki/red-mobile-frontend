@@ -55,11 +55,15 @@ export function startWatch(json) {
       const options = {
         frequency: Number(json.opts.freq),
       };
-      watchId = navigator.accelerometer.watchAcceleration((acceleration) => {
-        onSuccess(json.id, acceleration);
-      }, (error) => {
-        onError(json.id, error);
-      }, options);
+      watchId = navigator.accelerometer.watchAcceleration(
+        (acceleration) => {
+          onSuccess(json.id, acceleration);
+        },
+        (error) => {
+          onError(json.id, error);
+        },
+        options,
+      );
       callbackSuccess(json.id, method);
     } else {
       callbackError(json.id, method, "Already subscribed");

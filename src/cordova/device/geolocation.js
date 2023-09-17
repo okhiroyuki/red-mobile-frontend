@@ -53,11 +53,14 @@ export function startWatch(json) {
   if (canExec(json)) {
     const method = "sensor-subscribe";
     if (!watchId) {
-      watchId = navigator.geolocation.watchPosition((position) => {
-        onSuccess(json.id, position);
-      }, (error) => {
-        onError(json.id, error);
-      });
+      watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          onSuccess(json.id, position);
+        },
+        (error) => {
+          onError(json.id, error);
+        },
+      );
       callbackSuccess(json.id, method);
     } else {
       callbackError(json.id, method, "Already subscribed");

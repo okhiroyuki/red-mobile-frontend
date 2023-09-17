@@ -32,7 +32,8 @@ function registerReadCallback(json) {
           }
         }
       }
-    }, () => {
+    },
+    () => {
       // eslint-disable-next-line no-console
       console.log("error");
     },
@@ -87,13 +88,17 @@ function getOpts(json) {
 
 function open(_json) {
   const json = _json;
-  serial.open(getOpts(json), (message) => {
-    json.payload = message;
-    successOpen(json);
-  }, (message) => {
-    json.payload = message;
-    onError(json);
-  });
+  serial.open(
+    getOpts(json),
+    (message) => {
+      json.payload = message;
+      successOpen(json);
+    },
+    (message) => {
+      json.payload = message;
+      onError(json);
+    },
+  );
 }
 
 function successClose(json) {
@@ -109,13 +114,16 @@ function successClose(json) {
 function close(_json) {
   const json = _json;
   if (isConnected) {
-    serial.close((message) => {
-      json.payload = message;
-      successClose(json);
-    }, (message) => {
-      json.payload = message;
-      onError(json);
-    });
+    serial.close(
+      (message) => {
+        json.payload = message;
+        successClose(json);
+      },
+      (message) => {
+        json.payload = message;
+        onError(json);
+      },
+    );
     isConnected = false;
   } else {
     json.payload = "Port is closed.";
@@ -137,21 +145,29 @@ function write(_json) {
   const json = _json;
   if (isConnected) {
     if (json.dataType === "hex") {
-      serial.writeHex(json.payload, (message) => {
-        json.payload = message;
-        successWrite(json);
-      }, (message) => {
-        json.payload = message;
-        onError(json);
-      });
+      serial.writeHex(
+        json.payload,
+        (message) => {
+          json.payload = message;
+          successWrite(json);
+        },
+        (message) => {
+          json.payload = message;
+          onError(json);
+        },
+      );
     } else {
-      serial.write(json.payload, (message) => {
-        json.payload = message;
-        successWrite(json);
-      }, (message) => {
-        json.payload = message;
-        onError(json);
-      });
+      serial.write(
+        json.payload,
+        (message) => {
+          json.payload = message;
+          successWrite(json);
+        },
+        (message) => {
+          json.payload = message;
+          onError(json);
+        },
+      );
     }
   } else {
     json.payload = "Port is closed.";
@@ -161,12 +177,15 @@ function write(_json) {
 
 function requestPermission(_json) {
   const json = _json;
-  serial.requestPermission(() => {
-    open(json);
-  }, (message) => {
-    json.payload = message;
-    onError(json);
-  });
+  serial.requestPermission(
+    () => {
+      open(json);
+    },
+    (message) => {
+      json.payload = message;
+      onError(json);
+    },
+  );
 }
 
 export default function startIfNeeded(json) {

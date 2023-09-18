@@ -2,7 +2,7 @@
   <v-list nav>
     <v-list-item>
       <v-avatar size="36px">
-        <v-img alt="Avatar" src="@/assets/logo.png" />
+        <v-img alt="Avatar" src="/src/assets/logo.png" />
       </v-avatar>
       <v-list-item-content> RedMobile </v-list-item-content>
     </v-list-item>

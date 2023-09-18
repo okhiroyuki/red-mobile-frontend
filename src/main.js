@@ -1,7 +1,7 @@
 import { createApp, h } from "vue";
+import App from "./App.vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import App from "./App.vue";
 import * as Main from "./cordova/main";
 import * as Util from "./cordova/util";
 import * as Env from "./cordova/env";
@@ -117,7 +117,9 @@ const app = createApp({
 });
 
 app.config.productionTip = false;
+
 app.use(VueAxios, axios);
 app.use(router);
 app.use(vuetify);
+
 app.mount("#app");

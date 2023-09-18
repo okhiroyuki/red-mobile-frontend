@@ -1,14 +1,19 @@
+require("@rushstack/eslint-patch/modern-module-resolution");
+
 module.exports = {
   root: true,
   env: {
     node: true,
+    es2022: true,
   },
-  extends: ["eslint:recommended", "plugin:vue/vue3-essential"],
+  extends: [
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "@vue/eslint-config-prettier",
+  ],
   parserOptions: {
-    parser: "@babel/eslint-parser",
-    requireConfigFile: false,
+    ecmaVersion: "latest",
   },
-  rules: {},
   globals: {
     cordova: true,
     nodejs: true,
@@ -26,13 +31,5 @@ module.exports = {
     LaunchReview: true,
     nfc: true,
     ndef: true,
-  },
-  settings: {
-    "import/resolver": {
-      alias: {
-        map: [["@", "./src/"]],
-        extensions: [".js", ".vue"],
-      },
-    },
   },
 };

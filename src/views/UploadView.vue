@@ -1,29 +1,29 @@
 <template :key="select">
   <div v-if="isSelect0">
-    <FlowComponent />
+    <UploadFlows />
   </div>
   <div v-else-if="isSelect1">
-    <EnvComponent />
+    <UploadEnv />
   </div>
   <div v-else>
-    <ModuleComponent />
+    <UploadModules />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import FlowComponent from "@/components/FlowComponent.vue";
-import EnvComponent from "@/components/EnvComponent.vue";
-import ModuleComponent from "@/components/ModuleComponent.vue";
+import UploadFlows from "../components/UploadFlows.vue";
+import UploadEnv from "../components/UploadEnv.vue";
+import UploadModules from "../components/UploadModules.vue";
 
 let selectWatch;
 
 export default {
   name: "UploadView",
   components: {
-    FlowComponent,
-    EnvComponent,
-    ModuleComponent,
+    UploadFlows,
+    UploadEnv,
+    UploadModules,
   },
   data: () => ({
     select: 0,

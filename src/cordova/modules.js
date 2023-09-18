@@ -1,4 +1,4 @@
-const path = require("path");
+import path from "path";
 
 const BACKUP_ZIP = "node_modules.zip";
 

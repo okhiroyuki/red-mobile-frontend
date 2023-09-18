@@ -16,25 +16,21 @@
         :target="item.target"
         @click="click(`${i}`)"
       >
-        <v-list-item-icon>
+        <template v-slot:prepend>
           <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ item.text }}
-          </v-list-item-title>
-        </v-list-item-content>
-        <v-icon v-if="item.subIcon">{{ item.subIcon }}</v-icon>
+        </template>
+        <v-list-item-title>{{ item.text }}</v-list-item-title>
+        <template v-slot:append>
+          <v-icon v-if="item.subIcon">{{ item.subIcon }}</v-icon>
+        </template>
       </v-list-item>
       <v-list-item>
-        <v-list-item-icon>
+        <template v-slot:prepend>
           <v-icon>{{ mdiInformationVariant }}</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ getVersion }}
-          </v-list-item-title>
-        </v-list-item-content>
+        </template>
+        <v-list-item-title>
+          {{ getVersion }}
+        </v-list-item-title>
       </v-list-item>
     </v-list-item-group>
   </v-list>

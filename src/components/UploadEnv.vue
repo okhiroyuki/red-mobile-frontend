@@ -88,15 +88,21 @@ export default {
     this.disabledReset = !this.$root.hasEnv();
   },
   methods: {
-    selectedFile(file) {
-      if (file !== null) {
-        this.loading = true;
+    selectedFile(event) {
+      if (event.target.files) {
+        const file = event.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
           this.readData = reader.result;
           this.loading = false;
           this.disabledUpload = false;
         };
+        reader.onerror = () => {
+          this.readData = "";
+          this.loading = false;
+          this.disabledUpload = true;
+        };
+        this.loading = true;
         reader.readAsText(file);
       } else {
         this.readData = "";

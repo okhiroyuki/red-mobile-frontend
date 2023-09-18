@@ -29,10 +29,13 @@
       v-show="!isStarted"
       label="modules"
       :value="filename"
-      prepend-icon="mdiPaperclip"
       :disabled="!hasOwned || loadingCopy || loadingReset"
       @click="select"
-    />
+    >
+      <template v-slot:prepend>
+        <v-icon>{{ mdiPaperclip }}</v-icon>
+      </template>
+    </v-text-field>
 
     <v-row class="mb-5">
       <v-btn

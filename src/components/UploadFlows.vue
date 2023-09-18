@@ -4,12 +4,7 @@
       After Node-RED is up and running, flow data can be updated.
     </v-alert>
 
-    <v-file-input
-      v-show="!disabled"
-      accept="application/json"
-      label="Flow file"
-      @change="selectedFile"
-    />
+    <v-file-input v-show="!disabled" label="Flow file" @change="selectedFile" />
     <v-btn
       v-show="!disabled"
       color="teal darken-1"
@@ -69,15 +64,21 @@ export default {
     },
   },
   methods: {
-    selectedFile(file) {
-      if (file !== null) {
-        this.loading = true;
+    selectedFile(event) {
+      if (event.target.files) {
+        const file = event.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
           this.data = reader.result;
           this.loading = false;
           this.canUpload = true;
         };
+        reader.onerror = () => {
+          this.readData = "";
+          this.loading = true;
+          this.canUpload = false;
+        };
+        this.loading = true;
         reader.readAsText(file);
       } else {
         this.canUpload = false;

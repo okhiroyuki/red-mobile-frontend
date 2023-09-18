@@ -1,72 +1,66 @@
 <template>
   <v-card class="mx-auto" max-width="400">
-    <v-list flat subheader lines="three">
+    <v-list>
       <v-list-subheader>Permission</v-list-subheader>
 
-      <v-list-item-group v-model="settings" multiple active-class="">
+      <v-list v-model="settings">
         <v-list-item
           :disabled="permission.location"
           @click="openLocationDialog"
         >
-          <v-list-item-action>
+          <template v-slot:prepend>
             <v-checkbox
               :input-value="permission.location"
               :disabled="permission.location"
             />
-          </v-list-item-action>
+          </template>
 
-          <v-list-item-content>
-            <v-list-item-title>Location</v-list-item-title>
-            <v-list-item-subtitle style="height: 50px">
-              This app collects location data to enable
-              <strong>geolocation</strong>, & <strong>ble</strong> nodes even
-              when the app is closed or not in use.
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>Location</v-list-item-title>
+          <v-list-item-subtitle>
+            This app collects location data to enable
+            <strong>geolocation</strong>, & <strong>ble</strong> nodes even when
+            the app is closed or not in use.
+          </v-list-item-subtitle>
         </v-list-item>
 
         <v-list-item :disabled="permission.camera" @click="openCameraDialog">
-          <v-list-item-action>
+          <template v-slot:prepend>
             <v-checkbox
               :input-value="permission.camera"
               :disabled="permission.camera"
             />
-          </v-list-item-action>
+          </template>
 
-          <v-list-item-content>
-            <v-list-item-title>Camera</v-list-item-title>
-            <v-list-item-subtitle>
-              Use camera functions with the <strong>camera</strong>,
-              <strong>camera command</strong>, &
-              <strong>qrcode scan</strong> nodes.
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>Camera</v-list-item-title>
+          <v-list-item-subtitle>
+            Use camera functions with the <strong>camera</strong>,
+            <strong>camera command</strong>, &
+            <strong>qrcode scan</strong> nodes.
+          </v-list-item-subtitle>
         </v-list-item>
 
         <v-list-item :disabled="permission.storage" @click="openStorageDialog">
-          <v-list-item-action>
+          <template v-slot:prepend>
             <v-checkbox
               :input-value="permission.storage"
               :disabled="permission.storage"
             />
-          </v-list-item-action>
+          </template>
 
-          <v-list-item-content>
-            <v-list-item-title>Storage</v-list-item-title>
-            <v-list-item-subtitle>
-              Use storage access when uploading
-              <strong>flow</strong>, & <strong>env</strong> files.
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>Storage</v-list-item-title>
+          <v-list-item-subtitle>
+            Use storage access when uploading
+            <strong>flow</strong>, & <strong>env</strong> files.
+          </v-list-item-subtitle>
         </v-list-item>
 
         <v-list-item :disabled="permission.mic" @click="openMicDialog">
-          <v-list-item-action>
+          <template v-slot:prepend>
             <v-checkbox
               :input-value="permission.mic"
               :disabled="permission.mic"
             />
-          </v-list-item-action>
+          </template>
 
           <v-list-item-content>
             <v-list-item-title>Microphone</v-list-item-title>
@@ -81,31 +75,37 @@
           :disabled="permission.bluetooth"
           @click="openBluetoothDialog"
         >
-          <v-list-item-action>
+          <template v-slot:prepend>
             <v-checkbox
               :input-value="permission.bluetooth"
               :disabled="permission.bluetooth"
             />
-          </v-list-item-action>
+          </template>
 
-          <v-list-item-content>
-            <v-list-item-title>Bluetooth</v-list-item-title>
-            <v-list-item-subtitle>
-              Use bluetooth in
-              <strong>ble</strong> node.
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>Bluetooth</v-list-item-title>
+          <v-list-item-subtitle>
+            Use bluetooth in
+            <strong>ble</strong> node.
+          </v-list-item-subtitle>
         </v-list-item>
-      </v-list-item-group>
+      </v-list>
     </v-list>
   </v-card>
 </template>
 
+<style>
+.v-list-item-subtitle {
+  height: 50px;
+}
+</style>
+
 <script>
 export default {
-  data: () => ({
-    settings: [],
-  }),
+  data() {
+    return {
+      settings: [],
+    };
+  },
   computed: {
     permission() {
       return this.$root.permission;

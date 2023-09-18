@@ -3,7 +3,7 @@
     <v-list-item title="RedMobile">
       <template v-slot:prepend>
         <v-avatar size="36px">
-          <v-img alt="Avatar" src="/src/assets/logo.png" />
+          <v-img v-bind:src="logo" />
         </v-avatar>
       </template>
     </v-list-item>
@@ -48,6 +48,7 @@ import {
   mdiOpenInNew,
   mdiInformationVariant,
 } from "@mdi/js";
+import logo from "../assets/logo.png";
 
 export default {
   props: {
@@ -56,6 +57,7 @@ export default {
   emits: ["event-click"],
   data() {
     return {
+      logo,
       selectedItem: 1,
       mdiInformationVariant,
       items: [

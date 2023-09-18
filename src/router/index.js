@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import { mdiMenu, mdiArrowLeft } from "@mdi/js";
+import UploadView from "../views/UploadView.vue";
+import SettingView from "../views/SettingView.vue";
+import LicenseView from "../views/LicenseView.vue";
+import PolicyView from "../views/PolicyView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,32 +22,32 @@ const router = createRouter({
     {
       path: "/upload",
       name: "Upload",
+      component: UploadView,
       meta: {
         title: "Upload",
         icon: mdiArrowLeft,
         tab: true,
       },
-      component: () => import("../views/UploadView.vue"),
     },
     {
       path: "/setting",
       name: "Setting",
+      component: SettingView,
       meta: {
         title: "Setting",
         icon: mdiArrowLeft,
         tab: false,
       },
-      component: () => import("../views/SettingView.vue"),
     },
     {
       path: "/license",
       name: "License",
+      component: LicenseView,
       meta: {
         title: "License",
         icon: mdiArrowLeft,
         tab: false,
       },
-      component: () => import("../views/LicenseView.vue"),
     },
     {
       path: "/forum",
@@ -61,12 +65,12 @@ const router = createRouter({
     {
       path: "/policy",
       name: "Privacy Policy",
+      component: PolicyView,
       meta: {
         title: "Privacy Policy",
         icon: mdiArrowLeft,
         tab: false,
       },
-      component: () => import("../views/PolicyView.vue"),
     },
   ],
 });

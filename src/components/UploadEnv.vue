@@ -16,7 +16,7 @@
         @click="clickUpload"
       >
         Upload
-        <v-icon right dark icon="mdiCloudUpload" />
+        <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
       </v-btn>
       <v-btn
         class="ma-1 white--text"
@@ -27,7 +27,8 @@
         Reset
       </v-btn>
     </v-row>
-    <v-alert outlined color="blue-grey" icon="mdiSchool">
+    <v-alert outlined color="blue-grey">
+      <v-icon>{{ mdiSchool }}</v-icon>
       <div class="title">Using environment variables</div>
       <div>
         <p>

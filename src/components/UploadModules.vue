@@ -44,7 +44,7 @@
         @click="copy"
       >
         Upload
-        <v-icon right dark icon="mdiCloudUpload" />
+        <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
       </v-btn>
       <v-btn
         v-show="!isStarted"
@@ -58,7 +58,8 @@
       </v-btn>
     </v-row>
 
-    <v-alert v-show="!isStarted" outlined color="blue-grey" icon="mdiSchool">
+    <v-alert v-show="!isStarted" outlined color="blue-grey">
+      <v-icon>{{ mdiSchool }}</v-icon>
       <div class="title">
         How to update the node-module for custom node RED.
       </div>

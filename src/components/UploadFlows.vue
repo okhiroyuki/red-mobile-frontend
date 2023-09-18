@@ -19,10 +19,11 @@
       @click="upload"
     >
       Upload
-      <v-icon right dark icon="mdiCloudUpload" />
+      <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
     </v-btn>
 
-    <v-alert v-show="!disabled" outlined color="blue-grey" icon="mdiSchool">
+    <v-alert v-show="!disabled" outlined color="blue-grey">
+      <v-icon>{{ mdiSchool }}</v-icon>
       <div class="title">Importing and Exporting Flows</div>
       <div>
         Flows can be imported and exported from the editor using their JSON

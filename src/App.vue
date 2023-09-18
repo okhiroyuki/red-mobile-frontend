@@ -8,17 +8,18 @@ export default {
     NavList,
     Tab,
   },
-  data: () => ({
-    navigation: false,
-    title: "RedMobile",
-    appIcon: mdiMenu,
-    showTab: false,
-    selectTab: 0,
-    version: "",
-  }),
+  data() {
+    return {
+      navigation: false,
+      title: "RedMobile",
+      appIcon: mdiMenu,
+      showTab: false,
+      selectTab: 0,
+      version: "",
+    };
+  },
   watch: {
-    // eslint-disable-next-line no-unused-vars
-    $route(to, from) {
+    $route(to) {
       this.createPageParams(to);
     },
   },

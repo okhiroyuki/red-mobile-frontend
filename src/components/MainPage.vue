@@ -14,11 +14,11 @@
       <v-col>
         <v-text-field
           v-model="password"
-          :append-icon="show ? 'mdiEye' : 'mdiEyeOff'"
-          :type="show ? 'text' : 'password'"
           label="Password"
+          :append-inner-icon="showPassword ? mdiEye : mdiEyeOff"
+          :type="showPassword ? 'text' : 'password'"
           :disabled="disabled"
-          @click:append="show = !show"
+          @click:append-inner="showPassword = !showPassword"
         />
       </v-col>
     </v-row>
@@ -70,23 +70,20 @@
           @click="click"
         >
           {{ buttonTitle }}
-          <v-icon v-if="isStarted" icon="mdiOpenInNew" />
+          <v-icon v-if="isStarted"> {{ mdiOpenInNew }}</v-icon>
         </v-btn>
       </v-col>
     </v-row>
-    <v-fab-transition>
-      <v-btn
-        v-show="isStarted"
-        color="red darken-3"
-        fab
-        bottom
-        right
-        fixed
-        @click="dashboard"
-      >
-        <v-icon color="white" icon="mdiChartBox" />
-      </v-btn>
-    </v-fab-transition>
+    <v-layout-item position="bottom" bottom="88px" left="0px">
+      <v-fab-transition>
+        <v-btn v-show="isStarted" color="red darken-3" elevation="8">
+          <v-icon v-if="isStarted" @click="dashboard">
+            {{ mdiChartBox }}
+          </v-icon>
+        </v-btn>
+      </v-fab-transition>
+    </v-layout-item>
+
     <div class="mt-5">
       <v-alert
         v-show="!hasPermission"
@@ -118,28 +115,30 @@ let ipWatch;
 let statusWatch;
 
 export default {
-  data: () => ({
-    mdiChartBox,
-    mdiOpenInNew,
-    mdiEye,
-    mdiEyeOff,
-    show: false,
-    username: "",
-    password: "",
-    port: 1880,
-    keepAwake: false,
-    autoStart: false,
-    env: false,
-    loading: false,
-    snackbar: false,
-    snackbarText: "",
-    timeout: 2000,
-    buttonTitle: "Start",
-    disabled: false,
-    rules: {
-      required: (value) => !!value || "Required.",
-    },
-  }),
+  data() {
+    return {
+      mdiChartBox,
+      mdiOpenInNew,
+      mdiEye,
+      mdiEyeOff,
+      showPassword: false,
+      username: "",
+      password: "",
+      port: 1880,
+      keepAwake: false,
+      autoStart: false,
+      env: false,
+      loading: false,
+      snackbar: false,
+      snackbarText: "",
+      timeout: 2000,
+      buttonTitle: "Start",
+      disabled: false,
+      rules: {
+        required: (value) => !!value || "Required.",
+      },
+    };
+  },
   computed: {
     isStarted() {
       return vm.status === "started";

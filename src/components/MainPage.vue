@@ -34,13 +34,14 @@
       </v-col>
     </v-row>
     <v-row no-gutters>
-      <v-col>
-        <v-checkbox v-model="keepAwake" class="mt-0 mr-1" label="keepAwake" />
+      <v-col cols="6" style="height: 40px">
+        <v-checkbox v-model="keepAwake" class="mt-0 mr-1" label="keepAwake">
+        </v-checkbox>
       </v-col>
-      <v-col>
+      <v-col cols="6" style="height: 40px">
         <v-checkbox v-model="autoStart" class="mt-0 mr-1" label="AutoStart" />
       </v-col>
-      <v-col>
+      <v-col cols="6" style="height: 60px">
         <v-checkbox
           v-model="env"
           class="mt-0 mr-1"
@@ -48,7 +49,7 @@
           disabled
         />
       </v-col>
-      <v-col>
+      <v-col cols="6" style="height: 60px">
         <v-checkbox
           v-model="hasModules"
           class="mt-0 mr-1"

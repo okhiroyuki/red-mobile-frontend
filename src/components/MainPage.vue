@@ -74,15 +74,17 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-layout-item position="bottom" bottom="88px" left="0px">
-      <v-fab-transition>
-        <v-btn v-show="isStarted" color="red darken-3" elevation="8">
-          <v-icon v-if="isStarted" @click="dashboard">
-            {{ mdiChartBox }}
-          </v-icon>
-        </v-btn>
-      </v-fab-transition>
-    </v-layout-item>
+    <v-fab-transition>
+      <v-btn
+        v-show="isStarted"
+        color="red darken-3"
+        elevation="8"
+        icon=""
+        style="bottom: 50px; right: 20px; position: fixed"
+      >
+        <v-icon @click="dashboard">{{ mdiChartBox }}</v-icon>
+      </v-btn>
+    </v-fab-transition>
 
     <div class="mt-5">
       <v-alert

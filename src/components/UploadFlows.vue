@@ -51,16 +51,18 @@
 import { mdiCloudUpload, mdiSchool } from "@mdi/js";
 
 export default {
-  data: () => ({
-    data: "",
-    loading: false,
-    canUpload: false,
-    snackbar: false,
-    snackbarText: "",
-    timeout: 2000,
-    mdiCloudUpload,
-    mdiSchool,
-  }),
+  data() {
+    return {
+      data: "",
+      loading: false,
+      canUpload: false,
+      snackbar: false,
+      snackbarText: "",
+      timeout: 2000,
+      mdiCloudUpload,
+      mdiSchool,
+    };
+  },
   computed: {
     disabled() {
       return this.$root.status !== "started";

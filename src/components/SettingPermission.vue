@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto" max-width="400">
-    <v-list>
+    <v-list lines="three">
       <v-list-subheader>Permission</v-list-subheader>
 
       <v-list v-model="settings">

@@ -105,22 +105,24 @@
 import { mdiCloudUpload, mdiSchool, mdiPaperclip } from "@mdi/js";
 
 export default {
-  data: () => ({
-    uri: "",
-    filename: "",
-    loadingCopy: false,
-    loadingReset: false,
-    disable: true,
-    snackbar: false,
-    snackbarText: "",
-    timeout: 2000,
-    purchase: false,
-    canPurchase: false,
-    loadingPurchase: false,
-    mdiCloudUpload,
-    mdiSchool,
-    mdiPaperclip,
-  }),
+  data() {
+    return {
+      uri: "",
+      filename: "",
+      loadingCopy: false,
+      loadingReset: false,
+      disable: true,
+      snackbar: false,
+      snackbarText: "",
+      timeout: 2000,
+      purchase: false,
+      canPurchase: false,
+      loadingPurchase: false,
+      mdiCloudUpload,
+      mdiSchool,
+      mdiPaperclip,
+    };
+  },
   computed: {
     isStarted() {
       return this.$root.status === "started";

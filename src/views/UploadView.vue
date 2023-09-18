@@ -25,9 +25,11 @@ export default {
     UploadEnv,
     UploadModules,
   },
-  data: () => ({
-    select: 0,
-  }),
+  data() {
+    return {
+      select: 0,
+    };
+  },
   computed: {
     isSelect0() {
       return Number(this.select) === 0;

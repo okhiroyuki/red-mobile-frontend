@@ -6,9 +6,11 @@
 
 <script>
 export default {
-  data: () => ({
-    data: "",
-  }),
+  data() {
+    return {
+      data: "",
+    };
+  },
   computed: {
     isLoading() {
       return this.data.length === 0;

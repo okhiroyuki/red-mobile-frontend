@@ -13,14 +13,16 @@
 
 <script>
 export default {
-  data: () => ({
-    model: "tab-0",
-    items: [
-      { title: "Flows", to: "/flows" },
-      { title: "Env", to: "/env" },
-      { title: "Modules", to: "/modules" },
-    ],
-  }),
+  data() {
+    return {
+      model: "tab-0",
+      items: [
+        { title: "Flows", to: "/flows" },
+        { title: "Env", to: "/env" },
+        { title: "Modules", to: "/modules" },
+      ],
+    };
+  },
   methods: {
     click(i) {
       this.$root.selectTab = i;

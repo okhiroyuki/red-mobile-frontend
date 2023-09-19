@@ -2,17 +2,14 @@ const pid = "custom_modules";
 let Vue;
 
 function getProduct() {
-  // eslint-disable-next-line no-undef
   return CdvPurchase.store.get(pid);
 }
 
 export function order() {
-  // eslint-disable-next-line no-undef
   return getProduct().getOffer().order();
 }
 
 export function canPurchase() {
-  // eslint-disable-next-line no-undef
   return getProduct().canPurchase;
 }
 
@@ -21,19 +18,12 @@ function owned() {
 }
 
 export function init(_vue) {
-  const {
-    store,
-    ProductType,
-    Platform,
-    LogLevel,
-    // eslint-disable-next-line no-undef
-  } = CdvPurchase;
+  const { store, ProductType, Platform, LogLevel } = CdvPurchase;
   Vue = _vue;
   if (!store) {
     console.log("Store not available");
     return;
   }
-  // eslint-disable-next-line no-param-reassign
   store.verbosity = LogLevel.INFO;
 
   store.error((error) => {

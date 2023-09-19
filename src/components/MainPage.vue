@@ -190,14 +190,12 @@ export default {
   },
   created() {
     vm = this.$root;
-    // eslint-disable-next-line no-unused-vars
-    ipWatch = vm.$watch("ip", (n, o) => {
+    ipWatch = vm.$watch("ip", (n) => {
       if (this.isStarted) {
         this.buttonTitle = `http://${n}:${this.port}/red `;
       }
     });
-    // eslint-disable-next-line no-unused-vars
-    statusWatch = vm.$watch("status", (n, o) => {
+    statusWatch = vm.$watch("status", () => {
       if (this.isStarted) {
         this.setStart();
       } else if (this.isPrepare && this.autoStart) {
@@ -221,8 +219,7 @@ export default {
     statusWatch();
   },
   methods: {
-    // eslint-disable-next-line no-unused-vars
-    click(e) {
+    click() {
       if (this.isStarted) {
         vm.launchNodeRED(this.buttonTitle);
       } else {

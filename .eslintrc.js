@@ -31,5 +31,6 @@ module.exports = {
     LaunchReview: true,
     nfc: true,
     ndef: true,
+    CdvPurchase: true,
   },
 };

@@ -66,22 +66,18 @@ export function setKeepAwake(val) {
     if (val) {
       window.powerManagement.dim(
         () => {
-          // eslint-disable-next-line no-console
           console.log("Wakelock acquired");
         },
         () => {
-          // eslint-disable-next-line no-console
           console.log("Failed to acquire wakelock");
         },
       );
     } else {
       window.powerManagement.release(
         () => {
-          // eslint-disable-next-line no-console
           console.log("Wakelock released");
         },
         () => {
-          // eslint-disable-next-line no-console
           console.log("Failed to release wakelock");
         },
       );

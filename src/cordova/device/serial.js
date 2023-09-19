@@ -34,7 +34,6 @@ function registerReadCallback(json) {
       }
     },
     () => {
-      // eslint-disable-next-line no-console
       console.log("error");
     },
   );

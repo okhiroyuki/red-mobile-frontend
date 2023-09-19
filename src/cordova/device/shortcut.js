@@ -16,7 +16,6 @@ const defaultShortcuts = [
 ];
 
 function onError(e) {
-  // eslint-disable-next-line no-console
   console.log(`Error: ${e}`);
 }
 

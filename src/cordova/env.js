@@ -17,14 +17,12 @@ export function write(data) {
               window.localStorage.setItem("env", "enable");
             })
             .catch((error) => {
-              // eslint-disable-next-line no-console
               console.log(error);
             });
         },
       );
     },
     (error) => {
-      // eslint-disable-next-line no-console
       console.log(error);
     },
   );
@@ -39,12 +37,10 @@ export function remove() {
           localStorage.removeItem("env");
         })
         .catch((error) => {
-          // eslint-disable-next-line no-console
           console.log(error);
         });
     },
     (error) => {
-      // eslint-disable-next-line no-console
       console.log(error);
     },
   );

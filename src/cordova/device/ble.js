@@ -66,7 +66,6 @@ function scan(json) {
       bluetoothle.startScan(
         (_result) => {
           if (_result.status === "scanStarted") {
-            // eslint-disable-next-line no-console
             console.log("scanStarted");
           } else if (_result.status === "scanResult") {
             if (!devices.some((device) => device.address === _result.address)) {
@@ -75,7 +74,6 @@ function scan(json) {
           }
         },
         (err) => {
-          // eslint-disable-next-line no-console
           console.log(err);
         },
         {
@@ -273,10 +271,8 @@ function disconnect(json) {
 export function init() {
   bluetoothle.initialize(
     () => {
-      // eslint-disable-next-line no-console
       // console.log(JSON.stringify(result1));
       bluetoothle.getAdapterInfo(() => {
-        // eslint-disable-next-line no-console
         // console.log(JSON.stringify(result2));
       });
     },

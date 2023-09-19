@@ -39,7 +39,6 @@ import * as Modules from "./modules";
 let Vue;
 
 function getIpCallback(ip) {
-  // eslint-disable-next-line no-console
   console.log("getIp");
   Vue.$root.ip = ip;
 }
@@ -50,14 +49,12 @@ function sendStarted(ip) {
 }
 
 function onResume() {
-  // eslint-disable-next-line no-console
   console.log("onResume");
   Network.init(getIpCallback);
   Camera.enable();
 }
 
 function onPause() {
-  // eslint-disable-next-line no-console
   console.log("onPause");
   Camera.disable();
 }
@@ -69,7 +66,6 @@ function postMessage(msg) {
 }
 
 export function start(username, password, port) {
-  // eslint-disable-next-line no-console
   console.log("start");
   const msg = Util.generateMessage(username, password, port);
   if (msg !== undefined) {
@@ -189,7 +185,6 @@ function massageListener(msg) {
 }
 
 function startNodeProject() {
-  // eslint-disable-next-line no-console
   console.log("startNodeProject");
   nodejs.channel.on("message", massageListener);
   nodejs.start("main.js", massageListener, {
@@ -231,7 +226,6 @@ function onBackKeyDown() {
 
 const app = {
   initialize() {
-    // eslint-disable-next-line no-console
     console.log("initialize");
     document.addEventListener("deviceready", this.onDeviceReady, false);
   },
@@ -242,7 +236,6 @@ const app = {
     document.addEventListener("backbutton", onBackKeyDown, false);
     Purchase.init(Vue);
     Modules.hasModules(Vue);
-    // eslint-disable-next-line prefer-destructuring
     Permissions.init(Vue, cordova.plugins.permissions);
     Version.init();
     Battery.init();

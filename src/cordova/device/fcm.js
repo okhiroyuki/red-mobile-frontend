@@ -10,7 +10,6 @@ function setMessageReceived() {
       nodejs.channel.post("message", msg);
     },
     (error) => {
-      // eslint-disable-next-line no-console
       console.error(error);
     },
   );
@@ -30,7 +29,6 @@ function onTokenRefresh() {
       nodejs.channel.post("message", msg);
     },
     (error) => {
-      // eslint-disable-next-line no-console
       console.error(error);
     },
   );

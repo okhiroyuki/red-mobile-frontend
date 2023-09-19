@@ -90,13 +90,13 @@
     <div class="mt-5">
       <v-alert
         v-show="!hasPermission"
-        border="left"
+        start
         colored-border
         type="info"
         elevation="2"
       >
         Check the permissions required to use the app in Menu >
-        <router-link to="/setting"> Setting </router-link>.
+        <router-link to="/setting">Setting</router-link>.
       </v-alert>
     </div>
     <v-snackbar v-model="snackbar" :timeout="timeout">

@@ -3,16 +3,10 @@
     <v-list lines="three">
       <v-list-subheader>Permission</v-list-subheader>
 
-      <v-list v-model="settings">
-        <v-list-item
-          :disabled="permission.location"
-          @click="openLocationDialog"
-        >
+      <v-list>
+        <v-list-item @click="openLocationDialog">
           <template v-slot:prepend>
-            <v-checkbox
-              :input-value="permission.location"
-              :disabled="permission.location"
-            />
+            <v-checkbox :model-value="location" disabled />
           </template>
 
           <v-list-item-title>Location</v-list-item-title>
@@ -23,12 +17,9 @@
           </v-list-item-subtitle>
         </v-list-item>
 
-        <v-list-item :disabled="permission.camera" @click="openCameraDialog">
+        <v-list-item @click="openCameraDialog">
           <template v-slot:prepend>
-            <v-checkbox
-              :input-value="permission.camera"
-              :disabled="permission.camera"
-            />
+            <v-checkbox :model-value="camera" disabled />
           </template>
 
           <v-list-item-title>Camera</v-list-item-title>
@@ -39,12 +30,9 @@
           </v-list-item-subtitle>
         </v-list-item>
 
-        <v-list-item :disabled="permission.storage" @click="openStorageDialog">
+        <v-list-item @click="openStorageDialog">
           <template v-slot:prepend>
-            <v-checkbox
-              :input-value="permission.storage"
-              :disabled="permission.storage"
-            />
+            <v-checkbox :model-value="storage" disabled />
           </template>
 
           <v-list-item-title>Storage</v-list-item-title>
@@ -54,32 +42,21 @@
           </v-list-item-subtitle>
         </v-list-item>
 
-        <v-list-item :disabled="permission.mic" @click="openMicDialog">
+        <v-list-item @click="openMicDialog">
           <template v-slot:prepend>
-            <v-checkbox
-              :input-value="permission.mic"
-              :disabled="permission.mic"
-            />
+            <v-checkbox :model-value="mic" disabled />
           </template>
 
-          <v-list-item-content>
-            <v-list-item-title>Microphone</v-list-item-title>
-            <v-list-item-subtitle>
-              Use access to microphones in
-              <strong>speech to text</strong>, & <strong>db</strong> nodes.
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>Microphone</v-list-item-title>
+          <v-list-item-subtitle>
+            Use access to microphones in
+            <strong>speech to text</strong>, & <strong>db</strong> nodes.
+          </v-list-item-subtitle>
         </v-list-item>
 
-        <v-list-item
-          :disabled="permission.bluetooth"
-          @click="openBluetoothDialog"
-        >
+        <v-list-item @click="openBluetoothDialog">
           <template v-slot:prepend>
-            <v-checkbox
-              :input-value="permission.bluetooth"
-              :disabled="permission.bluetooth"
-            />
+            <v-checkbox :model-value="bluetooth" disabled />
           </template>
 
           <v-list-item-title>Bluetooth</v-list-item-title>
@@ -99,34 +76,68 @@
 }
 </style>
 
-<script>
-export default {
-  data() {
-    return {
-      settings: [],
-    };
-  },
-  computed: {
-    permission() {
-      return this.$root.permission;
-    },
-  },
-  methods: {
-    openLocationDialog() {
-      this.$root.requestPermission("location");
-    },
-    openCameraDialog() {
-      this.$root.requestPermission("camera");
-    },
-    openStorageDialog() {
-      this.$root.requestPermission("storage");
-    },
-    openMicDialog() {
-      this.$root.requestPermission("mic");
-    },
-    openBluetoothDialog() {
-      this.$root.requestPermission("bluetooth");
-    },
-  },
+<script setup>
+import { getCurrentInstance, onMounted, ref } from "vue";
+import {
+  checkLocationPermission,
+  checkCameraPermission,
+  checkStoragePermission,
+  checkMicPermission,
+  checkBluetoothPermission,
+} from "../cordova/permission";
+
+const location = ref("");
+const camera = ref("");
+const storage = ref("");
+const mic = ref("");
+const bluetooth = ref("");
+
+const root = getCurrentInstance().proxy.$root;
+const getPermission = () => {
+  checkLocationPermission((status) => {
+    location.value = status;
+  });
+  checkCameraPermission((status) => {
+    camera.value = status;
+  });
+  checkStoragePermission((status) => {
+    storage.value = status;
+  });
+  checkMicPermission((status) => {
+    mic.value = status;
+  });
+  checkBluetoothPermission((status) => {
+    bluetooth.value = status;
+  });
 };
+
+const openLocationDialog = () => {
+  root.requestPermission("location", (status) => {
+    location.value = status;
+  });
+};
+const openCameraDialog = () => {
+  root.requestPermission("camera", (status) => {
+    camera.value = status;
+  });
+};
+const openStorageDialog = () => {
+  root.requestPermission("storage", (status) => {
+    storage.value = status;
+  });
+};
+const openMicDialog = () => {
+  root.requestPermission("mic", (status) => {
+    mic.value = status;
+  });
+};
+const openBluetoothDialog = () => {
+  root.requestPermission("bluetooth", (status) => {
+    bluetooth.value = status;
+  });
+};
+
+onMounted(() => {
+  getPermission();
+});
 </script>

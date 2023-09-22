@@ -32,7 +32,6 @@ import * as NFC from "./device/nfc";
 
 import * as Util from "./util";
 import * as Version from "./version";
-import * as Permissions from "./permission";
 import * as Purchase from "./purchase";
 import * as Modules from "./modules";
 
@@ -238,7 +237,6 @@ const app = {
     document.addEventListener("backbutton", onBackKeyDown, false);
     Purchase.init(Vue);
     Modules.hasModules(Vue);
-    Permissions.init(Vue, cordova.plugins.permissions);
     Version.init();
     Battery.init();
     Background.init();
@@ -250,20 +248,6 @@ const app = {
     startNodeProject();
   },
 };
-
-export function requestPermission(val) {
-  if (val === "camera") {
-    Permissions.requestCameraPermission();
-  } else if (val === "location") {
-    Permissions.requestLocationPermission();
-  } else if (val === "storage") {
-    Permissions.requestStoragePermission();
-  } else if (val === "mic") {
-    Permissions.requestMicPermission();
-  } else if (val === "bluetooth") {
-    Permissions.requestBluetoothPermission();
-  }
-}
 
 export function init(_this) {
   Vue = _this;

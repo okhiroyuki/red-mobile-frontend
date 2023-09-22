@@ -77,13 +77,18 @@
 </style>
 
 <script setup>
-import { getCurrentInstance, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import {
   checkLocationPermission,
   checkCameraPermission,
   checkStoragePermission,
   checkMicPermission,
   checkBluetoothPermission,
+  requestLocationPermission,
+  requestStoragePermission,
+  requestMicPermission,
+  requestBluetoothPermission,
+  requestCameraPermission,
 } from "../cordova/permission";
 
 const location = ref("");
@@ -92,49 +97,28 @@ const storage = ref("");
 const mic = ref("");
 const bluetooth = ref("");
 
-const root = getCurrentInstance().proxy.$root;
-const getPermission = () => {
-  checkLocationPermission((status) => {
-    location.value = status;
-  });
-  checkCameraPermission((status) => {
-    camera.value = status;
-  });
-  checkStoragePermission((status) => {
-    storage.value = status;
-  });
-  checkMicPermission((status) => {
-    mic.value = status;
-  });
-  checkBluetoothPermission((status) => {
-    bluetooth.value = status;
-  });
+const getPermission = async () => {
+  location.value = await checkLocationPermission();
+  camera.value = await checkCameraPermission();
+  storage.value = await checkStoragePermission();
+  mic.value = await checkMicPermission();
+  bluetooth.value = await checkBluetoothPermission();
 };
 
-const openLocationDialog = () => {
-  root.requestPermission("location", (status) => {
-    location.value = status;
-  });
+const openLocationDialog = async () => {
+  location.value = await requestLocationPermission();
 };
-const openCameraDialog = () => {
-  root.requestPermission("camera", (status) => {
-    camera.value = status;
-  });
+const openCameraDialog = async () => {
+  camera.value = await requestCameraPermission();
 };
-const openStorageDialog = () => {
-  root.requestPermission("storage", (status) => {
-    storage.value = status;
-  });
+const openStorageDialog = async () => {
+  storage.value = await requestStoragePermission();
 };
-const openMicDialog = () => {
-  root.requestPermission("mic", (status) => {
-    mic.value = status;
-  });
+const openMicDialog = async () => {
+  mic.value = await requestMicPermission();
 };
-const openBluetoothDialog = () => {
-  root.requestPermission("bluetooth", (status) => {
-    bluetooth.value = status;
-  });
+const openBluetoothDialog = async () => {
+  bluetooth.value = await requestBluetoothPermission();
 };
 
 onMounted(() => {

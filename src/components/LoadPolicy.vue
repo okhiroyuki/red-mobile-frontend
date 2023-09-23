@@ -4,30 +4,27 @@
   </v-card>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      data: "",
-    };
-  },
-  computed: {
-    isLoading() {
-      return this.data.length === 0;
+<script setup>
+import { onMounted, ref, computed } from "vue";
+import { inject } from "vue";
+const axios = inject("axios");
+
+const data = ref("");
+const isLoading = computed(() => {
+  return data.value.length === 0;
+});
+
+onMounted(() => {
+  const url = "https://red-mobile.github.io/privacypolicy/";
+  axios.get(url).then(
+    (res) => {
+      const parser = new DOMParser();
+      const psd1 = parser.parseFromString(res.data, "text/html");
+      data.value = psd1.querySelector(".page").innerHTML;
     },
-  },
-  created() {
-    const url = "https://red-mobile.github.io/privacypolicy/";
-    this.axios.get(url).then(
-      (res) => {
-        const parser = new DOMParser();
-        const psd1 = parser.parseFromString(res.data, "text/html");
-        this.data = psd1.querySelector(".page").innerHTML;
-      },
-      (err) => {
-        this.data = err.message;
-      },
-    );
-  },
-};
+    (err) => {
+      data.value = err.message;
+    },
+  );
+});
 </script>

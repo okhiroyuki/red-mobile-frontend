@@ -139,5 +139,5 @@ app.config.productionTip = false;
 app.use(VueAxios, axios);
 app.use(router);
 app.use(vuetify);
-
+app.provide("axios", axios);
 app.mount("#app");

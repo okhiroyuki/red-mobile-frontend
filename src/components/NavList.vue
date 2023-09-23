@@ -16,7 +16,7 @@
       :key="i"
       :to="item.to"
       :target="item.target"
-      @click="click(`${i}`)"
+      @click="click(item)"
     >
       <template v-slot:prepend>
         <v-icon>{{ item.icon }}</v-icon>
@@ -31,13 +31,13 @@
         <v-icon>{{ mdiInformationVariant }}</v-icon>
       </template>
       <v-list-item-title>
-        {{ getVersion }}
+        {{ version }}
       </v-list-item-title>
     </v-list-item>
   </v-list>
 </template>
 
-<script>
+<script setup>
 import {
   mdiHome,
   mdiCloudUpload,
@@ -49,72 +49,68 @@ import {
   mdiInformationVariant,
 } from "@mdi/js";
 import logo from "../assets/logo.png";
+import { ref, onMounted } from "vue";
+import { getVersion } from "../cordova/version";
+import { requestReview } from "../cordova/util";
 
-export default {
-  props: {
-    version: String,
+const selectedItem = ref(1);
+const version = ref("");
+const items = ref([
+  {
+    text: "Home",
+    icon: mdiHome,
+    to: "/",
+    target: "",
+    subIcon: "",
   },
-  emits: ["event-click"],
-  data() {
-    return {
-      logo,
-      selectedItem: 1,
-      mdiInformationVariant,
-      items: [
-        {
-          text: "Home",
-          icon: mdiHome,
-          to: "/",
-          target: "",
-          subIcon: "",
-        },
-        {
-          text: "Upload",
-          icon: mdiCloudUpload,
-          to: "/upload",
-          target: "",
-          subIcon: "",
-        },
-        {
-          text: "Setting",
-          icon: mdiCog,
-          to: "/setting",
-          target: "",
-          subIcon: "",
-        },
-        {
-          text: "License",
-          icon: mdiLicense,
-          to: "/license",
-          target: "",
-          subIcon: "",
-        },
-        {
-          text: "Privacy Policy",
-          icon: mdiNoteText,
-          to: "/policy",
-          target: "",
-          subIcon: "",
-        },
-        {
-          text: "Feedback",
-          icon: mdiGooglePlay,
-          to: "",
-          target: "",
-          subIcon: mdiOpenInNew,
-        },
-      ],
-    };
+  {
+    text: "Upload",
+    icon: mdiCloudUpload,
+    to: "/upload",
+    target: "",
+    subIcon: "",
   },
-  computed: {
-    getVersion() {
-      return `Version ${this.version}`;
-    },
+  {
+    text: "Setting",
+    icon: mdiCog,
+    to: "/setting",
+    target: "",
+    subIcon: "",
   },
-  methods: {
-    click(i) {
-      this.$emit("event-click", i);
-    },
+  {
+    text: "License",
+    icon: mdiLicense,
+    to: "/license",
+    target: "",
+    subIcon: "",
   },
+  {
+    text: "Privacy Policy",
+    icon: mdiNoteText,
+    to: "/policy",
+    target: "",
+    subIcon: "",
+  },
+  {
+    text: "Feedback",
+    icon: mdiGooglePlay,
+    to: "",
+    target: "",
+    subIcon: mdiOpenInNew,
+  },
+]);
+
+const formatVersion = async () => {
+  version.value = `Version ${await getVersion()}`;
+};
+
+onMounted(() => {
+  formatVersion();
+});
+
+const click = (item) => {
+  if (item.text === "Feedback") {
+    requestReview();
+  }
 };
 </script>

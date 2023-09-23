@@ -31,7 +31,6 @@ import Volume from "./device/volume";
 import * as NFC from "./device/nfc";
 
 import * as Util from "./util";
-import * as Version from "./version";
 import * as Purchase from "./purchase";
 import * as Modules from "./modules";
 
@@ -237,7 +236,6 @@ const app = {
     document.addEventListener("backbutton", onBackKeyDown, false);
     Purchase.init(Vue);
     Modules.hasModules(Vue);
-    Version.init();
     Battery.init();
     Background.init();
     Shortcut.init();

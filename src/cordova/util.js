@@ -158,13 +158,17 @@ export function getFile(accept) {
 
 export function requestReview() {
   const appId = "com.okhiroyuki.redmobile";
-  LaunchReview.launch(
-    () => {
-      console.log("Successfully launched store app");
-    },
-    (err) => {
-      console.log(`Error launching store app: ${err}`);
-    },
-    appId,
-  );
+  if (isCordova()) {
+    LaunchReview.launch(
+      () => {
+        console.log("Successfully launched store app");
+      },
+      (err) => {
+        console.log(`Error launching store app: ${err}`);
+      },
+      appId,
+    );
+  } else {
+    console.log("call requestReview");
+  }
 }

@@ -3,16 +3,8 @@ import App from "./App.vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import * as Main from "./cordova/main";
-import {
-  requestBluetoothPermission,
-  requestCameraPermission,
-  requestLocationPermission,
-  requestMicPermission,
-  requestStoragePermission,
-} from "./cordova/permission";
 import * as Util from "./cordova/util";
 import * as Env from "./cordova/env";
-import * as Version from "./cordova/version";
 import * as Modules from "./cordova/modules";
 import vuetify from "./plugins/vuetify";
 import router from "./router";
@@ -87,25 +79,8 @@ const app = createApp({
       }
       return defaultValue;
     },
-    getVersion() {
-      return Version.get();
-    },
     hasEnv() {
       return this.getItem("env", null) === "enable";
-    },
-    requestPermission(val, callback) {
-      if (val === "camera") {
-        requestCameraPermission(callback);
-      } else if (val === "location") {
-        requestLocationPermission(callback);
-      } else if (val === "storage") {
-        requestStoragePermission(callback);
-      } else if (val === "mic") {
-        requestMicPermission(callback);
-      } else if (val === "bluetooth") {
-        requestBluetoothPermission(callback);
-      }
-      // Main.requestPermission(val, callback);
     },
     copyNodeModules(src) {
       return Modules.copy(src);

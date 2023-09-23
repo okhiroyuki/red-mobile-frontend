@@ -30,18 +30,14 @@ export default {
       this.showTab = to.meta.tab;
     },
     navClick() {
-      this.version = this.$root.getVersion();
       if (this.appIcon === mdiMenu) {
         this.$root.sidebar = true;
       } else {
         this.$router.push({ path: "/" });
       }
     },
-    closeDrawer(i) {
+    closeDrawer() {
       this.$root.sidebar = false;
-      if (i === "5") {
-        this.$root.requestReview();
-      }
     },
   },
 };
@@ -58,7 +54,7 @@ export default {
     </v-app-bar>
 
     <v-navigation-drawer v-model="$root.sidebar" absolute temporary>
-      <NavList :version="version" @event-click="closeDrawer" />
+      <NavList @event-click="closeDrawer" />
     </v-navigation-drawer>
 
     <v-main>

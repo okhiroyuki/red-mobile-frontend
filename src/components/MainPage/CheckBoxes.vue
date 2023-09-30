@@ -14,7 +14,7 @@ const env = ref(false);
 onMounted(() => {
   autoStart.value = getBooleanItem("autostart", false);
   keepAwake.value = getBooleanItem("keepawake", false);
-  modules.value = hasModules();
+  hasModules();
   env.value = hasEnv();
 });
 
@@ -35,11 +35,7 @@ watch(
 );
 
 const hasModules = async () => {
-  try {
-    return await Modules.hasModules();
-  } catch (e) {
-    return false;
-  }
+  modules.value = await Modules.hasModules();
 };
 </script>
 
@@ -56,7 +52,7 @@ const hasModules = async () => {
     </v-col>
     <v-col cols="6" style="height: 60px">
       <v-checkbox
-        v-model="hasModules"
+        v-model="modules"
         class="mt-0 mr-1"
         label="CustomModules"
         disabled

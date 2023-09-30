@@ -45,7 +45,7 @@ export function copy(uri) {
 }
 
 export function hasModules() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (isCordova()) {
       window.resolveLocalFileSystemURL(
         getBackupZipPath(),
@@ -55,12 +55,12 @@ export function hasModules() {
               resolve(true);
             },
             () => {
-              reject(false);
+              resolve(false);
             },
           );
         },
         () => {
-          reject(false);
+          resolve(false);
         },
       );
     } else {

@@ -1,12 +1,94 @@
+<script setup>
+import { mdiCloudUpload } from "@mdi/js";
+import { ref, onMounted } from "vue";
+import * as Env from "@/cordova/env";
+import { readUploadedFileAsText } from "@/resources/file";
+import Snackbar from "./SnackBar.vue";
+import EnvNote from "./UploadEnv/EnvNote.vue";
+
+const filename = ref([]);
+const disabledUpload = ref(true);
+const disabledReset = ref(false);
+const loading = ref(false);
+const snackbar = ref(false);
+const snackbarText = ref("");
+const readData = ref("");
+
+const setDisabledReset = async () => {
+  disabledReset.value = await !Env.hasEnv();
+};
+
+onMounted(() => {
+  setDisabledReset();
+});
+
+const showSnackbar = (text) => {
+  snackbarText.value = text;
+  snackbar.value = true;
+  setTimeout(() => {
+    snackbar.value = false;
+  }, "1000");
+};
+
+const selectedFile = async (event) => {
+  if (event.target.files) {
+    loading.value = true;
+    readData.value = "";
+    const file = event.target.files[0];
+    try {
+      const fileContents = await readUploadedFileAsText(file);
+      readData.value = fileContents;
+      loading.value = false;
+      disabledUpload.value = false;
+    } catch (e) {
+      console.log(e.message);
+      filename.value = [];
+      loading.value = false;
+      disabledUpload.value = true;
+    }
+  } else {
+    readData.value = "";
+    disabledUpload.value = true;
+  }
+};
+
+const clickUpload = async () => {
+  try {
+    await Env.write(readData.value);
+  } catch (e) {
+    console.log(e.message);
+  }
+  disabledReset.value = false;
+  disabledUpload.value = true;
+  showSnackbar("Set Done.");
+};
+const clickReset = async () => {
+  try {
+    await Env.remove();
+  } catch (e) {
+    console.log(e.message);
+  }
+  readData.value = "";
+  filename.value = [];
+  disabledReset.value = true;
+  showSnackbar("Reset Done.");
+};
+</script>
+
 <template>
   <v-container fluid>
     <v-file-input
-      v-model="filename"
-      accept="*"
+      :model-value="filename"
       label="Env file"
       @change="selectedFile"
     />
-    <v-textarea solo name="input-7-4" label="Data" :value="readData" disabled />
+    <v-textarea
+      solo
+      name="input-7-4"
+      label="Data"
+      :model-value="readData"
+      disabled
+    />
     <v-row class="mb-5">
       <v-btn
         class="ma-1 white--text"
@@ -27,103 +109,7 @@
         Reset
       </v-btn>
     </v-row>
-    <v-alert outlined color="blue-grey">
-      <v-icon>{{ mdiSchool }}</v-icon>
-      <div class="title">Using environment variables</div>
-      <div>
-        <p>
-          Please prepare env.txt. Environment variables should be added on a new
-          line in the form of
-          <code>NAME=VALUE</code>.
-        </p>
-        <p>For example:</p>
-        <blockquote>
-          DB_HOST=localhost<br />
-          DB_USER=root<br />
-          DB_PASS=s1mpl3<br />
-        </blockquote>
-        <br />
-        <p>
-          Environment variables will always be overwritten. If you want to
-          delete the content, please RESET.
-        </p>
-        <p>
-          To use environment variables in Node-RED, see
-          <a
-            href="https://nodered.org/docs/user-guide/environment-variables"
-            target="_blank"
-            >here</a
-          >.
-        </p>
-      </div>
-    </v-alert>
-    <v-snackbar v-model="snackbar" :timeout="timeout">
-      {{ snackbarText }}
-      <template #action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+    <EnvNote />
+    <Snackbar :text="snackbarText" :snackbar="snackbar" />
   </v-container>
 </template>
-
-<script>
-import { mdiCloudUpload, mdiSchool } from "@mdi/js";
-
-export default {
-  data: () => ({
-    filename: null,
-    disabledUpload: true,
-    disabledReset: false,
-    loading: false,
-    snackbar: false,
-    snackbarText: "",
-    timeout: 2000,
-    readData: "",
-    mdiCloudUpload,
-    mdiSchool,
-  }),
-  created() {
-    this.disabledReset = !this.$root.hasEnv();
-  },
-  methods: {
-    selectedFile(event) {
-      if (event.target.files) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          this.readData = reader.result;
-          this.loading = false;
-          this.disabledUpload = false;
-        };
-        reader.onerror = () => {
-          this.readData = "";
-          this.loading = false;
-          this.disabledUpload = true;
-        };
-        this.loading = true;
-        reader.readAsText(file);
-      } else {
-        this.readData = "";
-        this.disabledUpload = true;
-      }
-    },
-    clickUpload() {
-      this.$root.envWrite(this.readData);
-      this.disabledReset = false;
-      this.disabledUpload = true;
-      this.snackbar = true;
-      this.snackbarText = "Set Done.";
-    },
-    clickReset() {
-      this.readData = "";
-      this.filename = null;
-      this.$root.envRemove();
-      this.disabledReset = true;
-      this.snackbar = true;
-      this.snackbarText = "Reset Done.";
-    },
-  },
-};
-</script>

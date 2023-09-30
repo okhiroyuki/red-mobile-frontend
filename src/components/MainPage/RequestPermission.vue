@@ -1,0 +1,41 @@
+<script setup>
+import { onMounted, ref } from "vue";
+import {
+  checkLocationPermission,
+  checkMicPermission,
+  checkStoragePermission,
+  checkBluetoothPermission,
+  checkCameraPermission,
+} from "@/cordova/permission";
+
+const hasPermission = ref(false);
+
+const checkPermission = async () => {
+  return (
+    (await checkLocationPermission()) &&
+    (await checkCameraPermission()) &&
+    (await checkMicPermission()) &&
+    (await checkStoragePermission()) &&
+    (await checkBluetoothPermission())
+  );
+};
+
+onMounted(() => {
+  hasPermission.value = checkPermission();
+});
+</script>
+
+<template>
+  <div class="mt-5">
+    <v-alert
+      :model-value="!hasPermission"
+      start
+      colored-border
+      type="info"
+      elevation="2"
+    >
+      Check the permissions required to use the app in Menu >
+      <router-link to="/setting">Setting</router-link>.
+    </v-alert>
+  </div>
+</template>

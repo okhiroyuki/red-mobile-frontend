@@ -1,3 +1,53 @@
+<script setup>
+import { onMounted, ref } from "vue";
+import {
+  checkLocationPermission,
+  checkCameraPermission,
+  checkStoragePermission,
+  checkMicPermission,
+  checkBluetoothPermission,
+  requestLocationPermission,
+  requestStoragePermission,
+  requestMicPermission,
+  requestBluetoothPermission,
+  requestCameraPermission,
+} from "../cordova/permission";
+
+const location = ref("");
+const camera = ref("");
+const storage = ref("");
+const mic = ref("");
+const bluetooth = ref("");
+
+const getPermission = async () => {
+  location.value = await checkLocationPermission();
+  camera.value = await checkCameraPermission();
+  storage.value = await checkStoragePermission();
+  mic.value = await checkMicPermission();
+  bluetooth.value = await checkBluetoothPermission();
+};
+
+const openLocationDialog = async () => {
+  location.value = await requestLocationPermission();
+};
+const openCameraDialog = async () => {
+  camera.value = await requestCameraPermission();
+};
+const openStorageDialog = async () => {
+  storage.value = await requestStoragePermission();
+};
+const openMicDialog = async () => {
+  mic.value = await requestMicPermission();
+};
+const openBluetoothDialog = async () => {
+  bluetooth.value = await requestBluetoothPermission();
+};
+
+onMounted(() => {
+  getPermission();
+});
+</script>
+
 <template>
   <v-card class="mx-auto" max-width="400">
     <v-list lines="three">
@@ -75,53 +125,3 @@
   height: 50px;
 }
 </style>
-
-<script setup>
-import { onMounted, ref } from "vue";
-import {
-  checkLocationPermission,
-  checkCameraPermission,
-  checkStoragePermission,
-  checkMicPermission,
-  checkBluetoothPermission,
-  requestLocationPermission,
-  requestStoragePermission,
-  requestMicPermission,
-  requestBluetoothPermission,
-  requestCameraPermission,
-} from "../cordova/permission";
-
-const location = ref("");
-const camera = ref("");
-const storage = ref("");
-const mic = ref("");
-const bluetooth = ref("");
-
-const getPermission = async () => {
-  location.value = await checkLocationPermission();
-  camera.value = await checkCameraPermission();
-  storage.value = await checkStoragePermission();
-  mic.value = await checkMicPermission();
-  bluetooth.value = await checkBluetoothPermission();
-};
-
-const openLocationDialog = async () => {
-  location.value = await requestLocationPermission();
-};
-const openCameraDialog = async () => {
-  camera.value = await requestCameraPermission();
-};
-const openStorageDialog = async () => {
-  storage.value = await requestStoragePermission();
-};
-const openMicDialog = async () => {
-  mic.value = await requestMicPermission();
-};
-const openBluetoothDialog = async () => {
-  bluetooth.value = await requestBluetoothPermission();
-};
-
-onMounted(() => {
-  getPermission();
-});
-</script>

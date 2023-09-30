@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir",
+    "analyze": "vite build --emptyOutDir --mode analyze",
     "serve": "vite preview",
     "lint": "npx eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "npx prettier --write src/"
@@ -26,7 +27,9 @@
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-vue": "^9.17.0",
     "prettier": "^3.0.3",
+    "rollup-plugin-visualizer": "^5.9.2",
     "vite": "^4.4.9",
+    "vite-plugin-checker": "^0.6.2",
     "vite-plugin-node-polyfills": "^0.14.1",
     "vite-plugin-vuetify": "^1.0.2"
   }

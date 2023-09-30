@@ -1,4 +1,5 @@
 import path from "path";
+import { isCordova } from "./util";
 
 const BACKUP_ZIP = "node_modules.zip";
 
@@ -43,22 +44,27 @@ export function copy(uri) {
   });
 }
 
-export function hasModules(_vue) {
-  const Vue = _vue;
-  window.resolveLocalFileSystemURL(
-    getBackupZipPath(),
-    (backupEntry) => {
-      backupEntry.getMetadata(
-        () => {
-          Vue.$root.hasModules = true;
+export function hasModules() {
+  return new Promise((resolve, reject) => {
+    if (isCordova()) {
+      window.resolveLocalFileSystemURL(
+        getBackupZipPath(),
+        (backupEntry) => {
+          backupEntry.getMetadata(
+            () => {
+              resolve(true);
+            },
+            () => {
+              reject(false);
+            },
+          );
         },
         () => {
-          Vue.$root.hasModules = false;
+          reject(false);
         },
       );
-    },
-    () => {
-      Vue.$root.hasModules = false;
-    },
-  );
+    } else {
+      resolve(false);
+    }
+  });
 }

@@ -1,9 +1,3 @@
-<template>
-  <v-card :loading="isLoading">
-    <v-card-text>{{ data }} </v-card-text>
-  </v-card>
-</template>
-
 <script setup>
 import { onMounted, ref, computed } from "vue";
 import { inject } from "vue";
@@ -28,3 +22,9 @@ onMounted(() => {
   );
 });
 </script>
+
+<template>
+  <v-card :loading="isLoading">
+    <v-card-text>{{ data }} </v-card-text>
+  </v-card>
+</template>

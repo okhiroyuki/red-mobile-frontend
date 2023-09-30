@@ -1,32 +1,24 @@
+<script setup>
+import { ref } from "vue";
+
+const emits = defineEmits(["tabTitleClick"]);
+
+const tabTitles = ref(["Flows", "Env", "Modules"]);
+
+const tabTitleClick = (tabTitle) => {
+  emits("tabTitleClick", tabTitle);
+};
+</script>
+
 <template>
-  <v-tabs v-model="model" fixed-tabs>
+  <v-tabs fixed-tabs>
     <v-tab
-      v-for="(item, i) in items"
+      v-for="(tabTitle, i) in tabTitles"
       :key="i"
       :href="`#tab-${i}`"
-      @click="click(`${i}`)"
+      @click="tabTitleClick(`${tabTitle}`)"
     >
-      {{ item.title }}
+      {{ tabTitle }}
     </v-tab>
   </v-tabs>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      model: "tab-0",
-      items: [
-        { title: "Flows", to: "/flows" },
-        { title: "Env", to: "/env" },
-        { title: "Modules", to: "/modules" },
-      ],
-    };
-  },
-  methods: {
-    click(i) {
-      this.$root.selectTab = i;
-    },
-  },
-};
-</script>

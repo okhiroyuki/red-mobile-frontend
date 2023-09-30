@@ -53,13 +53,10 @@ export const getItem = (item, defaultValue) => {
   const val = window.localStorage.getItem(item);
   if (val !== null) {
     return val;
+  } else {
+    return defaultValue;
   }
-  return defaultValue;
 };
-
-export function getAutoStart() {
-  return getBooleanItem("autostart");
-}
 
 export function setKeepAwake(val) {
   if (isCordova()) {
@@ -84,10 +81,6 @@ export function setKeepAwake(val) {
     }
   }
 }
-
-export const initAutoStart = () => {
-  // $("input[id="autostart"]").prop("checked", getAutoStart());
-};
 
 export function writeFile(fileEntry, dataObj, isAppend) {
   return new Promise((resolve, reject) => {
@@ -141,7 +134,7 @@ export function readFile(fileEntry) {
       (file) => {
         const reader = new FileReader();
         reader.onloadend = () => {
-          resolve(this.result);
+          resolve(reader.result);
         };
         reader.readAsText(file);
       },

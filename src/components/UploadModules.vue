@@ -1,3 +1,93 @@
+<script setup>
+import { mdiCloudUpload, mdiPaperclip } from "@mdi/js";
+import { ref, computed, onMounted, inject } from "vue";
+import * as Modules from "@/cordova/modules";
+import { getFile } from "@/cordova/util";
+import Snackbar from "./SnackBar.vue";
+import ModulesNote from "./UploadModules/ModulesNote.vue";
+const Main = inject("Main");
+const Purchase = inject("Purchase");
+
+const uri = ref("");
+const filename = ref("");
+const loadingCopy = ref(false);
+const loadingReset = ref(false);
+const disable = ref(true);
+const snackbar = ref(false);
+const snackbarText = ref("");
+const purchase = ref(false);
+const canPurchase = ref(false);
+const loadingPurchase = ref(false);
+const hasOwned = ref(false);
+const status = ref(false);
+
+onMounted(() => {
+  Main.setStatusCallback((_status) => {
+    status.value = _status;
+  });
+  status.value = Main.getStatus();
+});
+
+const isStarted = computed(() => {
+  return status.value === "started";
+});
+
+const setCanPurchase = async () => {
+  canPurchase.value = await Purchase.canPurchase();
+};
+
+onMounted(() => {
+  Purchase.setCallback((_owned) => {
+    hasOwned.value = _owned;
+  });
+  setCanPurchase();
+});
+
+const showSnackbar = (text) => {
+  snackbarText.value = text;
+  snackbar.value = true;
+  setTimeout(() => {
+    snackbar.value = false;
+  }, "1000");
+};
+
+const select = async () => {
+  const file = await getFile("application/zip");
+  if (file) {
+    uri.value = file.uri;
+    filename.value = file.name;
+    disable.value = false;
+  }
+};
+const copy = async () => {
+  disable.value = true;
+  loadingCopy.value = true;
+  try {
+    await Modules.copy(uri.value);
+    Main.reset();
+  } catch (e) {
+    loadingCopy.value = false;
+    showSnackbar("Update Failure");
+  }
+};
+const reset = async () => {
+  disable.value = true;
+  loadingReset.value = true;
+  try {
+    await Modules.remove();
+    Main.reset();
+  } catch (e) {
+    loadingReset.value = false;
+    showSnackbar("Reset failure");
+  }
+};
+const order = async () => {
+  const result = await Purchase.order();
+  loadingPurchase.value = result;
+  purchase.value = result;
+};
+</script>
+
 <template>
   <v-container fluid>
     <v-alert v-show="isStarted" type="info">
@@ -6,7 +96,7 @@
 
     <v-alert
       v-show="!hasOwned && !isStarted"
-      border="left"
+      border="start"
       colored-border
       type="info"
       elevation="2"
@@ -61,121 +151,7 @@
       </v-btn>
     </v-row>
 
-    <v-alert v-show="!isStarted" outlined color="blue-grey">
-      <v-icon>{{ mdiSchool }}</v-icon>
-      <div class="title">
-        How to update the node-module for custom node RED.
-      </div>
-      <div>
-        <ol>
-          <li>
-            Generate <strong>node_modules.zip</strong> using this as
-            <a
-              href="https://github.com/okhiroyuki/redmobile-modules-generator"
-              target="_blank"
-              >a reference</a
-            >.
-          </li>
-          <li>
-            Set the generated <strong>node_modules.zip</strong> to the Android
-            device.
-          </li>
-          <li>Select the <strong>node_modules.zip</strong> file.</li>
-          <li>Press upload button to automatically restart the system.</li>
-          <li>it will be reflected after reboot.</li>
-        </ol>
-        <br />
-        <strong>Note: </strong>
-        <p>
-          Reset to initialize to the preset contents. Be sure to reboot in this
-          case as well.
-        </p>
-      </div>
-    </v-alert>
-
-    <v-snackbar v-model="snackbar" :timeout="timeout">
-      {{ snackbarText }}
-      <template #action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+    <ModulesNote :isShow="!isStarted" />
+    <Snackbar :text="snackbarText" :snackbar="snackbar" />
   </v-container>
 </template>
-
-<script>
-import { mdiCloudUpload, mdiSchool, mdiPaperclip } from "@mdi/js";
-
-export default {
-  data() {
-    return {
-      uri: "",
-      filename: "",
-      loadingCopy: false,
-      loadingReset: false,
-      disable: true,
-      snackbar: false,
-      snackbarText: "",
-      timeout: 2000,
-      purchase: false,
-      canPurchase: false,
-      loadingPurchase: false,
-      mdiCloudUpload,
-      mdiSchool,
-      mdiPaperclip,
-    };
-  },
-  computed: {
-    isStarted() {
-      return this.$root.status === "started";
-    },
-    hasOwned() {
-      return this.$root.owned;
-    },
-  },
-  async created() {
-    const result = await this.$root.canPurchase();
-    this.canPurchase = result;
-  },
-  methods: {
-    async select() {
-      const file = await this.$root.getFile("application/zip");
-      if (file) {
-        this.uri = file.uri;
-        this.filename = file.name;
-        this.disable = false;
-      }
-    },
-    async copy() {
-      this.disable = true;
-      this.loadingCopy = true;
-      try {
-        await this.$root.copyNodeModules(this.uri);
-        await this.$root.reset();
-      } catch (e) {
-        this.loadingCopy = false;
-        this.snackbar = true;
-        this.snackbarText = "Update Failure";
-      }
-    },
-    async reset() {
-      this.disable = true;
-      this.loadingReset = true;
-      try {
-        await this.$root.removeNodeModules();
-        await this.$root.reset();
-      } catch (e) {
-        this.loadingReset = false;
-        this.snackbar = true;
-        this.snackbarText = "Reset failure";
-      }
-    },
-    async order() {
-      const result = await this.$root.order();
-      this.loadingPurchase = result;
-      this.purchase = result;
-    },
-  },
-};
-</script>

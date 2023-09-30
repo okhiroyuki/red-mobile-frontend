@@ -1,16 +1,3 @@
-<template>
-  <v-card>
-    <v-list>
-      <template v-for="(item, index) in items">
-        <v-divider v-if="item.divider" :key="index" />
-        <v-list-item v-else :key="item.title" :href="item.url" target="_blank">
-          {{ item.title }}
-        </v-list-item>
-      </template>
-    </v-list>
-  </v-card>
-</template>
-
 <script setup>
 import { ref } from "vue";
 
@@ -232,3 +219,16 @@ const items = ref([
   { divider: true },
 ]);
 </script>
+
+<template>
+  <v-card>
+    <v-list>
+      <template v-for="(item, index) in items">
+        <v-divider v-if="item.divider" :key="index" />
+        <v-list-item v-else :key="item.title" :href="item.url" target="_blank">
+          {{ item.title }}
+        </v-list-item>
+      </template>
+    </v-list>
+  </v-card>
+</template>

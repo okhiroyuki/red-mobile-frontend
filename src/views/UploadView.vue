@@ -1,50 +1,34 @@
-<template :key="select">
-  <div v-if="isSelect0">
+<script setup>
+import UploadFlows from "../components/UploadFlows.vue";
+import UploadEnv from "../components/UploadEnv.vue";
+import UploadModules from "../components/UploadModules.vue";
+import AppBar from "../components/AppBar.vue";
+import { mdiArrowLeft } from "@mdi/js";
+import { ref } from "vue";
+
+const title = ref("Upload");
+const tabTitle = ref("Flows");
+
+const tabTitleClick = (_tabTitle) => {
+  tabTitle.value = _tabTitle;
+};
+</script>
+
+<template>
+  <AppBar
+    @tabTitleClick="tabTitleClick"
+    :appIcon="mdiArrowLeft"
+    :title="title"
+    :showUploadTab="true"
+  >
+  </AppBar>
+  <div v-if="tabTitle === `Flows`">
     <UploadFlows />
   </div>
-  <div v-else-if="isSelect1">
+  <div v-else-if="tabTitle === `Env`">
     <UploadEnv />
   </div>
   <div v-else>
     <UploadModules />
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-import UploadFlows from "../components/UploadFlows.vue";
-import UploadEnv from "../components/UploadEnv.vue";
-import UploadModules from "../components/UploadModules.vue";
-
-let selectWatch;
-
-export default {
-  name: "UploadView",
-  components: {
-    UploadFlows,
-    UploadEnv,
-    UploadModules,
-  },
-  data() {
-    return {
-      select: 0,
-    };
-  },
-  computed: {
-    isSelect0() {
-      return Number(this.select) === 0;
-    },
-    isSelect1() {
-      return Number(this.select) === 1;
-    },
-  },
-  created() {
-    selectWatch = this.$root.$watch("selectTab", (n) => {
-      this.select = n;
-    });
-  },
-  beforeUnmount() {
-    selectWatch();
-  },
-};
-</script>

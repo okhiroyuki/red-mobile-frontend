@@ -1,62 +1,27 @@
-<script>
-import NavList from "@/components/NavList.vue";
-import Tab from "@/components/UploadTab.vue";
-import { mdiMenu } from "@mdi/js";
+<script setup>
+import { inject, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { moveToBackground } from "./cordova/background";
+const Main = inject("Main");
 
-export default {
-  components: {
-    NavList,
-    Tab,
-  },
-  data() {
-    return {
-      navigation: false,
-      title: "RedMobile",
-      appIcon: mdiMenu,
-      showTab: false,
-      selectTab: 0,
-      version: "",
-    };
-  },
-  watch: {
-    $route(to) {
-      this.createPageParams(to);
-    },
-  },
-  methods: {
-    createPageParams(to) {
-      this.title = to.meta.title;
-      this.appIcon = to.meta.icon;
-      this.showTab = to.meta.tab;
-    },
-    navClick() {
-      if (this.appIcon === mdiMenu) {
-        this.$root.sidebar = true;
-      } else {
-        this.$router.push({ path: "/" });
-      }
-    },
-    closeDrawer() {
-      this.$root.sidebar = false;
-    },
-  },
-};
+const router = useRouter();
+const route = useRoute();
+
+onMounted(() => {
+  router.push("/");
+  Main.setBackKeyDownCallback(() => {
+    console.log("onBackKeyDown");
+    if (route.path === "/") {
+      moveToBackground();
+    } else {
+      window.history.back();
+    }
+  });
+});
 </script>
 
 <template>
   <v-app>
-    <v-app-bar color="red darken-4" dark app>
-      <v-app-bar-nav-icon :icon="appIcon" @click="navClick" />
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
-      <template v-if="showTab" #extension>
-        <Tab />
-      </template>
-    </v-app-bar>
-
-    <v-navigation-drawer v-model="$root.sidebar" absolute temporary>
-      <NavList @event-click="closeDrawer" />
-    </v-navigation-drawer>
-
     <v-main>
       <v-container fluid>
         <router-view />

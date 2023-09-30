@@ -15,18 +15,9 @@ const loadingReset = ref(false);
 const disable = ref(true);
 const snackbar = ref(false);
 const snackbarText = ref("");
-const purchase = ref(false);
 const canPurchase = ref(false);
-const loadingPurchase = ref(false);
 const hasOwned = ref(false);
 const status = ref(false);
-
-onMounted(() => {
-  Main.setStatusCallback((_status) => {
-    status.value = _status;
-  });
-  status.value = Main.getStatus();
-});
 
 const isStarted = computed(() => {
   return status.value === "started";
@@ -36,11 +27,20 @@ const setCanPurchase = async () => {
   canPurchase.value = await Purchase.canPurchase();
 };
 
+const getOwned = async () => {
+  hasOwned.value = await Purchase.getOwned();
+};
+
 onMounted(() => {
   Purchase.setCallback((_owned) => {
     hasOwned.value = _owned;
   });
+  Main.setStatusCallback((_status) => {
+    status.value = _status;
+  });
+  getOwned();
   setCanPurchase();
+  status.value = Main.getStatus();
 });
 
 const showSnackbar = (text) => {
@@ -82,9 +82,7 @@ const reset = async () => {
   }
 };
 const order = async () => {
-  const result = await Purchase.order();
-  loadingPurchase.value = result;
-  purchase.value = result;
+  await Purchase.order();
 };
 </script>
 
@@ -106,11 +104,7 @@ const order = async () => {
         If you can't press the buy button, please select another tab and come
         back.
       </p>
-      <v-btn
-        color="primary"
-        :disabled="purchase || !canPurchase"
-        @click="order"
-      >
+      <v-btn color="primary" :disabled="!canPurchase" @click="order">
         Purchase
       </v-btn>
     </v-alert>

@@ -11,7 +11,7 @@ export function order() {
     if (isCordova()) {
       resolve(getProduct().getOffer().order());
     } else {
-      resolve(true);
+      resolve();
     }
   });
 }
@@ -28,6 +28,16 @@ export function canPurchase() {
 
 export function setCallback(_callback) {
   callback = _callback;
+}
+
+export function getOwned() {
+  return new Promise((resolve) => {
+    if (isCordova()) {
+      resolve(getProduct().owned);
+    } else {
+      resolve(false);
+    }
+  });
 }
 
 function owned() {

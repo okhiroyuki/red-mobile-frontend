@@ -5,11 +5,19 @@ export function isCordova() {
 }
 
 export function validatePort(port) {
-  return !(port.length === 0 || (port <= 0 || port === webSocketPort || port > 61000));
+  return !(
+    port.length === 0 ||
+    port <= 0 ||
+    port === webSocketPort ||
+    port > 61000
+  );
 }
 
 export function validateLogin(user, pass) {
-  return (user.length > 0 && pass.length > 0) || (user.length === 0 && pass.length === 0);
+  return (
+    (user.length > 0 && pass.length > 0) ||
+    (user.length === 0 && pass.length === 0)
+  );
 }
 
 export function generateMessage(user, pass, port) {
@@ -21,13 +29,15 @@ export function generateMessage(user, pass, port) {
       port,
       wsport: webSocketPort,
     };
-  } if (user.length === 0 && pass.length === 0) {
+  }
+  if (user.length === 0 && pass.length === 0) {
     return {
       method: "start",
       port,
       wsport: webSocketPort,
     };
-  } return {};
+  }
+  return {};
 }
 
 export function onError() {
@@ -43,39 +53,34 @@ export const getItem = (item, defaultValue) => {
   const val = window.localStorage.getItem(item);
   if (val !== null) {
     return val;
+  } else {
+    return defaultValue;
   }
-  return defaultValue;
 };
-
-export function getAutoStart() {
-  return getBooleanItem("autostart");
-}
 
 export function setKeepAwake(val) {
   if (isCordova()) {
     if (val) {
-      window.powerManagement.dim(() => {
-        // eslint-disable-next-line no-console
-        console.log("Wakelock acquired");
-      }, () => {
-        // eslint-disable-next-line no-console
-        console.log("Failed to acquire wakelock");
-      });
+      window.powerManagement.dim(
+        () => {
+          console.log("Wakelock acquired");
+        },
+        () => {
+          console.log("Failed to acquire wakelock");
+        },
+      );
     } else {
-      window.powerManagement.release(() => {
-        // eslint-disable-next-line no-console
-        console.log("Wakelock released");
-      }, () => {
-        // eslint-disable-next-line no-console
-        console.log("Failed to release wakelock");
-      });
+      window.powerManagement.release(
+        () => {
+          console.log("Wakelock released");
+        },
+        () => {
+          console.log("Failed to release wakelock");
+        },
+      );
     }
   }
 }
-
-export const initAutoStart = () => {
-  // $("input[id="autostart"]").prop("checked", getAutoStart());
-};
 
 export function writeFile(fileEntry, dataObj, isAppend) {
   return new Promise((resolve, reject) => {
@@ -104,29 +109,39 @@ export function writeFile(fileEntry, dataObj, isAppend) {
 
 export function removeFile(dirEntry, filename) {
   return new Promise((resolve, reject) => {
-    dirEntry.getFile(filename, {
-      create: false,
-    }, (fileEntry) => {
-      fileEntry.remove(() => {
-        resolve();
-      }, (error) => {
-        reject(error);
-      });
-    });
+    dirEntry.getFile(
+      filename,
+      {
+        create: false,
+      },
+      (fileEntry) => {
+        fileEntry.remove(
+          () => {
+            resolve();
+          },
+          (error) => {
+            reject(error);
+          },
+        );
+      },
+    );
   });
 }
 
 export function readFile(fileEntry) {
   return new Promise((resolve, reject) => {
-    fileEntry.file((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        resolve(this.result);
-      };
-      reader.readAsText(file);
-    }, (error) => {
-      reject(error);
-    });
+    fileEntry.file(
+      (file) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+        reader.readAsText(file);
+      },
+      (error) => {
+        reject(error);
+      },
+    );
   });
 }
 
@@ -136,9 +151,17 @@ export function getFile(accept) {
 
 export function requestReview() {
   const appId = "com.okhiroyuki.redmobile";
-  LaunchReview.launch(() => {
-    console.log("Successfully launched store app");
-  }, (err) => {
-    console.log(`Error launching store app: ${err}`);
-  }, appId);
+  if (isCordova()) {
+    LaunchReview.launch(
+      () => {
+        console.log("Successfully launched store app");
+      },
+      (err) => {
+        console.log(`Error launching store app: ${err}`);
+      },
+      appId,
+    );
+  } else {
+    console.log("call requestReview");
+  }
 }

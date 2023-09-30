@@ -3,40 +3,34 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build --dest src-cordova/dist",
-    "lint": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build --emptyOutDir",
+    "analyze": "vite build --emptyOutDir --mode analyze",
+    "serve": "vite preview",
+    "lint": "npx eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "npx prettier --write src/"
   },
   "dependencies": {
     "axios": "0.21.4",
-    "core-js": "3.29.0",
-    "vue": "2.7.14",
+    "vue": "^3.3.4",
     "vue-axios": "3.5.2",
-    "vue-router": "3.6.5",
-    "vuetify": "2.6.14"
+    "vue-router": "4.2.4",
+    "vuetify": "3.3.16"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.19",
-    "@vue/cli-plugin-eslint": "4.5.19",
-    "@vue/cli-plugin-router": "4.5.19",
-    "@vue/cli-service": "4.5.19",
-    "@vue/eslint-config-airbnb": "5.3.0",
-    "babel-eslint": "10.1.0",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.2.1",
-    "eslint-import-resolver-alias": "1.1.2",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-vue": "6.2.2",
-    "sass": "1.58.3",
-    "sass-loader": "8.0.2",
-    "vue-cli-plugin-cordova": "2.4.1",
-    "vue-cli-plugin-vuetify": "2.5.8",
-    "vue-template-compiler": "2.7.14",
-    "vuetify-loader": "1.9.2"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "@mdi/js": "7.2.96",
+    "@rushstack/eslint-patch": "^1.4.0",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-vue": "^9.17.0",
+    "prettier": "^3.0.3",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "vite": "^4.4.9",
+    "vite-plugin-checker": "^0.6.2",
+    "vite-plugin-node-polyfills": "^0.14.1",
+    "vite-plugin-vuetify": "^1.0.2"
+  }
 }

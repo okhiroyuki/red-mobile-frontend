@@ -1,16 +1,13 @@
 import * as Util from "./util";
 
-let version;
-
-export function init() {
-  cordova.getAppVersion.getVersionNumber().then((val) => {
-    version = val;
+export function getVersion() {
+  return new Promise((resolve) => {
+    if (Util.isCordova()) {
+      cordova.getAppVersion.getVersionNumber((version) => {
+        resolve(version);
+      });
+    } else {
+      resolve("1.0.0");
+    }
   });
-}
-
-export function get() {
-  if (Util.isCordova()) {
-    return version;
-  }
-  return "1.0.0";
 }

@@ -1,36 +1,60 @@
+import { isCordova } from "./util";
 const pid = "custom_modules";
-let Vue;
+let callback = null;
 
 function getProduct() {
-  // eslint-disable-next-line no-undef
   return CdvPurchase.store.get(pid);
 }
 
 export function order() {
-  // eslint-disable-next-line no-undef
-  return getProduct().getOffer().order();
+  return new Promise((resolve) => {
+    if (isCordova()) {
+      resolve(getProduct().getOffer().order());
+    } else {
+      resolve();
+    }
+  });
 }
 
 export function canPurchase() {
-  // eslint-disable-next-line no-undef
-  return getProduct().canPurchase;
+  return new Promise((resolve) => {
+    if (isCordova()) {
+      resolve(getProduct().canPurchase);
+    } else {
+      resolve(true);
+    }
+  });
+}
+
+export function setCallback(_callback) {
+  callback = _callback;
+}
+
+export function getOwned() {
+  return new Promise((resolve) => {
+    if (isCordova()) {
+      resolve(getProduct().owned);
+    } else {
+      resolve(false);
+    }
+  });
 }
 
 function owned() {
-  return getProduct().owned;
+  if (callback) {
+    callback(getProduct().owned);
+  }
 }
 
-export function init(_vue) {
-  const {
-    store, ProductType, Platform, LogLevel
-    // eslint-disable-next-line no-undef
-  } = CdvPurchase;
-  Vue = _vue;
+export function init() {
+  if (!isCordova()) {
+    return;
+  }
+  const { store, ProductType, Platform, LogLevel } = CdvPurchase;
   if (!store) {
     console.log("Store not available");
     return;
   }
-  // eslint-disable-next-line no-param-reassign
   store.verbosity = LogLevel.INFO;
 
   store.error((error) => {
@@ -46,7 +70,7 @@ export function init(_vue) {
 
   store.ready(() => {
     console.log("\\o/ STORE READY \\o/");
-    Vue.$root.owned = owned();
+    owned();
   });
 
   store.when().approved((transaction) => {
@@ -56,12 +80,12 @@ export function init(_vue) {
 
   store.when().productUpdated(() => {
     console.log("call productUpdated");
-    Vue.$root.owned = owned();
+    owned();
   });
 
   store.when().receiptUpdated(() => {
     console.log("call receiptUpdated");
-    Vue.$root.owned = owned();
+    owned();
   });
 
   store.initialize([Platform.GOOGLE_PLAY]);

@@ -29,29 +29,33 @@ function successStart(json) {
 }
 
 function getPicture(json) {
-  navigator.camera.getPicture((imageData) => {
-    let result;
-    if (Number(json.options.destinationType) === 0) {
-      result = `data:image/jpeg;base64,${imageData}`;
-    } else {
-      result = imageData;
-    }
-    const msg = {
-      id: json.id,
-      method: json.method,
-      payload: result,
-      status: true,
-    };
-    nodejs.channel.post("message", msg);
-  }, (error) => {
-    const msg = {
-      id: json.id,
-      method: json.method,
-      payload: error.message,
-      status: false,
-    };
-    nodejs.channel.post("message", msg);
-  }, json.options);
+  navigator.camera.getPicture(
+    (imageData) => {
+      let result;
+      if (Number(json.options.destinationType) === 0) {
+        result = `data:image/jpeg;base64,${imageData}`;
+      } else {
+        result = imageData;
+      }
+      const msg = {
+        id: json.id,
+        method: json.method,
+        payload: result,
+        status: true,
+      };
+      nodejs.channel.post("message", msg);
+    },
+    (error) => {
+      const msg = {
+        id: json.id,
+        method: json.method,
+        payload: error.message,
+        status: false,
+      };
+      nodejs.channel.post("message", msg);
+    },
+    json.options,
+  );
 }
 
 function getToBack(json) {

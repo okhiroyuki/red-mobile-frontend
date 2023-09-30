@@ -1,5 +1,11 @@
 # redmobile-frontend
 
+## Prepare
+
+```zsh
+nodenv isntall
+```
+
 ## Project setup
 
 ```bash

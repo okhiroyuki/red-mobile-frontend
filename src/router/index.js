@@ -1,82 +1,47 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import UploadView from "../views/UploadView.vue";
+import SettingView from "../views/SettingView.vue";
+import LicenseView from "../views/LicenseView.vue";
+import PolicyView from "../views/PolicyView.vue";
 
-Vue.use(VueRouter);
-
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-    meta: {
-      title: "RedMobile",
-      icon: "mdi-menu",
-      tab: false,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: HomeView,
     },
-  },
-  {
-    path: "/upload",
-    name: "Upload",
-    meta: {
-      title: "Upload",
-      icon: "mdi-arrow-left",
-      tab: true,
+    {
+      path: "/upload",
+      name: "Upload",
+      component: UploadView,
     },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/Upload.vue"),
-  },
-  {
-    path: "/setting",
-    name: "Setting",
-    meta: {
-      title: "Setting",
-      icon: "mdi-arrow-left",
-      tab: false,
+    {
+      path: "/setting",
+      name: "Setting",
+      component: SettingView,
     },
-    component: () => import(/* webpackChunkName: "about" */ "../views/Setting.vue"),
-  },
-  {
-    path: "/license",
-    name: "License",
-    meta: {
-      title: "License",
-      icon: "mdi-arrow-left",
-      tab: false,
+    {
+      path: "/license",
+      name: "License",
+      component: LicenseView,
     },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/License.vue"),
-  },
-  {
-    path: "/forum",
-    name: "Forum",
-    meta: {
-      title: "Forum",
-      icon: "mdi-arrow-left",
-      tab: false,
+    {
+      path: "/forum",
+      name: "Forum",
+      beforeEnter() {
+        window.location =
+          "https://groups.google.com/forum/?hl=ja#!forum/redmobile-apps";
+      },
     },
-    beforeEnter() {
-      window.location = "https://groups.google.com/forum/?hl=ja#!forum/redmobile-apps";
+    {
+      path: "/policy",
+      name: "Privacy Policy",
+      component: PolicyView,
     },
-  },
-  {
-    path: "/policy",
-    name: "Privacy Policy",
-    meta: {
-      title: "Privacy Policy",
-      icon: "mdi-arrow-left",
-      tab: false,
-    },
-    component: () => import(/* webpackChunkName: "about" */ "../views/Policy.vue"),
-  },
-];
-
-const router = new VueRouter({
-  routes,
+  ],
 });
 
 export default router;

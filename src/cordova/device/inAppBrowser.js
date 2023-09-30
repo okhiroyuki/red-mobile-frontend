@@ -61,7 +61,11 @@ function close(json) {
 }
 
 export function openDashboard(port) {
-  cordova.InAppBrowser.open(`http://127.0.0.1:${port}/api/ui/`, "_blank", "location=no,zoom=no,presentationstyle=fullscreen,toolbar=no");
+  cordova.InAppBrowser.open(
+    `http://127.0.0.1:${port}/api/ui/`,
+    "_blank",
+    "location=no,zoom=no,presentationstyle=fullscreen,toolbar=no",
+  );
 }
 
 export function launchNodeRED(url) {

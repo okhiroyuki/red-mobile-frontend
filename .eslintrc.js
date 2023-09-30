@@ -1,19 +1,18 @@
+require("@rushstack/eslint-patch/modern-module-resolution");
+
 module.exports = {
   root: true,
   env: {
     node: true,
+    es2022: true,
   },
-  extends: ["eslint:recommended", "plugin:vue/essential", "airbnb-base"],
+  extends: [
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "@vue/eslint-config-prettier",
+  ],
   parserOptions: {
-    ecmaVersion: 12,
-    sourceType: "module",
-    parser: "babel-eslint",
-  },
-  plugins: ["vue"],
-  rules: {
-    quotes: ["error", "double"],
-    "comma-dangle": ["error", "only-multiline"],
-    "operator-linebreak": ["error", "after"],
+    ecmaVersion: "latest",
   },
   globals: {
     cordova: true,
@@ -32,13 +31,6 @@ module.exports = {
     LaunchReview: true,
     nfc: true,
     ndef: true,
-  },
-  settings: {
-    "import/resolver": {
-      alias: {
-        map: [["@", "./src/"]],
-        extensions: [".js", ".vue"],
-      },
-    },
+    CdvPurchase: true,
   },
 };

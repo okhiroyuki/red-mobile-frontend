@@ -19,21 +19,27 @@ function sendError(json, error) {
 }
 
 function startTextRecognizer(json) {
-  FirebaseVisionPlugin.onDeviceTextRecognizer(json.payload,
+  FirebaseVisionPlugin.onDeviceTextRecognizer(
+    json.payload,
     (result) => sendSuccess(json, result),
-    (error) => sendError(json, error));
+    (error) => sendError(json, error),
+  );
 }
 
 function startBarcodeDetector(json) {
-  FirebaseVisionPlugin.barcodeDetector(json.payload,
+  FirebaseVisionPlugin.barcodeDetector(
+    json.payload,
     (result) => sendSuccess(json, result),
-    (error) => sendError(json, error));
+    (error) => sendError(json, error),
+  );
 }
 
 function startImageLabeler(json) {
-  FirebaseVisionPlugin.imageLabeler(json.payload,
+  FirebaseVisionPlugin.imageLabeler(
+    json.payload,
     (result) => sendSuccess(json, result),
-    (error) => sendError(json, error));
+    (error) => sendError(json, error),
+  );
 }
 
 export default function startIfNeeded(json) {

@@ -1,7 +1,9 @@
 <script setup>
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
+
+const emits = defineEmits(["update"]);
 
 const props = defineProps({
   password: {
@@ -15,12 +17,17 @@ const props = defineProps({
 });
 const showPassword = ref(false);
 
-const password = computed(() => {
-  return props.password;
-});
+const password = ref(props.password);
 const disabled = computed(() => {
   return props.disabled;
 });
+
+watch(
+  () => password.value,
+  () => {
+    emits("update", password.value);
+  },
+);
 </script>
 <template>
   <v-row no-gutters>

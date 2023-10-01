@@ -14,11 +14,10 @@ import { mdiMenu } from "@mdi/js";
 
 const Main = inject("Main");
 
-const title = "Home";
 const status = ref("");
-const username = ref("");
-const password = ref("");
-const port = ref(1880);
+const username = ref(getItem("username", ""));
+const password = ref(getItem("password", ""));
+const port = ref(Number(getItem("port", "1880")));
 const autoStart = ref(false);
 const loading = ref(false);
 const snackbar = ref(false);
@@ -27,9 +26,6 @@ const buttonTitle = ref("Start");
 const disabled = ref(false);
 
 onMounted(() => {
-  username.value = getItem("username", "");
-  password.value = getItem("password", "");
-  port.value = Number(getItem("port", "1880"));
   Main.setStatusCallback((_status) => {
     status.value = _status;
   });
@@ -82,6 +78,8 @@ const showSnackbar = (text) => {
 
 const click = () => {
   console.log("click");
+  console.log(`${username.value} : ${password.value} : ${port.value}`);
+
   if (isStarted.value) {
     Main.launchNodeRED(buttonTitle.value);
   } else {
@@ -116,15 +114,36 @@ const startLoading = () => {
   disabled.value = true;
   loading.value = true;
 };
+
+const updateUsername = (_username) => {
+  console.log(_username);
+  username.value = _username;
+};
+
+const updatePassword = (_password) => {
+  password.value = _password;
+};
+
+const updatePort = (_port) => {
+  port.value = _port;
+};
 </script>
 
 <template>
-  <AppBar :appIcon="mdiMenu" :title="title" />
+  <AppBar :appIcon="mdiMenu" :title="`Home`" />
   <main>
     <v-container fluid>
-      <Username :username="username" :disabled="disabled" />
-      <Password :password="password" :disabled="disabled" />
-      <Port :port="port" :disabled="disabled" />
+      <Username
+        :username="username"
+        :disabled="disabled"
+        @update="updateUsername"
+      />
+      <Password
+        :password="password"
+        :disabled="disabled"
+        @update="updatePassword"
+      />
+      <Port :port="port" :disabled="disabled" @update="updatePort" />
       <CheckBoxes @changeAutoStart="changeAutoStart" />
       <StartButton
         :loading="loading"

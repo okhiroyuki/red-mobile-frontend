@@ -1,5 +1,7 @@
 <script setup>
-import { computed } from "vue";
+import { computed, watch, ref } from "vue";
+
+const emits = defineEmits(["update"]);
 
 const props = defineProps({
   username: {
@@ -12,19 +14,24 @@ const props = defineProps({
   },
 });
 
-const username = computed(() => {
-  return props.username;
-});
+const username = ref(props.username);
 const disabled = computed(() => {
   return props.disabled;
 });
+
+watch(
+  () => username.value,
+  () => {
+    emits("update", username.value);
+  },
+);
 </script>
 
 <template>
   <v-row no-gutters>
     <v-col>
       <v-text-field
-        :v-model="username"
+        v-model="username"
         type="text"
         :disabled="disabled"
         label="Username"

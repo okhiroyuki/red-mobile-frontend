@@ -1,9 +1,11 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 const rules = ref({
   required: (value) => !!value || "Required.",
 });
+
+const emits = defineEmits(["update"]);
 
 const props = defineProps({
   port: {
@@ -16,12 +18,17 @@ const props = defineProps({
   },
 });
 
-const port = computed(() => {
-  return props.port;
-});
+const port = ref(props.port);
 const disabled = computed(() => {
   return props.disabled;
 });
+
+watch(
+  () => port.value,
+  () => {
+    emits("update", Number(port.value));
+  },
+);
 </script>
 <template>
   <v-row no-gutters>

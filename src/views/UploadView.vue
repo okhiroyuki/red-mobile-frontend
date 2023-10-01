@@ -7,7 +7,7 @@ import { mdiArrowLeft } from "@mdi/js";
 import { ref } from "vue";
 
 const title = ref("Upload");
-const tabTitles = ref(["Flows", "Env", "Modules"]);
+const tabTitles = ref(["Env", "Modules"]);
 const tabTitle = ref(tabTitles.value[0]);
 
 const tabTitleClick = (_tabTitle) => {

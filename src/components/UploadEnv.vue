@@ -1,11 +1,12 @@
 <script setup>
-import { mdiCloudUpload } from "@mdi/js";
 import { ref, onMounted } from "vue";
-import * as Env from "@/cordova/env";
-import { readUploadedFileAsText } from "@/resources/file";
+import { hasEnv, write, remove } from "../cordova/env";
+import { readAsText } from "../cordova/util";
 import Snackbar from "./BaseSnackBar.vue";
 import EnvNote from "./UploadEnvNote.vue";
-
+import ResetButton from "./BaseResetButton.vue";
+import UploadButton from "./BaseUploadButton.vue";
+import FileSelector from "./BaseFileSelector.vue";
 const filename = ref([]);
 const disabledUpload = ref(true);
 const disabledReset = ref(false);
@@ -15,7 +16,7 @@ const snackbarText = ref("");
 const readData = ref("");
 
 const setDisabledReset = async () => {
-  disabledReset.value = await !Env.hasEnv();
+  disabledReset.value = await !hasEnv();
 };
 
 onMounted(() => {
@@ -30,31 +31,22 @@ const showSnackbar = (text) => {
   }, "1000");
 };
 
-const selectedFile = async (event) => {
-  if (event.target.files) {
-    loading.value = true;
-    readData.value = "";
-    const file = event.target.files[0];
-    try {
-      const fileContents = await readUploadedFileAsText(file);
-      readData.value = fileContents;
-      loading.value = false;
-      disabledUpload.value = false;
-    } catch (e) {
-      console.log(e.message);
-      filename.value = [];
-      loading.value = false;
-      disabledUpload.value = true;
-    }
-  } else {
-    readData.value = "";
+const selectFile = async (file) => {
+  try {
+    readData.value = await readAsText(file.uri);
+    loading.value = false;
+    disabledUpload.value = false;
+  } catch (e) {
+    console.log(e.message);
+    filename.value = [];
+    loading.value = false;
     disabledUpload.value = true;
   }
 };
 
 const clickUpload = async () => {
   try {
-    await Env.write(readData.value);
+    await write(readData.value);
   } catch (e) {
     console.log(e.message);
   }
@@ -62,9 +54,10 @@ const clickUpload = async () => {
   disabledUpload.value = true;
   showSnackbar("Set Done.");
 };
+
 const clickReset = async () => {
   try {
-    await Env.remove();
+    await remove();
   } catch (e) {
     console.log(e.message);
   }
@@ -77,11 +70,7 @@ const clickReset = async () => {
 
 <template>
   <v-container fluid>
-    <v-file-input
-      :model-value="filename"
-      label="Env file"
-      @change="selectedFile"
-    />
+    <FileSelector :label="'Env file'" @selectFile="selectFile" />
     <v-textarea
       solo
       name="input-7-4"
@@ -90,24 +79,12 @@ const clickReset = async () => {
       disabled
     />
     <v-row class="mb-5">
-      <v-btn
-        class="ma-1 white--text"
-        color="teal darken-1"
+      <UploadButton
         :disabled="disabledUpload"
         :loading="loading"
         @click="clickUpload"
-      >
-        Upload
-        <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
-      </v-btn>
-      <v-btn
-        class="ma-1 white--text"
-        color="red darken-4"
-        :disabled="disabledReset"
-        @click="clickReset"
-      >
-        Reset
-      </v-btn>
+      />
+      <ResetButton :disabled="disabledReset" @click="clickReset" />
     </v-row>
     <EnvNote />
     <Snackbar :text="snackbarText" :snackbar="snackbar" />

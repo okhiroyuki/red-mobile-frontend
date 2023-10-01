@@ -1,16 +1,8 @@
 <script setup>
 import { mdiSchool } from "@mdi/js";
-import { computed } from "vue";
-const props = defineProps({
-  isShow: Boolean,
-});
-
-const isShow = computed(() => {
-  return props.isShow;
-});
 </script>
 <template>
-  <v-alert v-show="isShow" outlined color="blue-grey">
+  <v-alert outlined color="blue-grey">
     <v-icon>{{ mdiSchool }}</v-icon>
     <div class="title">Importing and Exporting Flows</div>
     <div>

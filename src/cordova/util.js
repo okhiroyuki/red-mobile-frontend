@@ -82,61 +82,26 @@ export function setKeepAwake(val) {
   }
 }
 
-export function writeFile(fileEntry, dataObj, isAppend) {
+export function readAsText(uri) {
   return new Promise((resolve, reject) => {
-    fileEntry.createWriter((_fileWriter) => {
-      const fileWriter = _fileWriter;
-      fileWriter.onwriteend = () => {
-        resolve(fileEntry);
-      };
-
-      fileWriter.onerror = (e) => {
-        reject(e);
-      };
-
-      // If we are appending data to file, go to the end of the file.
-      if (isAppend) {
-        try {
-          fileWriter.seek(fileWriter.length);
-        } catch (e) {
-          reject(e);
-        }
-      }
-      fileWriter.write(dataObj);
-    });
-  });
-}
-
-export function removeFile(dirEntry, filename) {
-  return new Promise((resolve, reject) => {
-    dirEntry.getFile(
-      filename,
-      {
-        create: false,
-      },
+    window.resolveLocalFileSystemURL(
+      uri,
       (fileEntry) => {
-        fileEntry.remove(
-          () => {
-            resolve();
+        fileEntry.file(
+          (file) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              resolve(reader.result);
+            };
+            reader.onerror = () => {
+              reject(reader.error);
+            };
+            reader.readAsText(file);
           },
           (error) => {
             reject(error);
           },
         );
-      },
-    );
-  });
-}
-
-export function readFile(fileEntry) {
-  return new Promise((resolve, reject) => {
-    fileEntry.file(
-      (file) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-        reader.readAsText(file);
       },
       (error) => {
         reject(error);
@@ -146,7 +111,11 @@ export function readFile(fileEntry) {
 }
 
 export function getFile(accept) {
-  return chooser.getFileMetadata(accept);
+  if (isCordova()) {
+    return chooser.getFileMetadata(accept);
+  } else {
+    return null;
+  }
 }
 
 export function requestReview() {

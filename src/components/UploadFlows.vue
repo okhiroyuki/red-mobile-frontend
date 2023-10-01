@@ -1,8 +1,10 @@
 <script setup>
-import { mdiCloudUpload } from "@mdi/js";
 import { ref, computed, inject, onMounted } from "vue";
 import Snackbar from "./BaseSnackBar.vue";
 import FlowNote from "./UploadFlowsNote.vue";
+import UploadButton from "./BaseUploadButton.vue";
+import FileSelector from "./BaseFileSelector.vue";
+import { readAsText } from "../cordova/util";
 const axios = inject("axios");
 const Main = inject("Main");
 
@@ -32,25 +34,15 @@ const showSnackbar = (text) => {
   }, "1000");
 };
 
-const selectedFile = async (event) => {
-  if (event.target.files) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      readData.value = reader.result;
-      loading.value = false;
-      canUpload.value = true;
-    };
-    reader.onerror = () => {
-      readData.value = "";
-      loading.value = true;
-      canUpload.value = false;
-    };
-    loading.value = true;
-    reader.readAsText(file);
-  } else {
+const selectFile = async (file) => {
+  try {
+    readData.value = await readAsText(file.uri);
+    canUpload.value = true;
+  } catch (e) {
+    console.log(e.message);
     canUpload.value = false;
   }
+  loading.value = false;
 };
 
 const getItem = (item, defaultValue) => {
@@ -66,10 +58,10 @@ const upload = async () => {
   loading.value = true;
   try {
     const port = getItem("port", 1880);
-    const url = `http://127.0.0.1:${port}/upload`;
+    const url = `http://localhost:${port}/upload`;
     await axios.post(url, { data: readData.value });
     loading.value = false;
-    showSnackbar("suceess upload");
+    showSnackbar("success upload");
   } catch (error) {
     readData.value = "";
     loading.value = false;
@@ -83,21 +75,15 @@ const upload = async () => {
     <v-alert v-show="disabled" type="info">
       After Node-RED is up and running, flow data can be updated.
     </v-alert>
-
-    <v-file-input v-show="!disabled" label="Flow file" @change="selectedFile" />
-    <v-btn
-      v-show="!disabled"
-      color="teal darken-1"
-      class="mb-5 white--text"
-      :loading="loading"
-      :disabled="disabled || !canUpload"
-      @click="upload"
-    >
-      Upload
-      <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
-    </v-btn>
-
-    <FlowNote :isShow="!disabled" />
+    <div v-if="!disabled">
+      <FileSelector :label="'Flow file'" @selectFile="selectFile" />
+      <UploadButton
+        :disabled="disabled || !canUpload"
+        :loading="loading"
+        @click="upload"
+      />
+      <FlowNote />
+    </div>
     <Snackbar :text="snackbarText" :snackbar="snackbar" />
   </v-container>
 </template>

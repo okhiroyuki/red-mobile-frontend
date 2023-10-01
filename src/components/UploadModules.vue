@@ -1,10 +1,11 @@
 <script setup>
-import { mdiCloudUpload, mdiPaperclip } from "@mdi/js";
+import { mdiCloudUpload } from "@mdi/js";
 import { ref, computed, onMounted, inject } from "vue";
 import * as Modules from "../cordova/modules";
-import { getFile } from "../cordova/util";
 import Snackbar from "./BaseSnackBar.vue";
 import ModulesNote from "./UploadModulesNote.vue";
+import FileSelector from "./BaseFileSelector.vue";
+import ResetButton from "./BaseResetButton.vue";
 const Main = inject("Main");
 const Purchase = inject("Purchase");
 
@@ -51,14 +52,12 @@ const showSnackbar = (text) => {
   }, "1000");
 };
 
-const select = async () => {
-  const file = await getFile("application/zip");
-  if (file) {
-    uri.value = file.uri;
-    filename.value = file.name;
-    disable.value = false;
-  }
+const select = (file) => {
+  uri.value = file.uri;
+  filename.value = file.name;
+  disable.value = false;
 };
+
 const copy = async () => {
   disable.value = true;
   loadingCopy.value = true;
@@ -109,17 +108,13 @@ const order = async () => {
       </v-btn>
     </v-alert>
 
-    <v-text-field
-      v-show="!isStarted"
-      label="modules"
-      :value="filename"
+    <FileSelector
+      v-if="!isStarted"
+      :label="'modules'"
+      :metadata="'application/zip'"
       :disabled="!hasOwned || loadingCopy || loadingReset"
-      @click="select"
-    >
-      <template v-slot:prepend>
-        <v-icon>{{ mdiPaperclip }}</v-icon>
-      </template>
-    </v-text-field>
+      @selectFile="select"
+    />
 
     <v-row class="mb-5">
       <v-btn
@@ -133,16 +128,12 @@ const order = async () => {
         Upload
         <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
       </v-btn>
-      <v-btn
-        v-show="!isStarted"
-        class="ma-1 white--text"
-        color="red darken-4"
+      <ResetButton
+        v-if="!isStarted"
         :disabled="loadingCopy || loadingReset"
         :loading="loadingReset"
-        @click="reset"
-      >
-        Reset
-      </v-btn>
+        @clickReset="reset"
+      />
     </v-row>
 
     <ModulesNote :isShow="!isStarted" />

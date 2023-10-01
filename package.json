@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@mdi/js": "7.2.96",
-    "@rushstack/eslint-patch": "1.5.0",
+    "@rushstack/eslint-patch": "1.5.1",
     "@vitejs/plugin-vue": "4.3.4",
     "@vue/eslint-config-prettier": "8.0.0",
     "eslint": "8.50.0",

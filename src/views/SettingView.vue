@@ -6,12 +6,10 @@ import LocationPermission from "../components/SettingLocationPermission.vue";
 import MicPermission from "../components/SettingMicPermission.vue";
 import StoragePermission from "../components/SettingStoragePermission.vue";
 import { mdiArrowLeft } from "@mdi/js";
-import { ref } from "vue";
-const title = ref("Setting");
 </script>
 
 <template>
-  <AppBar :appIcon="mdiArrowLeft" :title="title" />
+  <AppBar :appIcon="mdiArrowLeft" :title="`Setting`" />
   <v-card class="mx-auto" max-width="400">
     <v-list lines="three">
       <v-list-subheader>Permission</v-list-subheader>

@@ -7,18 +7,10 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
-  loading: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
 });
 
 const disabled = computed(() => {
   return props.disabled;
-});
-const loading = computed(() => {
-  return props.loading;
 });
 const click = () => {
   emits("click");
@@ -29,7 +21,6 @@ const click = () => {
     class="ma-1 white--text"
     color="red darken-4"
     :disabled="disabled"
-    :loading="loading"
     @click="click"
   >
     Reset

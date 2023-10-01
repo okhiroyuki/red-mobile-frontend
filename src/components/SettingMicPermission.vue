@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { checkMicPermission, requestMicPermission } from "@/cordova/permission";
+import {
+  checkMicPermission,
+  requestMicPermission,
+} from "../cordova/permission";
 
 const mic = ref(false);
 

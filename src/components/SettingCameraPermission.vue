@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import {
   checkCameraPermission,
   requestCameraPermission,
-} from "@/cordova/permission";
+} from "../cordova/permission";
 
 const camera = ref(false);
 

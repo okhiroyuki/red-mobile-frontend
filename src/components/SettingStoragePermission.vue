@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import {
   checkStoragePermission,
   requestStoragePermission,
-} from "@/cordova/permission";
+} from "../cordova/permission";
 
 const storage = ref(false);
 

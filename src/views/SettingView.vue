@@ -1,10 +1,10 @@
 <script setup>
-import AppBar from "@/components/BaseAppBar.vue";
-import BluetoothPermission from "@/components/SettingBluetoothPermission.vue";
-import CameraPermission from "@/components/SettingCameraPermission.vue";
-import LocationPermission from "@/components/SettingLocationPermission.vue";
-import MicPermission from "@/components/SettingMicPermission.vue";
-import StoragePermission from "@/components/SettingStoragePermission.vue";
+import AppBar from "../components/BaseAppBar.vue";
+import BluetoothPermission from "../components/SettingBluetoothPermission.vue";
+import CameraPermission from "../components/SettingCameraPermission.vue";
+import LocationPermission from "../components/SettingLocationPermission.vue";
+import MicPermission from "../components/SettingMicPermission.vue";
+import StoragePermission from "../components/SettingStoragePermission.vue";
 import { mdiArrowLeft } from "@mdi/js";
 import { ref } from "vue";
 const title = ref("Setting");

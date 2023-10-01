@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import {
   checkBluetoothPermission,
   requestBluetoothPermission,
-} from "@/cordova/permission";
+} from "../cordova/permission";
 
 const bluetooth = ref(false);
 

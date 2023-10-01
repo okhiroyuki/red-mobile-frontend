@@ -3,7 +3,7 @@ import { onMounted, ref } from "vue";
 import {
   checkLocationPermission,
   requestLocationPermission,
-} from "@/cordova/permission";
+} from "../cordova/permission";
 
 const location = ref(false);
 

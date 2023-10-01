@@ -1,8 +1,8 @@
 <script setup>
 import { mdiCloudUpload, mdiPaperclip } from "@mdi/js";
 import { ref, computed, onMounted, inject } from "vue";
-import * as Modules from "@/cordova/modules";
-import { getFile } from "@/cordova/util";
+import * as Modules from "../cordova/modules";
+import { getFile } from "../cordova/util";
 import Snackbar from "./BaseSnackBar.vue";
 import ModulesNote from "./UploadModulesNote.vue";
 const Main = inject("Main");

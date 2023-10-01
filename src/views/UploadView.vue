@@ -6,7 +6,6 @@ import UploadModules from "../components/UploadModules.vue";
 import { mdiArrowLeft } from "@mdi/js";
 import { ref } from "vue";
 
-const title = ref("Upload");
 const tabTitles = ref(["Env", "Modules"]);
 const tabTitle = ref(tabTitles.value[0]);
 
@@ -19,7 +18,7 @@ const tabTitleClick = (_tabTitle) => {
   <AppBar
     @tabTitleClick="tabTitleClick"
     :appIcon="mdiArrowLeft"
-    :title="title"
+    :title="`Upload`"
     :showTab="true"
     :tabTitles="tabTitles"
   >

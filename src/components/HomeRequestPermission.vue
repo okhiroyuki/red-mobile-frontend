@@ -6,7 +6,8 @@ import {
   checkStoragePermission,
   checkBluetoothPermission,
   checkCameraPermission,
-} from "@/cordova/permission";
+} from "../cordova/permission";
+import { isCordova } from "../cordova/util";
 
 const hasPermission = ref(false);
 
@@ -21,7 +22,9 @@ const checkPermission = async () => {
 };
 
 onMounted(() => {
-  hasPermission.value = checkPermission();
+  if (isCordova()) {
+    hasPermission.value = checkPermission();
+  }
 });
 </script>
 

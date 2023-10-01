@@ -1,8 +1,8 @@
 <script setup>
 import { mdiCloudUpload } from "@mdi/js";
 import { ref, computed, inject, onMounted } from "vue";
-import Snackbar from "./SnackBar.vue";
-import FlowNote from "./UploadFlow/FlowNote.vue";
+import Snackbar from "./BaseSnackBar.vue";
+import FlowNote from "./UploadFlowsNote.vue";
 const axios = inject("axios");
 const Main = inject("Main");
 

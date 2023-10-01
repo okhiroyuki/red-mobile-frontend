@@ -3,8 +3,8 @@ import { mdiCloudUpload } from "@mdi/js";
 import { ref, onMounted } from "vue";
 import * as Env from "@/cordova/env";
 import { readUploadedFileAsText } from "@/resources/file";
-import Snackbar from "./SnackBar.vue";
-import EnvNote from "./UploadEnv/EnvNote.vue";
+import Snackbar from "./BaseSnackBar.vue";
+import EnvNote from "./UploadEnvNote.vue";
 
 const filename = ref([]);
 const disabledUpload = ref(true);

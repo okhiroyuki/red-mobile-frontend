@@ -4,9 +4,18 @@ import { computed } from "vue";
 
 const emits = defineEmits(["clickButton"]);
 const props = defineProps({
-  loading: Boolean,
-  title: String,
-  isStarted: Boolean,
+  loading: {
+    type: Boolean,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  isStarted: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const loading = computed(() => {

@@ -12,7 +12,6 @@ const Purchase = inject("Purchase");
 const uri = ref("");
 const filename = ref("");
 const loadingCopy = ref(false);
-const loadingReset = ref(false);
 const disable = ref(true);
 const snackbar = ref(false);
 const snackbarText = ref("");
@@ -71,12 +70,10 @@ const copy = async () => {
 };
 const reset = async () => {
   disable.value = true;
-  loadingReset.value = true;
   try {
     await Modules.remove();
     Main.reset();
   } catch (e) {
-    loadingReset.value = false;
     showSnackbar("Reset failure");
   }
 };
@@ -107,36 +104,30 @@ const order = async () => {
         Purchase
       </v-btn>
     </v-alert>
-
-    <FileSelector
-      v-if="!isStarted"
-      :label="'modules'"
-      :metadata="'application/zip'"
-      :disabled="!hasOwned || loadingCopy || loadingReset"
-      @selectFile="select"
-    />
-
-    <v-row class="mb-5">
-      <v-btn
-        v-show="!isStarted"
-        class="ma-1 white--text"
-        color="teal darken-1"
-        :loading="loadingCopy"
-        :disabled="!hasOwned || disable"
-        @click="copy"
-      >
-        Upload
-        <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
-      </v-btn>
-      <ResetButton
-        v-if="!isStarted"
-        :disabled="loadingCopy || loadingReset"
-        :loading="loadingReset"
-        @clickReset="reset"
+    <div v-if="!isStarted">
+      <FileSelector
+        :label="'modules file'"
+        :metadata="'application/zip'"
+        :disabled="!hasOwned || loadingCopy"
+        @selectFile="select"
       />
-    </v-row>
 
-    <ModulesNote :isShow="!isStarted" />
+      <v-row class="mb-5">
+        <v-btn
+          class="ma-1 white--text"
+          color="teal darken-1"
+          :loading="loadingCopy"
+          :disabled="!hasOwned || disable"
+          @click="copy"
+        >
+          Upload
+          <v-icon right dark>{{ mdiCloudUpload }}</v-icon>
+        </v-btn>
+        <ResetButton :disabled="loadingCopy" @click="reset" />
+      </v-row>
+
+      <ModulesNote />
+    </div>
     <Snackbar :text="snackbarText" :snackbar="snackbar" />
   </v-container>
 </template>

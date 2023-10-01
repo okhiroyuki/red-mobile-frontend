@@ -1,9 +1,16 @@
 <script setup>
 import { ref } from "vue";
 
+const props = defineProps({
+  titles: {
+    type: Array,
+    required: false,
+    default: () => [],
+  },
+});
 const emits = defineEmits(["tabTitleClick"]);
 
-const tabTitles = ref(["Flows", "Env", "Modules"]);
+const titles = ref(props.titles);
 
 const tabTitleClick = (tabTitle) => {
   emits("tabTitleClick", tabTitle);
@@ -11,14 +18,14 @@ const tabTitleClick = (tabTitle) => {
 </script>
 
 <template>
-  <v-tabs fixed-tabs>
+  <v-tabs grow>
     <v-tab
-      v-for="(tabTitle, i) in tabTitles"
+      v-for="(title, i) in titles"
       :key="i"
       :href="`#tab-${i}`"
-      @click="tabTitleClick(`${tabTitle}`)"
+      @click="tabTitleClick(`${title}`)"
     >
-      {{ tabTitle }}
+      {{ title }}
     </v-tab>
   </v-tabs>
 </template>

@@ -1,17 +1,17 @@
 <script setup>
-import ListTop from "./NavList/ListTop.vue";
-import ListItems from "./NavList/ListItems.vue";
-import ListVersion from "./NavList/ListVersion.vue";
+import NavListAvatar from "./NavListAvatar.vue";
+import NavListItems from "./NavListItems.vue";
+import NavListVersion from "./NavListVersion.vue";
 import { ref } from "vue";
 
 const selectedItem = ref(1);
 </script>
 
 <template>
-  <ListTop />
+  <NavListAvatar />
   <v-divider />
   <v-list v-model="selectedItem">
-    <ListItems />
-    <ListVersion />
+    <NavListItems />
+    <NavListVersion />
   </v-list>
 </template>

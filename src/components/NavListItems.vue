@@ -8,7 +8,7 @@ import {
   mdiOpenInNew,
 } from "@mdi/js";
 import { ref } from "vue";
-import { requestReview } from "@/cordova/util";
+import { requestReview } from "../cordova/util";
 
 const items = ref([
   {

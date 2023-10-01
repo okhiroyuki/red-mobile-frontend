@@ -1,8 +1,8 @@
 <script setup>
-import * as Modules from "@/cordova/modules";
-import { hasEnv } from "@/cordova/env";
+import * as Modules from "../cordova/modules";
+import { hasEnv } from "../cordova/env";
 import { ref, onMounted, watch } from "vue";
-import { getBooleanItem, setKeepAwake } from "@/cordova/util";
+import { getBooleanItem, setKeepAwake } from "../cordova/util";
 
 const emits = defineEmits(["changeAutoStart"]);
 

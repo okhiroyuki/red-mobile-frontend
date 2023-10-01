@@ -1,19 +1,35 @@
 <script setup>
-import UploadTab from "./UploadTab.vue";
-import NavigationDrawer from "./NavigationDrawer.vue";
+import Tab from "./BaseTab.vue";
+import NavigationDrawer from "./BaseNavigationDrawer.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 const emits = defineEmits(["tabTitleClick"]);
 const props = defineProps({
-  appIcon: String,
-  title: String,
-  showUploadTab: Boolean,
+  appIcon: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  showTab: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  tabTitles: {
+    type: Array,
+    required: false,
+    default: () => [],
+  },
 });
 
 const appIcon = ref(props.appIcon);
 const title = ref(props.title);
-const showUplaodTab = ref(props.showUploadTab);
+const showTab = ref(props.showTab);
+const tabTitles = ref(props.tabTitles);
 
 const sidebar = ref(false);
 const router = useRouter();
@@ -36,8 +52,8 @@ const navIconClick = () => {
   <v-app-bar color="red darken-4" dark app>
     <v-app-bar-nav-icon :icon="appIcon" @click="navIconClick" />
     <v-toolbar-title>{{ title }}</v-toolbar-title>
-    <template v-if="showUplaodTab" #extension>
-      <UploadTab @tabTitleClick="tabTitleClick" />
+    <template v-if="showTab" #extension>
+      <Tab @tabTitleClick="tabTitleClick" :titles="tabTitles" />
     </template>
   </v-app-bar>
   <NavigationDrawer :sidebar="sidebar" />

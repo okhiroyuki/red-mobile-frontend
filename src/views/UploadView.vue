@@ -1,13 +1,14 @@
 <script setup>
+import AppBar from "../components/BaseAppBar.vue";
 import UploadFlows from "../components/UploadFlows.vue";
 import UploadEnv from "../components/UploadEnv.vue";
 import UploadModules from "../components/UploadModules.vue";
-import AppBar from "../components/AppBar.vue";
 import { mdiArrowLeft } from "@mdi/js";
 import { ref } from "vue";
 
 const title = ref("Upload");
-const tabTitle = ref("Flows");
+const tabTitles = ref(["Flows", "Env", "Modules"]);
+const tabTitle = ref(tabTitles.value[0]);
 
 const tabTitleClick = (_tabTitle) => {
   tabTitle.value = _tabTitle;
@@ -19,7 +20,8 @@ const tabTitleClick = (_tabTitle) => {
     @tabTitleClick="tabTitleClick"
     :appIcon="mdiArrowLeft"
     :title="title"
-    :showUploadTab="true"
+    :showTab="true"
+    :tabTitles="tabTitles"
   >
   </AppBar>
   <div v-if="tabTitle === `Flows`">

@@ -2,13 +2,14 @@
 import { inject, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { moveToBackground } from "./cordova/background";
+import { isCordova } from "./cordova/util";
 const Main = inject("Main");
 
 const router = useRouter();
 const route = useRoute();
 
 onMounted(() => {
-  router.push("/");
+  if (isCordova()) router.push("/");
   Main.setBackKeyDownCallback(() => {
     console.log("onBackKeyDown");
     if (route.path === "/") {

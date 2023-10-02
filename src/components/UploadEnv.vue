@@ -7,8 +7,7 @@ import EnvNote from "./UploadEnvNote.vue";
 import ResetButton from "./BaseResetButton.vue";
 import UploadButton from "./BaseUploadButton.vue";
 import FileSelector from "./BaseFileSelector.vue";
-const filename = ref([]);
-const disabledUpload = ref(true);
+
 const disabledReset = ref(false);
 const loading = ref(false);
 const snackbar = ref(false);
@@ -32,39 +31,37 @@ const showSnackbar = (text) => {
 };
 
 const selectFile = async (file) => {
+  loading.value = true;
   try {
     readData.value = await readAsText(file.uri);
-    loading.value = false;
-    disabledUpload.value = false;
   } catch (e) {
     console.log(e.message);
-    filename.value = [];
+  } finally {
     loading.value = false;
-    disabledUpload.value = true;
   }
 };
 
 const clickUpload = async () => {
   try {
     await write(readData.value);
+    readData.value = "";
+    disabledReset.value = false;
+    showSnackbar("Set Done.");
   } catch (e) {
     console.log(e.message);
+    showSnackbar("Upload Failure.");
   }
-  disabledReset.value = false;
-  disabledUpload.value = true;
-  showSnackbar("Set Done.");
 };
 
 const clickReset = async () => {
   try {
     await remove();
+    disabledReset.value = true;
+    showSnackbar("Reset Done.");
   } catch (e) {
     console.log(e.message);
+    showSnackbar("Reset Failure.");
   }
-  readData.value = "";
-  filename.value = [];
-  disabledReset.value = true;
-  showSnackbar("Reset Done.");
 };
 </script>
 
@@ -80,7 +77,7 @@ const clickReset = async () => {
     />
     <v-row class="mb-5">
       <UploadButton
-        :disabled="disabledUpload"
+        :disabled="!readData"
         :loading="loading"
         @click="clickUpload"
       />

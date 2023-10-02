@@ -10,7 +10,6 @@ const Main = inject("Main");
 
 const readData = ref("");
 const loading = ref(false);
-const canUpload = ref(false);
 const snackbar = ref(false);
 const snackbarText = ref("");
 const status = ref("");
@@ -37,12 +36,9 @@ const showSnackbar = (text) => {
 const selectFile = async (file) => {
   try {
     readData.value = await readAsText(file.uri);
-    canUpload.value = true;
   } catch (e) {
     console.log(e.message);
-    canUpload.value = false;
   }
-  loading.value = false;
 };
 
 const getItem = (item, defaultValue) => {
@@ -54,13 +50,13 @@ const getItem = (item, defaultValue) => {
 };
 
 const upload = async () => {
-  canUpload.value = false;
   loading.value = true;
   try {
     const port = getItem("port", 1880);
     const url = `http://localhost:${port}/upload`;
     await axios.post(url, { data: readData.value });
     loading.value = false;
+    readData.value = "";
     showSnackbar("success upload");
   } catch (error) {
     readData.value = "";
@@ -77,11 +73,7 @@ const upload = async () => {
     </v-alert>
     <div v-if="!disabled">
       <FileSelector :label="'Flow file'" @selectFile="selectFile" />
-      <UploadButton
-        :disabled="disabled || !canUpload"
-        :loading="loading"
-        @click="upload"
-      />
+      <UploadButton :disabled="!readData" :loading="loading" @click="upload" />
       <FlowNote />
     </div>
     <Snackbar :text="snackbarText" :snackbar="snackbar" />

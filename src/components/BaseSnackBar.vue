@@ -15,7 +15,7 @@ const text = computed(() => {
 </script>
 
 <template>
-  <v-snackbar :model-value="snackbar">
+  <v-snackbar :model-value="snackbar" :timeout="2000">
     {{ text }}
   </v-snackbar>
 </template>

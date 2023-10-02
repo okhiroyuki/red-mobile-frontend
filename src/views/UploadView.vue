@@ -6,7 +6,7 @@ import UploadModules from "../components/UploadModules.vue";
 import { mdiArrowLeft } from "@mdi/js";
 import { ref } from "vue";
 
-const tabTitles = ref(["Env", "Modules"]);
+const tabTitles = ref(["Flows", "Env", "Modules"]);
 const tabTitle = ref(tabTitles.value[0]);
 
 const tabTitleClick = (_tabTitle) => {

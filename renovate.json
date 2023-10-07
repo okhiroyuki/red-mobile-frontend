@@ -12,6 +12,7 @@
   },
   "nodenv": {
     "enabled": true,
+    "automerge": true,
     "platformAutomerge": true
   },
   "lockFileMaintenance": {

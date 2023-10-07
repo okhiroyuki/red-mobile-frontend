@@ -11,16 +11,24 @@
     "dependencyDashboardApproval": true
   },
   "nodenv": {
-    "enabled": true
+    "enabled": true,
+    "platformAutomerge": true
   },
   "lockFileMaintenance": {
     "enabled": true,
-    "automerge": true
+    "automerge": true,
+    "platformAutomerge": true
   },
   "packageRules": [
     {
       "automerge": true,
+      "platformAutomerge": true,
       "matchManagers": ["pre-commit"]
+    },
+    {
+      "automerge": true,
+      "platformAutomerge": true,
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
     }
   ]
 }

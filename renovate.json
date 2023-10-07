@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
+    "dependencyDashboardApproval",
     ":enablePreCommit",
     ":prHourlyLimitNone",
     ":prConcurrentLimitNone",
@@ -9,7 +10,7 @@
   ],
   "rangeStrategy": "pin",
   "major": {
-    "automerge": false
+    "dependencyDashboardApproval": true
   },
   "nodenv": {
     "enabled": true

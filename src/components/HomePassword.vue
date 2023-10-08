@@ -1,9 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 
 import { computed, ref, watch } from "vue";
 
-const emits = defineEmits(["update"]);
+const emits = defineEmits<{
+  update: [value: string];
+}>();
 
 const props = defineProps({
   password: {

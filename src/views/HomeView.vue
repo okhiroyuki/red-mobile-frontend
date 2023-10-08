@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, inject, onMounted, watch } from "vue";
 import { validatePort, validateLogin, getItem } from "../cordova/util";
 import Snackbar from "../components/BaseSnackBar.vue";
@@ -12,12 +12,12 @@ import Port from "../components/HomePort.vue";
 import Username from "../components/HomeUsername.vue";
 import { mdiMenu } from "@mdi/js";
 
-const Main = inject("Main");
+const Main = inject("Main") as Main;
 
 const status = ref("");
 const username = ref(getItem("username", ""));
 const password = ref(getItem("password", ""));
-const port = ref(Number(getItem("port", "1880")));
+const port = ref(getItem("port", "1880"));
 const autoStart = ref(false);
 const loading = ref(false);
 const snackbar = ref(false);
@@ -26,7 +26,7 @@ const buttonTitle = ref("Start");
 const disabled = ref(false);
 
 onMounted(() => {
-  Main.setStatusCallback((_status) => {
+  Main.setStatusCallback((_status: string) => {
     status.value = _status;
   });
   status.value = Main.getStatus();
@@ -57,7 +57,7 @@ watch(
   },
 );
 
-const changeAutoStart = (_status) => {
+const changeAutoStart = (_status: boolean) => {
   autoStart.value = _status;
   if (_status) {
     if (isStarted.value) {
@@ -68,12 +68,12 @@ const changeAutoStart = (_status) => {
   }
 };
 
-const showSnackbar = (text) => {
+const showSnackbar = (text: string) => {
   snackbarText.value = text;
   snackbar.value = true;
   setTimeout(() => {
     snackbar.value = false;
-  }, "1000");
+  }, 1000);
 };
 
 const click = () => {
@@ -97,10 +97,10 @@ const click = () => {
   }
 };
 
-const saveParams = async (user, pass, port) => {
-  await window.localStorage.setItem("username", user);
-  await window.localStorage.setItem("password", pass);
-  await window.localStorage.setItem("port", port);
+const saveParams = (user: string, pass: string, port: string) => {
+  window.localStorage.setItem("username", user);
+  window.localStorage.setItem("password", pass);
+  window.localStorage.setItem("port", port);
 };
 
 const start = () => {
@@ -115,16 +115,16 @@ const startLoading = () => {
   loading.value = true;
 };
 
-const updateUsername = (_username) => {
+const updateUsername = (_username: string) => {
   console.log(_username);
   username.value = _username;
 };
 
-const updatePassword = (_password) => {
+const updatePassword = (_password: string) => {
   password.value = _password;
 };
 
-const updatePort = (_port) => {
+const updatePort = (_port: string) => {
   port.value = _port;
 };
 </script>

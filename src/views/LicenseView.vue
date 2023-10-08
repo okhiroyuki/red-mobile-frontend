@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import AppBar from "../components/BaseAppBar.vue";
 import LicenseContents from "../components/LicenseContents.vue";
 import { mdiArrowLeft } from "@mdi/js";

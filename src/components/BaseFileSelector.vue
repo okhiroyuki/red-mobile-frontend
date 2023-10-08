@@ -1,10 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { mdiPaperclip } from "@mdi/js";
 
 import { ref, computed } from "vue";
 import { getFile } from "../cordova/util";
 
-const emits = defineEmits(["selectFile"]);
+const emits = defineEmits<{
+  selectFile: [file: { uri: string; name: string }];
+}>();
 const props = defineProps({
   disabled: {
     type: Boolean,

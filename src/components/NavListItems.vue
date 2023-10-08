@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {
   mdiCloudUpload,
   mdiCog,
@@ -48,7 +48,7 @@ const items = ref([
   },
 ]);
 
-const click = (item) => {
+const click = (item: { text: string }) => {
   if (item.text === "Feedback") {
     requestReview();
   } else if (item.text === "Privacy Policy") {

@@ -1,15 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch } from "vue";
 
 const rules = ref({
-  required: (value) => !!value || "Required.",
+  required: (value: string) => !!value || "Required.",
 });
 
-const emits = defineEmits(["update"]);
+const emits = defineEmits<{
+  update: [value: string];
+}>();
 
 const props = defineProps({
   port: {
-    type: Number,
+    type: String,
     required: true,
   },
   disabled: {
@@ -26,7 +28,7 @@ const disabled = computed(() => {
 watch(
   () => port.value,
   () => {
-    emits("update", Number(port.value));
+    emits("update", port.value);
   },
 );
 </script>

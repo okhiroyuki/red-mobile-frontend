@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 const props = defineProps({
@@ -8,11 +8,13 @@ const props = defineProps({
     default: () => [],
   },
 });
-const emits = defineEmits(["tabTitleClick"]);
+const emits = defineEmits<{
+  tabTitleClick: [value: string];
+}>();
 
 const titles = ref(props.titles);
 
-const tabTitleClick = (tabTitle) => {
+const tabTitleClick = (tabTitle: string) => {
   emits("tabTitleClick", tabTitle);
 };
 </script>

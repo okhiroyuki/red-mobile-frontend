@@ -10,7 +10,6 @@ import router from "./router";
 
 const init = () => {
   const app = createApp(App);
-  app.config.productionTip = false;
   app.use(VueAxios, axios);
   app.use(router);
   app.use(vuetify);

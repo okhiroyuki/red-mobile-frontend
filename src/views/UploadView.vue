@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import AppBar from "../components/BaseAppBar.vue";
 import UploadFlows from "../components/UploadFlows.vue";
 import UploadEnv from "../components/UploadEnv.vue";
@@ -9,7 +9,7 @@ import { ref } from "vue";
 const tabTitles = ref(["Flows", "Env", "Modules"]);
 const tabTitle = ref(tabTitles.value[0]);
 
-const tabTitleClick = (_tabTitle) => {
+const tabTitleClick = (_tabTitle: string) => {
   tabTitle.value = _tabTitle;
 };
 </script>

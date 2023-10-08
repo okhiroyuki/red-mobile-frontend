@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { mdiChartBox } from "@mdi/js";
 import { inject } from "vue";
-const Main = inject("Main");
+const Main = inject("Main") as Main;
 
 const clickDashBoard = () => {
   console.log("dashboard");

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import AppBar from "../components/BaseAppBar.vue";
 import BluetoothPermission from "../components/SettingBluetoothPermission.vue";
 import CameraPermission from "../components/SettingCameraPermission.vue";

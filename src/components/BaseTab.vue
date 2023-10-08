@@ -8,7 +8,9 @@ const props = defineProps({
     default: () => [],
   },
 });
-const emits = defineEmits(["tabTitleClick"]);
+const emits = defineEmits<{
+  tabTitleClick: [value: string];
+}>();
 
 const titles = ref(props.titles);
 

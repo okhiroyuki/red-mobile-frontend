@@ -4,7 +4,9 @@ import NavigationDrawer from "./BaseNavigationDrawer.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
-const emits = defineEmits(["tabTitleClick"]);
+const emits = defineEmits<{
+  tabTitleClick: [value: string];
+}>();
 const props = defineProps({
   appIcon: {
     type: String,

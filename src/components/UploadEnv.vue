@@ -30,7 +30,7 @@ const showSnackbar = (text: string) => {
   }, 1000);
 };
 
-const selectFile = async (file: { uri: any }) => {
+const selectFile = async (file: { uri: string }) => {
   loading.value = true;
   try {
     readData.value = await readAsText(file.uri);

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const emits = defineEmits(["click"]);
+const emits = defineEmits<{
+  click: any;
+}>();
 const props = defineProps({
   disabled: {
     type: Boolean,

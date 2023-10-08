@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { inject, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { moveToBackground } from "./cordova/background";
 import { isCordova } from "./cordova/util";
-const Main = inject("Main");
+const Main = inject("Main") as Main;
 
 const router = useRouter();
 const route = useRoute();

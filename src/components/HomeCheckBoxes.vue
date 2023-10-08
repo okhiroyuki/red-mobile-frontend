@@ -1,10 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import * as Modules from "../cordova/modules";
 import { hasEnv } from "../cordova/env";
 import { ref, onMounted, watch } from "vue";
 import { getBooleanItem, setKeepAwake } from "../cordova/util";
 
-const emits = defineEmits(["changeAutoStart"]);
+const emits = defineEmits<{
+  changeAutoStart: [value: boolean];
+}>();
 
 const autoStart = ref(false);
 const keepAwake = ref(false);
@@ -12,8 +14,8 @@ const modules = ref(false);
 const env = ref(false);
 
 onMounted(() => {
-  autoStart.value = getBooleanItem("autostart", false);
-  keepAwake.value = getBooleanItem("keepawake", false);
+  autoStart.value = getBooleanItem("autostart");
+  keepAwake.value = getBooleanItem("keepawake");
   hasModules();
   env.value = hasEnv();
 });
@@ -21,7 +23,10 @@ onMounted(() => {
 watch(
   () => keepAwake.value,
   () => {
-    window.localStorage.setItem("keepawake", keepAwake.value);
+    window.localStorage.setItem(
+      "keepawake",
+      Boolean(keepAwake.value).toString(),
+    );
     setKeepAwake(keepAwake.value);
   },
 );
@@ -29,7 +34,10 @@ watch(
 watch(
   () => autoStart.value,
   () => {
-    window.localStorage.setItem("autostart", autoStart.value);
+    window.localStorage.setItem(
+      "autostart",
+      Boolean(autoStart.value).toString(),
+    );
     emits("changeAutoStart", autoStart.value);
   },
 );

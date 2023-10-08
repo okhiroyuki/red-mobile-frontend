@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { mdiCloudUpload } from "@mdi/js";
 import { ref, computed, onMounted, inject } from "vue";
 import * as Modules from "../cordova/modules";
@@ -6,8 +6,8 @@ import Snackbar from "./BaseSnackBar.vue";
 import ModulesNote from "./UploadModulesNote.vue";
 import FileSelector from "./BaseFileSelector.vue";
 import ResetButton from "./BaseResetButton.vue";
-const Main = inject("Main");
-const Purchase = inject("Purchase");
+const Main = inject("Main") as Main;
+const Purchase = inject("Purchase") as Purchase;
 
 const uri = ref("");
 const filename = ref("");
@@ -32,10 +32,10 @@ const getOwned = async () => {
 };
 
 onMounted(() => {
-  Purchase.setCallback((_owned) => {
+  Purchase.setCallback((_owned: boolean) => {
     hasOwned.value = _owned;
   });
-  Main.setStatusCallback((_status) => {
+  Main.setStatusCallback((_status: string) => {
     status.value = _status;
   });
   getOwned();
@@ -43,7 +43,7 @@ onMounted(() => {
   status.value = Main.getStatus();
 });
 
-const showSnackbar = (text) => {
+const showSnackbar = (text: string) => {
   snackbarText.value = text;
   snackbar.value = true;
   setTimeout(() => {
@@ -51,7 +51,7 @@ const showSnackbar = (text) => {
   }, 1000);
 };
 
-const select = (file) => {
+const select = (file: { uri: string; name: string }) => {
   uri.value = file.uri;
   filename.value = file.name;
   disable.value = false;

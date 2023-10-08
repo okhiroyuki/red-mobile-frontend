@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import NavListAvatar from "./NavListAvatar.vue";
 import NavListItems from "./NavListItems.vue";
 import NavListVersion from "./NavListVersion.vue";

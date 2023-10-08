@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { hasEnv, write, remove } from "../cordova/env";
 import { readAsText } from "../cordova/util";
@@ -22,19 +22,19 @@ onMounted(() => {
   setDisabledReset();
 });
 
-const showSnackbar = (text) => {
+const showSnackbar = (text: string) => {
   snackbarText.value = text;
   snackbar.value = true;
   setTimeout(() => {
     snackbar.value = false;
-  }, "1000");
+  }, 1000);
 };
 
-const selectFile = async (file) => {
+const selectFile = async (file: { uri: any }) => {
   loading.value = true;
   try {
     readData.value = await readAsText(file.uri);
-  } catch (e) {
+  } catch (e: any) {
     console.log(e.message);
   } finally {
     loading.value = false;
@@ -47,7 +47,7 @@ const clickUpload = async () => {
     readData.value = "";
     disabledReset.value = false;
     showSnackbar("Set Done.");
-  } catch (e) {
+  } catch (e: any) {
     console.log(e.message);
     showSnackbar("Upload Failure.");
   }
@@ -58,7 +58,7 @@ const clickReset = async () => {
     await remove();
     disabledReset.value = true;
     showSnackbar("Reset Done.");
-  } catch (e) {
+  } catch (e: any) {
     console.log(e.message);
     showSnackbar("Reset Failure.");
   }

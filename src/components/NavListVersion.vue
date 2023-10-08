@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { mdiInformationVariant } from "@mdi/js";
 import { ref, onMounted } from "vue";
 import { getVersion } from "../cordova/version";

@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch } from "vue";
 
 const rules = ref({
-  required: (value) => !!value || "Required.",
+  required: (value: string) => !!value || "Required.",
 });
 
 const emits = defineEmits(["update"]);

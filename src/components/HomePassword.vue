@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 
 import { computed, ref, watch } from "vue";

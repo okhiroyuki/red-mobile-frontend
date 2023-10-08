@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import Tab from "./BaseTab.vue";
 import NavigationDrawer from "./BaseNavigationDrawer.vue";
 import { useRouter } from "vue-router";
@@ -34,7 +34,7 @@ const tabTitles = ref(props.tabTitles);
 const sidebar = ref(false);
 const router = useRouter();
 
-const tabTitleClick = (tabTitle) => {
+const tabTitleClick = (tabTitle: string) => {
   emits("tabTitleClick", tabTitle);
 };
 

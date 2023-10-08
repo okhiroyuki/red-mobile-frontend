@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 const props = defineProps({
@@ -12,7 +12,7 @@ const emits = defineEmits(["tabTitleClick"]);
 
 const titles = ref(props.titles);
 
-const tabTitleClick = (tabTitle) => {
+const tabTitleClick = (tabTitle: string) => {
   emits("tabTitleClick", tabTitle);
 };
 </script>

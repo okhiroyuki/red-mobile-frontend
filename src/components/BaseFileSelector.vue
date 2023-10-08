@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { mdiPaperclip } from "@mdi/js";
 
 import { ref, computed } from "vue";

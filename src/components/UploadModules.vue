@@ -17,7 +17,7 @@ const snackbar = ref(false);
 const snackbarText = ref("");
 const canPurchase = ref(false);
 const hasOwned = ref(false);
-const status = ref(false);
+const status = ref("");
 
 const isStarted = computed(() => {
   return status.value === "started";
@@ -48,7 +48,7 @@ const showSnackbar = (text) => {
   snackbar.value = true;
   setTimeout(() => {
     snackbar.value = false;
-  }, "1000");
+  }, 1000);
 };
 
 const select = (file) => {

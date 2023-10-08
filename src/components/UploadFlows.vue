@@ -1,4 +1,4 @@
-<script setup>
+<script setup lan="ts">
 import { ref, computed, inject, onMounted } from "vue";
 import Snackbar from "./BaseSnackBar.vue";
 import FlowNote from "./UploadFlowsNote.vue";

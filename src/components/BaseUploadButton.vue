@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { mdiCloudUpload } from "@mdi/js";
 
 import { computed } from "vue";

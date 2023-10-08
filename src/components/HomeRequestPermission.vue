@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
 import {
   checkLocationPermission,
@@ -11,7 +11,7 @@ import { isCordova } from "../cordova/util";
 
 const hasPermission = ref(false);
 
-const checkPermission = async () => {
+const checkPermission = async (): Promise<boolean> => {
   return (
     (await checkLocationPermission()) &&
     (await checkCameraPermission()) &&
@@ -21,9 +21,9 @@ const checkPermission = async () => {
   );
 };
 
-onMounted(() => {
+onMounted(async () => {
   if (isCordova()) {
-    hasPermission.value = checkPermission();
+    hasPermission.value = await checkPermission();
   }
 });
 </script>

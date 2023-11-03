@@ -19,7 +19,7 @@ function sendError(json, error) {
 }
 
 function startTextRecognizer(json) {
-  FirebaseVisionPlugin.onDeviceTextRecognizer(
+  MLKit.onDeviceTextRecognizer(
     json.payload,
     (result) => sendSuccess(json, result),
     (error) => sendError(json, error),
@@ -27,7 +27,7 @@ function startTextRecognizer(json) {
 }
 
 function startBarcodeDetector(json) {
-  FirebaseVisionPlugin.barcodeDetector(
+  MLKit.barcodeDetector(
     json.payload,
     (result) => sendSuccess(json, result),
     (error) => sendError(json, error),
@@ -35,7 +35,7 @@ function startBarcodeDetector(json) {
 }
 
 function startImageLabeler(json) {
-  FirebaseVisionPlugin.imageLabeler(
+  MLKit.imageLabeler(
     json.payload,
     (result) => sendSuccess(json, result),
     (error) => sendError(json, error),

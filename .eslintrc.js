@@ -24,7 +24,7 @@ module.exports = {
     serial: true,
     DBMeter: true,
     CameraPreview: true,
-    FirebaseVisionPlugin: true,
+    MLKit: true,
     webkit: true,
     device: true,
     store: true,

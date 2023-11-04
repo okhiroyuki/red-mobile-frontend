@@ -4,7 +4,6 @@ import * as Handler from "./device/handler";
 import * as InAppBrowser from "./device/inAppBrowser";
 import * as Network from "./device/network";
 import * as Camera from "./device/camera";
-import * as Shortcut from "./device/shortcut";
 
 let ip;
 let status;
@@ -73,17 +72,6 @@ export function openDashboard() {
     const port = Util.getItem("port", 1880);
     InAppBrowser.openDashboard(port);
   }
-}
-
-function setHandlerOpenUrl() {
-  window.handleOpenURL = (url) => {
-    console.log(url);
-    if (url === "redmobile://dashboard/show") {
-      openDashboard();
-    } else if (url === "redmobile://dashboard/pin") {
-      Shortcut.pin("dashboard");
-    }
-  };
 }
 
 function sendCheckCommand() {
@@ -171,7 +159,6 @@ const cordovaApp = {
     document.addEventListener("backbutton", onBackKeyDown, false);
     Handler.init();
     Background.init();
-    setHandlerOpenUrl();
     startNodeProject();
     deviceReadyCallback();
   },

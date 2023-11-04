@@ -22,7 +22,6 @@ import * as Proximity from "./proximity";
 import QRCode from "./qrcode";
 import Recognition from "./recognition";
 import Serial from "./serial";
-import * as Shortcut from "./shortcut";
 import Speech from "./speech";
 import SQLite from "./sqlite";
 import Vibrate from "./vibrate";
@@ -78,7 +77,6 @@ export function start(json) {
 
 export function init() {
   Battery.init();
-  Shortcut.init();
   Network.init();
   Ble.init();
   Fcm.init();

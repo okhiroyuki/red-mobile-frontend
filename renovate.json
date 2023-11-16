@@ -1,10 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":enablePreCommit",
-    ":timezone(Asia/Tokyo)"
-  ],
+  "extends": ["config:base", ":enablePreCommit", ":timezone(Asia/Tokyo)"],
   "rangeStrategy": "pin",
   "major": {
     "automerge": false
@@ -24,6 +20,10 @@
       "automerge": true,
       "platformAutomerge": true,
       "matchManagers": ["pre-commit"]
+    },
+    {
+      "groupName": "vite and plugins",
+      "packagePatterns": ["^vite", "@vitejs/plugin-vue"]
     },
     {
       "automerge": true,

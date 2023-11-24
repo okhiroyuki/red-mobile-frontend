@@ -23,7 +23,7 @@
     "@mdi/js": "7.3.67",
     "@rushstack/eslint-patch": "1.6.0",
     "@tsconfig/node18": "18.2.2",
-    "@types/node": "20.9.5",
+    "@types/node": "20.10.0",
     "@vitejs/plugin-vue": "4.5.0",
     "@vue/eslint-config-prettier": "8.0.0",
     "@vue/eslint-config-typescript": "12.0.0",

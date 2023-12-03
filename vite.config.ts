@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from "node:url";
 
-import { defineConfig, splitVendorChunkPlugin } from "vite";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vuetify from "vite-plugin-vuetify";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
@@ -14,7 +14,6 @@ export default defineConfig(({ mode }) => {
       vue(),
       vuetify({ autoImport: true }),
       nodePolyfills(),
-      splitVendorChunkPlugin(),
       visualizer(),
       checker({
         eslint: {
@@ -30,6 +29,12 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "src-cordova/dist",
       rollupOptions: {
+        output: {
+          manualChunks: {
+            axios: ["axios"],
+            vuetify: ["vuetify"],
+          },
+        },
         plugins: [
           mode === "analyze" &&
             visualizer({

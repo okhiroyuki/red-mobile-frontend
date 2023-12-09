@@ -45,7 +45,7 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  return json.opts.sensor === "motion";
+  return json.options.sensor === "motion";
 }
 
 export function startWatch(json) {
@@ -53,7 +53,7 @@ export function startWatch(json) {
     const method = "sensor-subscribe";
     if (!watchId) {
       const options = {
-        frequency: Number(json.opts.freq),
+        frequency: Number(json.options.freq),
       };
       watchId = navigator.accelerometer.watchAcceleration(
         (acceleration) => {

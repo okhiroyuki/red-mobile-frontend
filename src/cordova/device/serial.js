@@ -61,34 +61,34 @@ function successOpen(json) {
   registerReadCallback(json);
 }
 
-function getOpts(json) {
-  const opts = {
-    baudRate: Number(json.opts.baudRate),
-    dataBits: Number(json.opts.dataBits),
-    stopBits: Number(json.opts.stopBits),
+function getoptions(json) {
+  const options = {
+    baudRate: Number(json.options.baudRate),
+    dataBits: Number(json.options.dataBits),
+    stopBits: Number(json.options.stopBits),
     parity: 0,
     dtr: false,
     rts: false,
     sleepOnPause: true,
   };
-  if (json.opts.parity === "odd") {
-    opts.parity = 1;
-  } else if (json.opts.parity === "even") {
-    opts.parity = 2;
+  if (json.options.parity === "odd") {
+    options.parity = 1;
+  } else if (json.options.parity === "even") {
+    options.parity = 2;
   }
-  if (json.opts.dtr === "true") {
-    opts.dtr = true;
+  if (json.options.dtr === "true") {
+    options.dtr = true;
   }
-  if (json.opts.rts === "true") {
-    opts.rts = true;
+  if (json.options.rts === "true") {
+    options.rts = true;
   }
-  return opts;
+  return options;
 }
 
 function open(_json) {
   const json = _json;
   serial.open(
-    getOpts(json),
+    getoptions(json),
     (message) => {
       json.payload = message;
       successOpen(json);

@@ -18,7 +18,7 @@ function startScan(json) {
       };
       nodejs.channel.post("message", msg);
     },
-    json.opts,
+    json.options,
   );
 }
 

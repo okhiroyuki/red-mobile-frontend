@@ -41,7 +41,7 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  return json.opts.sensor === "light";
+  return json.options.sensor === "light";
 }
 
 export function startWatch(json) {
@@ -49,7 +49,7 @@ export function startWatch(json) {
     const method = "sensor-subscribe";
     if (!watchId) {
       const options = {
-        frequency: Number(json.opts.freq),
+        frequency: Number(json.options.freq),
       };
       watchId = navigator.ambientlight.watchLight(
         (result) => {

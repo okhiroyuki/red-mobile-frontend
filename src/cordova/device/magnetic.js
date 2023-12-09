@@ -47,7 +47,7 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  return json.opts.sensor === "magnetic";
+  return json.options.sensor === "magnetic";
 }
 
 export function startWatch(json) {
@@ -55,7 +55,7 @@ export function startWatch(json) {
     const method = "sensor-subscribe";
     if (!watchId) {
       const options = {
-        frequency: Number(json.opts.freq),
+        frequency: Number(json.options.freq),
       };
       watchId = navigator.magnetometer.watchMagnetometer(
         (result) => {

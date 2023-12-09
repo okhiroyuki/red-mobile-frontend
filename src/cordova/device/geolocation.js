@@ -46,7 +46,7 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  return json.opts.sensor === "geolocation";
+  return json.options.sensor === "geolocation";
 }
 
 export function startWatch(json) {

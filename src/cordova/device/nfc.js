@@ -1,5 +1,5 @@
 function canExec(json) {
-  return json.opts.sensor === "nfc";
+  return json.options.sensor === "nfc";
 }
 
 function callbackSuccess(id, method, message) {

@@ -11,15 +11,15 @@ function sendWs(id, data) {
 }
 
 function getAddress(json) {
-  return json.opts.address;
+  return json.options.address;
 }
 
 function getService(json) {
-  return json.opts.service;
+  return json.options.service;
 }
 
 function getCharacteristic(json) {
-  return json.opts.characteristic;
+  return json.options.characteristic;
 }
 
 function enable(resolve, reject) {
@@ -61,7 +61,7 @@ function scan(json) {
     if (result.isScanning) {
       sendError(json, "isScanning");
     } else {
-      const timeout = json.opts.timeout * 1000 || 5000;
+      const timeout = json.options.timeout * 1000 || 5000;
       devices = [];
       bluetoothle.startScan(
         (_result) => {

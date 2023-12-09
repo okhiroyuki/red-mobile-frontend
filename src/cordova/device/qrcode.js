@@ -1,11 +1,3 @@
-function getOptions(json) {
-  if (json.options) {
-    return json.options;
-  } else {
-    return json.opts;
-  }
-}
-
 function startScan(json) {
   cordova.plugins.barcodeScanner.scan(
     (result) => {
@@ -26,7 +18,7 @@ function startScan(json) {
       };
       nodejs.channel.post("message", msg);
     },
-    getOptions(json),
+    json.options,
   );
 }
 

@@ -42,10 +42,11 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  if (json.opts) {
+  if (json.options) {
+    return json.options.sensor === "compass";
+  } else {
     return json.opts.sensor === "compass";
   }
-  return json.options.sensor === "compass";
 }
 
 export function startWatch(json) {

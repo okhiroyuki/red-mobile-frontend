@@ -11,15 +11,27 @@ function sendWs(id, data) {
 }
 
 function getAddress(json) {
-  return json.options.address;
+  if (json.options) {
+    return json.options.address;
+  } else {
+    return json.opts.address;
+  }
 }
 
 function getService(json) {
-  return json.options.service;
+  if (json.options) {
+    return json.options.service;
+  } else {
+    return json.opts.service;
+  }
 }
 
 function getCharacteristic(json) {
-  return json.options.characteristic;
+  if (json.options) {
+    return json.options.characteristic;
+  } else {
+    return json.opts.characteristic;
+  }
 }
 
 function enable(resolve, reject) {
@@ -56,12 +68,19 @@ function sendSuccess(json, payload) {
   nodejs.channel.post("message", msg);
 }
 
+function getTimeout(json) {
+  if (json.options) {
+    return json.options.timeout * 1000 || 5000;
+  } else {
+    return json.opts.timeout * 1000 || 5000;
+  }
+}
+
 function scan(json) {
   bluetoothle.isScanning((result) => {
     if (result.isScanning) {
       sendError(json, "isScanning");
     } else {
-      const timeout = json.options.timeout * 1000 || 5000;
       devices = [];
       bluetoothle.startScan(
         (_result) => {
@@ -83,7 +102,7 @@ function scan(json) {
       );
       setTimeout(
         bluetoothle.stopScan,
-        timeout,
+        getTimeout(json),
         () => {
           sendSuccess(json, devices);
         },

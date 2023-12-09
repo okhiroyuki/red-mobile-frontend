@@ -1,3 +1,4 @@
+import { getFrequency } from "../util";
 let watchId = null;
 
 function callbackSuccess(id, method, message) {
@@ -41,7 +42,11 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  return json.options.sensor === "light";
+  if (json.options) {
+    return json.options.sensor === "light";
+  } else {
+    return json.opts.sensor === "light";
+  }
 }
 
 export function startWatch(json) {
@@ -49,7 +54,7 @@ export function startWatch(json) {
     const method = "sensor-subscribe";
     if (!watchId) {
       const options = {
-        frequency: Number(json.options.freq),
+        frequency: getFrequency(json),
       };
       watchId = navigator.ambientlight.watchLight(
         (result) => {

@@ -1,3 +1,4 @@
+import { getFrequency } from "../util";
 let watchId = null;
 
 function callbackSuccess(id, method, message) {
@@ -41,6 +42,9 @@ function onError(id, error) {
 }
 
 function canExec(json) {
+  if (json.opts) {
+    return json.opts.sensor === "compass";
+  }
   return json.options.sensor === "compass";
 }
 
@@ -49,7 +53,7 @@ export function startWatch(json) {
     const method = "sensor-subscribe";
     if (!watchId) {
       const options = {
-        frequency: Number(json.options.freq),
+        frequency: getFrequency(json),
       };
       watchId = navigator.compass.watchHeading(
         (heading) => {

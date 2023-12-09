@@ -19,14 +19,14 @@ function registerReadCallback(json) {
     (data) => {
       const view = new Uint8Array(data);
       if (view.length >= 1) {
-        for (const element of view) {
+        for (let i = 0; i < view.length; i += 1) {
           // if we received a \n, the message is complete, display it
-          if (element === 13) {
+          if (view[i] === 13) {
             lastReadString = str;
             sendWs(json.id, lastReadString);
             str = "";
-          } else if (element !== 10) {
-            const tempStr = String.fromCharCode(element);
+          } else if (view[i] !== 10) {
+            const tempStr = String.fromCharCode(view[i]);
             const strEsc = escape(tempStr);
             str += unescape(strEsc);
           }
@@ -61,61 +61,28 @@ function successOpen(json) {
   registerReadCallback(json);
 }
 
-function getBaudRate(json) {
-  if (json.options) {
-    return Number(json.options.baudRate);
-  } else {
-    return Number(json.opts.baudRate);
-  }
-}
-
-function getDataBits(json) {
-  if (json.options) {
-    return Number(json.options.dataBits);
-  } else {
-    return Number(json.opts.dataBits);
-  }
-}
-
-function getStopBits(json) {
-  if (json.options) {
-    return Number(json.options.stopBits);
-  } else {
-    return Number(json.opts.stopBits);
-  }
-}
-
-function getParity(json) {
-  const parity = json.options ? json.options.parity : json.opts.parity;
-  if (parity === "odd") {
-    return 1;
-  } else if (parity === "even") {
-    return 2;
-  } else {
-    return 0;
-  }
-}
-
-function getDTR(json) {
-  const dtr = json.options ? json.options.dtr : json.opts.dtr;
-  return dtr === "true";
-}
-
-function getRTS(json) {
-  const rts = json.options ? json.options.rts : json.opts.rts;
-  return rts === "true";
-}
-
 function getoptions(json) {
-  return {
-    baudRate: getBaudRate(json),
-    dataBits: getDataBits(json),
-    stopBits: getStopBits(json),
-    parity: getParity(json),
-    dtr: getDTR(json),
-    rts: getRTS(json),
+  const options = {
+    baudRate: Number(json.options.baudRate),
+    dataBits: Number(json.options.dataBits),
+    stopBits: Number(json.options.stopBits),
+    parity: 0,
+    dtr: false,
+    rts: false,
     sleepOnPause: true,
   };
+  if (json.options.parity === "odd") {
+    options.parity = 1;
+  } else if (json.options.parity === "even") {
+    options.parity = 2;
+  }
+  if (json.options.dtr === "true") {
+    options.dtr = true;
+  }
+  if (json.options.rts === "true") {
+    options.rts = true;
+  }
+  return options;
 }
 
 function open(_json) {

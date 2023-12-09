@@ -134,11 +134,3 @@ export function requestReview() {
     console.log("call requestReview");
   }
 }
-
-export function getFrequency(json) {
-  if (json.options) {
-    return json.options.freq;
-  } else {
-    return json.opts.freq;
-  }
-}

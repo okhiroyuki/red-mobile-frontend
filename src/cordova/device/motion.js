@@ -1,4 +1,3 @@
-import { getFrequency } from "../util";
 let watchId = null;
 
 function callbackSuccess(id, method, message) {
@@ -46,11 +45,7 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  if (json.options) {
-    return json.options.sensor === "motion";
-  } else {
-    return json.opts.sensor === "motion";
-  }
+  return json.options.sensor === "motion";
 }
 
 export function startWatch(json) {
@@ -58,7 +53,7 @@ export function startWatch(json) {
     const method = "sensor-subscribe";
     if (!watchId) {
       const options = {
-        frequency: getFrequency(json),
+        frequency: Number(json.options.freq),
       };
       watchId = navigator.accelerometer.watchAcceleration(
         (acceleration) => {

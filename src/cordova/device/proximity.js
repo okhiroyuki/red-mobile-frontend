@@ -1,4 +1,3 @@
-import { getFrequency } from "../util";
 let watchId = null;
 
 function callbackSuccess(id, method, message) {
@@ -42,11 +41,7 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  if (json.options) {
-    return json.options.sensor === "proximity";
-  } else {
-    return json.opts.sensor === "proximity";
-  }
+  return json.options.sensor === "proximity";
 }
 
 export function startWatch(json) {
@@ -54,7 +49,7 @@ export function startWatch(json) {
     const method = "sensor-subscribe";
     if (!watchId) {
       const options = {
-        frequency: getFrequency(json),
+        frequency: Number(json.options.freq),
       };
       watchId = navigator.proximity.watchProximity(
         (result) => {

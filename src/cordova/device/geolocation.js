@@ -46,11 +46,7 @@ function onError(id, error) {
 }
 
 function canExec(json) {
-  if (json.options) {
-    return json.options.sensor === "geolocation";
-  } else {
-    return json.opts.sensor === "geolocation";
-  }
+  return json.options.sensor === "geolocation";
 }
 
 export function startWatch(json) {

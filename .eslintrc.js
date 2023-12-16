@@ -2,6 +2,7 @@ require("@rushstack/eslint-patch/modern-module-resolution");
 
 module.exports = {
   root: true,
+  files: ["src/**/*.js", "src/**/.ts", "src/**/*.vue"],
   env: {
     node: true,
     es2022: true,

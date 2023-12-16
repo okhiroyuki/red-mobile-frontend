@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
       visualizer(),
       checker({
         eslint: {
-          lintCommand: 'eslint "./src/**/*.{js,ts,vue}"',
+          lintCommand: "eslint",
         },
       }),
     ],

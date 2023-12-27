@@ -38,7 +38,7 @@
     "typescript": "5.3.3",
     "vite": "5.0.10",
     "vite-plugin-checker": "0.6.2",
-    "vite-plugin-node-polyfills": "0.18.0",
+    "vite-plugin-node-polyfills": "0.19.0",
     "vite-plugin-vuetify": "2.0.1",
     "vue-tsc": "1.8.27"
   }

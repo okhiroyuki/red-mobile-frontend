@@ -28,10 +28,10 @@
   "customizations": {
     "codespaces": {
       "repositories": {
-        "okhiroyuki/red-mobile-backend.git": {
+        "okhiroyuki/red-mobile-backend": {
           "permissions": "write-all"
         },
-        "okhiroyuki/red-mobile-core.git": {
+        "okhiroyuki/red-mobile-core": {
           "permissions": "write-all"
         }
       }

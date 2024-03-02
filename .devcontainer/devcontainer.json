@@ -21,7 +21,8 @@
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "yarn install",
-  "updateContentCommand": "bash .devcontainer/update-content-command.sh",
+  "postCreateCommand": "bash .devcontainer/update-content-command.sh",
+  "postAttachCommand": "bash .devcontainer/post-attach-command.sh",
 
   // Configure tool-specific properties.
   "customizations": {

@@ -1,6 +1,7 @@
 #!/bin/sh
 
 npm ci
+npm run build
 
 cd src-cordova
 npm ci
@@ -10,5 +11,3 @@ echo $ANDROID_KEYSTORE | base64 -d > android.keystore
 
 cd www/nodejs-project
 npm i --omit=dev
-
-

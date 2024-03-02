@@ -3,9 +3,7 @@
 {
   "name": "Node.js & TypeScript",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "dockerComposeFile": "../docker-compose.yml",
-  "service": "devcontainer",
-  "workspaceFolder": "/workspace",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-18-bullseye",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -23,16 +21,17 @@
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "yarn install",
+  "updateContentCommand": "bash .devcontainer/update-content-command.sh",
 
   // Configure tool-specific properties.
   "customizations": {
     "codespaces": {
       "repositories": {
         "okhiroyuki/red-mobile-backend": {
-          "permissions": "write-all"
+          "content": "read"
         },
         "okhiroyuki/red-mobile-core": {
-          "permissions": "write-all"
+          "content": "read"
         }
       }
     },

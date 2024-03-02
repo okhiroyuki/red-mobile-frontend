@@ -45,7 +45,9 @@
         "esbenp.prettier-vscode",
         "emeraldwalk.RunOnSave",
         "Vue.vscode-typescript-vue-plugin",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "github.vscode-github-actions",
+        "DavidAnson.vscode-markdownlint"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "zsh"

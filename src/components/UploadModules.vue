@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { mdiCloudUpload } from "@mdi/js";
-import { ref, computed, onMounted, inject } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
 import * as Modules from "../cordova/modules";
-import Snackbar from "./BaseSnackBar.vue";
-import ModulesNote from "./UploadModulesNote.vue";
 import FileSelector from "./BaseFileSelector.vue";
 import ResetButton from "./BaseResetButton.vue";
+import Snackbar from "./BaseSnackBar.vue";
+import ModulesNote from "./UploadModulesNote.vue";
 const Main = inject("Main") as Main;
 const Purchase = inject("Purchase") as Purchase;
 

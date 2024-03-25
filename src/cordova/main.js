@@ -1,9 +1,9 @@
-import * as Util from "./util";
 import * as Background from "./background";
+import * as Camera from "./device/camera";
 import * as Handler from "./device/handler";
 import * as InAppBrowser from "./device/inAppBrowser";
 import * as Network from "./device/network";
-import * as Camera from "./device/camera";
+import * as Util from "./util";
 
 let ip;
 let status;
@@ -68,7 +68,7 @@ export function start(username, password, port) {
 }
 
 export function openDashboard() {
-  if (status == "started") {
+  if (status === "started") {
     const port = Util.getItem("port", 1880);
     InAppBrowser.openDashboard(port);
   }

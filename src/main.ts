@@ -1,10 +1,10 @@
-import { createApp } from "vue";
-import App from "./App.vue";
 import axios from "axios";
+import { createApp } from "vue";
 import VueAxios from "vue-axios";
+import App from "./App.vue";
 import * as Main from "./cordova/main";
-import { isCordova } from "./cordova/util";
 import * as Purchase from "./cordova/purchase";
+import { isCordova } from "./cordova/util";
 import vuetify from "./plugins/vuetify";
 import router from "./router";
 

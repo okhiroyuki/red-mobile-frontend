@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AppBar from "../components/BaseAppBar.vue";
-import UploadFlows from "../components/UploadFlows.vue";
-import UploadEnv from "../components/UploadEnv.vue";
-import UploadModules from "../components/UploadModules.vue";
 import { mdiArrowLeft } from "@mdi/js";
 import { ref } from "vue";
+import AppBar from "../components/BaseAppBar.vue";
+import UploadEnv from "../components/UploadEnv.vue";
+import UploadFlows from "../components/UploadFlows.vue";
+import UploadModules from "../components/UploadModules.vue";
 
 const tabTitles = ref(["Flows", "Env", "Modules"]);
 const tabTitle = ref(tabTitles.value[0]);

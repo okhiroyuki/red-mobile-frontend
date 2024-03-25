@@ -2,9 +2,9 @@
 import {
   mdiCloudUpload,
   mdiCog,
+  mdiGooglePlay,
   mdiLicense,
   mdiNoteText,
-  mdiGooglePlay,
   mdiOpenInNew,
 } from "@mdi/js";
 import { ref } from "vue";

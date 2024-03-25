@@ -46,7 +46,7 @@ export function onError() {
 
 export const getBooleanItem = (item) => {
   const val = window.localStorage.getItem(item);
-  return val != undefined && val === "true";
+  return val !== undefined && val === "true";
 };
 
 export const getItem = (item, defaultValue) => {

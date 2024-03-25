@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { mdiInformationVariant } from "@mdi/js";
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { getVersion } from "../cordova/version";
 
 const version = ref("");

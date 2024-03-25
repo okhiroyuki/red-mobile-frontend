@@ -17,6 +17,7 @@ import * as Magnetic from "./magnetic";
 import MLKit from "./mlkit";
 import * as Motion from "./motion";
 import * as Network from "./network";
+import * as NFC from "./nfc";
 import Prompt from "./prompt";
 import * as Proximity from "./proximity";
 import QRCode from "./qrcode";
@@ -26,7 +27,6 @@ import Speech from "./speech";
 import SQLite from "./sqlite";
 import Vibrate from "./vibrate";
 import Volume from "./volume";
-import * as NFC from "./nfc";
 
 export function sensorManager(json) {
   if (json.method === "sensor-subscribe") {

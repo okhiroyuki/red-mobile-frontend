@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import {
+  checkBluetoothPermission,
+  checkCameraPermission,
   checkLocationPermission,
   checkMicPermission,
   checkStoragePermission,
-  checkBluetoothPermission,
-  checkCameraPermission,
 } from "../cordova/permission";
 import { isCordova } from "../cordova/util";
 

@@ -1,11 +1,11 @@
-import { fileURLToPath, URL } from "node:url";
+import { URL, fileURLToPath } from "node:url";
 
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import vuetify from "vite-plugin-vuetify";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
 import { visualizer } from "rollup-plugin-visualizer";
+import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
+import vuetify from "vite-plugin-vuetify";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -15,11 +15,7 @@ export default defineConfig(({ mode }) => {
       vuetify({ autoImport: true }),
       nodePolyfills(),
       visualizer(),
-      checker({
-        eslint: {
-          lintCommand: 'eslint "./src/**/*.{js,ts,vue}"',
-        },
-      }),
+      checker({}),
     ],
     resolve: {
       alias: {
@@ -27,7 +23,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      outDir: "src-cordova/dist",
+      outDir: "dist",
       rollupOptions: {
         output: {
           manualChunks: {

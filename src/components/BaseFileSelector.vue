@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mdiPaperclip } from "@mdi/js";
 
-import { ref, computed } from "vue";
+import { computed, ref } from "vue";
 import { getFile } from "../cordova/util";
 
 const emits = defineEmits<{

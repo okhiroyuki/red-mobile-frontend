@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Tab from "./BaseTab.vue";
-import NavigationDrawer from "./BaseNavigationDrawer.vue";
-import { useRouter } from "vue-router";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import NavigationDrawer from "./BaseNavigationDrawer.vue";
+import Tab from "./BaseTab.vue";
 
 const emits = defineEmits<{
   tabTitleClick: [value: string];
@@ -41,7 +41,7 @@ const tabTitleClick = (tabTitle: string) => {
 };
 
 const navIconClick = () => {
-  console.log("navIconClick :" + title.value);
+  console.log(`navIconClick :${title.value}`);
   if (title.value === "Home") {
     sidebar.value = !sidebar.value;
   } else {

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { hasEnv, write, remove } from "../cordova/env";
+import { onMounted, ref } from "vue";
+import { hasEnv, remove, write } from "../cordova/env";
 import { readAsText } from "../cordova/util";
-import Snackbar from "./BaseSnackBar.vue";
-import EnvNote from "./UploadEnvNote.vue";
-import ResetButton from "./BaseResetButton.vue";
-import UploadButton from "./BaseUploadButton.vue";
 import FileSelector from "./BaseFileSelector.vue";
+import ResetButton from "./BaseResetButton.vue";
+import Snackbar from "./BaseSnackBar.vue";
+import UploadButton from "./BaseUploadButton.vue";
+import EnvNote from "./UploadEnvNote.vue";
 
 const disabledReset = ref(false);
 const loading = ref(false);

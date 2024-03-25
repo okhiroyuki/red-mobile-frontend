@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import * as Modules from "../cordova/modules";
+import { onMounted, ref, watch } from "vue";
 import { hasEnv } from "../cordova/env";
-import { ref, onMounted, watch } from "vue";
+import * as Modules from "../cordova/modules";
 import { getBooleanItem, setKeepAwake } from "../cordova/util";
 
 const emits = defineEmits<{

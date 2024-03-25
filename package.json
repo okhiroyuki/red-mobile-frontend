@@ -23,7 +23,7 @@
     "yargs": "17.7.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.2",
+    "@biomejs/biome": "1.6.3",
     "@mdi/js": "7.4.47",
     "@tsconfig/node18": "18.2.3",
     "@types/node": "20.11.30",

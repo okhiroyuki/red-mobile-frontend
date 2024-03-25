@@ -1,10 +1,10 @@
 <script setup lan="ts">
-import { ref, computed, inject, onMounted } from "vue";
-import Snackbar from "./BaseSnackBar.vue";
-import FlowNote from "./UploadFlowsNote.vue";
-import UploadButton from "./BaseUploadButton.vue";
-import FileSelector from "./BaseFileSelector.vue";
+import { computed, inject, onMounted, ref } from "vue";
 import { readAsText } from "../cordova/util";
+import FileSelector from "./BaseFileSelector.vue";
+import Snackbar from "./BaseSnackBar.vue";
+import UploadButton from "./BaseUploadButton.vue";
+import FlowNote from "./UploadFlowsNote.vue";
 const axios = inject("axios");
 const Main = inject("Main");
 

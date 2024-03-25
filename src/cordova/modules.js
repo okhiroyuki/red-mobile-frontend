@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { isCordova } from "./util";
 
 const BACKUP_ZIP = "node_modules.zip";

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, computed, inject, onMounted, watch } from "vue";
-import { validatePort, validateLogin, getItem } from "../cordova/util";
-import Snackbar from "../components/BaseSnackBar.vue";
+import { mdiMenu } from "@mdi/js";
+import { computed, inject, onMounted, ref, watch } from "vue";
 import AppBar from "../components/BaseAppBar.vue";
-import DashboardButton from "../components/HomeDashboardButton.vue";
-import RequestPermission from "../components/HomeRequestPermission.vue";
-import StartButton from "../components/HomeStartButton.vue";
+import Snackbar from "../components/BaseSnackBar.vue";
 import CheckBoxes from "../components/HomeCheckBoxes.vue";
+import DashboardButton from "../components/HomeDashboardButton.vue";
 import Password from "../components/HomePassword.vue";
 import Port from "../components/HomePort.vue";
+import RequestPermission from "../components/HomeRequestPermission.vue";
+import StartButton from "../components/HomeStartButton.vue";
 import Username from "../components/HomeUsername.vue";
-import { mdiMenu } from "@mdi/js";
+import { getItem, validateLogin, validatePort } from "../cordova/util";
 
 const Main = inject("Main") as Main;
 

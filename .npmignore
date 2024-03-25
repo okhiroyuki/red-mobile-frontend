@@ -1,0 +1,17 @@
+.devcontainer
+.github
+.vscode
+.editorconfig
+.gitmodules
+.gitignore
+
+public
+src
+src-cordova
+
+*.md
+*.yaml
+*.ts
+*.json
+*.html
+!dist/*.html

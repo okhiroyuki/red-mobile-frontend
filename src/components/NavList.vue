@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import NavListAvatar from "./NavListAvatar.vue";
 import NavListItems from "./NavListItems.vue";
 import NavListVersion from "./NavListVersion.vue";
-import { ref } from "vue";
 
 const selectedItem = ref(1);
 </script>

@@ -1,12 +1,14 @@
-# redmobile-frontend
+# @red-mobile/frontend
 
-## Prepare
+## Usage
 
 ```zsh
-nodenv isntall
+@red-mobile/frontend copy "./dist"
 ```
 
-## Project setup
+## Development
+
+### Prepare
 
 ```bash
 npm ci
@@ -22,10 +24,4 @@ npm run serve
 
 ```bash
 npm run build
-```
-
-### Lints and fixes files
-
-```bash
-npm run lint
 ```

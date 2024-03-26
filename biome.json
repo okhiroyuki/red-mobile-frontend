@@ -22,6 +22,6 @@
     "lineEnding": "lf"
   },
   "files": {
-    "ignore": ["src-cordova", "dist", ".devcontainer", ".github", ".vscode"]
+    "ignore": ["dist", ".devcontainer", ".github", ".vscode"]
   }
 }

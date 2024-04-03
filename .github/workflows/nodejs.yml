@@ -16,9 +16,9 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      - name: npm install, test
-        run: |
-          npm ci
-          npm run test --if-present
+      - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+        run: npm ci
+      - name: npm test
+        run: npm run test --if-present
         env:
           CI: true

@@ -15,9 +15,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: npm install, test
-        run: |
-          npm ci
-          npm run test --if-present
+      - name: npm ci
+        run: npm ci --no-audit --progress=false --silent
+      - name: npm test
+        run: npm run test --if-present
         env:
           CI: true

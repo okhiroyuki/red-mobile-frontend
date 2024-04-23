@@ -162,3 +162,5 @@ yarn-error.log
 *.sln
 *.sw?
 stats.html
+
+.pre-commit-cache

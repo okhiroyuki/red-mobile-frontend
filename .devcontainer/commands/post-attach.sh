@@ -1,3 +1,7 @@
 #!/bin/bash
 
-sudo chown -R node node_modules && npm ci
+sudo chown node .pre-commit-cache
+sudo chown node .npm
+sudo chown node node_modules
+
+npm ci

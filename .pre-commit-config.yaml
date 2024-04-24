@@ -11,6 +11,6 @@ repos:
     hooks:
       - id: local-biome-check
         name: biome check
-        entry: npx biome check .
+        entry: npx biome check --apply --files-ignore-unknown=true --no-errors-on-unmatched
         language: system
         types: [text]

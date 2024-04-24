@@ -12,9 +12,9 @@
     "serve": "vite preview",
     "lint": "npx @biomejs/biome check .",
     "fmt": "npx @biomejs/biome format . --write",
-    "tsc": "vue-tsc --noEmit --composite false",
+    "tsc": "npx vue-tsc --noEmit --composite false",
     "copy": "./bin/cli.mjs copy './src-cordova/dist'",
-    "test": "run-s tsc lint",
+    "test": "run-s tsc",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

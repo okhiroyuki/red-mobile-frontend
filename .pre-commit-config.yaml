@@ -7,3 +7,9 @@ repos:
       - id: check-yaml
       - id: double-quote-string-fixer
       - id: requirements-txt-fixer
+  - repo: local
+    hooks:
+      - id: local-biome-check
+        name: biome check
+        entry: npx @biomejs/biome check .
+        language: system

@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/typescript-node:1-20
 
 # renovate: datasource=github-releases depName=hadolint/hadolint
-ENV HADOLINT_VERSION="v2.11.0"
+ENV HADOLINT_VERSION="v2.12.0"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         pre-commit \

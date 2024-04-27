@@ -10,7 +10,13 @@ repos:
 
   - repo: local
     hooks:
-      - id: local-biome-check
+      - id: biome
         name: biome check
         entry: npx @biomejs/biome check --apply .
+        language: system
+
+      - id: dprint
+        name: dprint fmt
+        entry: npx dprint fmt
+        args: ['--allow-no-files']
         language: system

@@ -10,6 +10,7 @@
     "build": "run-s tsc lint build:vite",
     "analyze": "vite build --emptyOutDir --mode analyze",
     "serve": "vite preview",
+    "hadolint": "hadolint .devcontainer/Dockerfile",
     "lint": "npx @biomejs/biome check .",
     "fmt": "npx @biomejs/biome format . --write",
     "tsc": "npx vue-tsc --noEmit --composite false",

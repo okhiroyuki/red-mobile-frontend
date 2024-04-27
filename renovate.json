@@ -29,6 +29,18 @@
       "automerge": true,
       "platformAutomerge": true,
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
+    },
+    {
+      "customManagers": [
+        {
+          "customType": "regex",
+          "fileMatch": ["^Dockerfile$"],
+          "matchStrings": [
+            "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION=(?<currentValue>.*)\\s"
+          ],
+          "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+        }
+      ]
     }
   ]
 }

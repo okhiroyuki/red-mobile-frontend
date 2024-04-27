@@ -7,6 +7,12 @@ repos:
       - id: check-yaml
       - id: double-quote-string-fixer
       - id: requirements-txt-fixer
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+
   - repo: local
     hooks:
       - id: local-biome-check

@@ -31,7 +31,10 @@
         "streetsidesoftware.code-spell-checker",
         "usernamehw.errorlens",
         "github.vscode-github-actions",
-        "GitHub.vscode-pull-request-github"
+        "GitHub.vscode-pull-request-github",
+        "exiasr.hadolint",
+        "GitHub.copilot-chat",
+        "GitHub.copilot"
       ]
     }
   }

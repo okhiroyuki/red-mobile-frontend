@@ -13,4 +13,4 @@ repos:
       - id: local-biome-check
         name: biome check
         entry: npx @biomejs/biome check --apply .
-        language: node
+        language: system

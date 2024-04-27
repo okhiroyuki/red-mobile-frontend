@@ -34,7 +34,8 @@
         "GitHub.vscode-pull-request-github",
         "exiasr.hadolint",
         "GitHub.copilot-chat",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "timonwong.shellcheck"
       ]
     }
   }

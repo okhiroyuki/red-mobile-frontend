@@ -40,7 +40,7 @@
     "vite-plugin-checker": "0.6.4",
     "vite-plugin-node-polyfills": "0.21.0",
     "vite-plugin-vuetify": "2.0.3",
-    "vue": "3.4.25",
+    "vue": "3.4.26",
     "vue-axios": "3.5.2",
     "vue-router": "4.3.2",
     "vue-tsc": "2.0.14",

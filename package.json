@@ -29,7 +29,7 @@
     "@biomejs/biome": "1.7.3",
     "@mdi/js": "7.4.47",
     "@tsconfig/node18": "18.2.4",
-    "@types/node": "20.14.0",
+    "@types/node": "20.14.1",
     "@vitejs/plugin-vue": "5.0.5",
     "@vue/tsconfig": "0.5.1",
     "axios": "1.7.2",

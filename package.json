@@ -44,6 +44,6 @@
     "vue-axios": "3.5.2",
     "vue-router": "4.4.0",
     "vue-tsc": "2.0.26",
-    "vuetify": "3.6.10"
+    "vuetify": "3.6.11"
   }
 }

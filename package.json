@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "fs-extra": "11.2.0",
-    "rimraf": "5.0.8",
+    "rimraf": "5.0.9",
     "yargs": "17.7.2"
   },
   "devDependencies": {

@@ -42,7 +42,7 @@
     "vite-plugin-vuetify": "2.0.3",
     "vue": "3.4.35",
     "vue-axios": "3.5.2",
-    "vue-router": "4.4.1",
+    "vue-router": "4.4.2",
     "vue-tsc": "2.0.29",
     "vuetify": "3.6.14"
   }

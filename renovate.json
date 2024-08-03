@@ -1,46 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":enablePreCommit", ":timezone(Asia/Tokyo)"],
-  "rangeStrategy": "pin",
-  "major": {
-    "automerge": false
-  },
-  "nodenv": {
-    "enabled": true,
-    "automerge": true,
-    "platformAutomerge": true
-  },
-  "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true,
-    "platformAutomerge": true
-  },
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "(^|/|\\.)([Dd]ocker|[Cc]ontainer)file$",
-        "(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$"
-      ],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s(?:ENV|ARG) .+?_VERSION[ =]\"?(?<currentValue>.+?)\"?\\s"
-      ]
-    }
-  ],
-  "packageRules": [
-    {
-      "automerge": true,
-      "platformAutomerge": true,
-      "matchManagers": ["pre-commit"]
-    },
-    {
-      "groupName": "vite and plugins",
-      "packagePatterns": ["^vite", "@vitejs/plugin-vue"]
-    },
-    {
-      "automerge": true,
-      "platformAutomerge": true,
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"]
-    }
-  ]
+  "extends": ["github>okhiroyuki/renovate-config"]
 }

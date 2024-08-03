@@ -5,7 +5,7 @@
   "excludes": [".pre-commit-cache", ".npm"],
   "plugins": [
     "https://plugins.dprint.dev/markdown-0.16.4.wasm",
-    "https://plugins.dprint.dev/toml-0.6.1.wasm",
+    "https://plugins.dprint.dev/toml-0.6.2.wasm",
     "https://plugins.dprint.dev/dockerfile-0.3.2.wasm"
   ]
 }

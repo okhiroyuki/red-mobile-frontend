@@ -10,7 +10,7 @@ repos:
     hooks:
       - id: biome
         name: biome check
-        entry: npx @biomejs/biome check --apply .
+        entry: npx @biomejs/biome check --write .
         language: system
 
       - id: dprint

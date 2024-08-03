@@ -16,5 +16,5 @@ repos:
       - id: dprint
         name: dprint fmt
         entry: npx dprint fmt
-        args: ['--allow-no-files']
+        args: ["--allow-no-files"]
         language: system

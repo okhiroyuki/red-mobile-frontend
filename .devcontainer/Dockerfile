@@ -1,13 +1,11 @@
+FROM koalaman/shellcheck:v0.10.0 AS shellcheck
+FROM hadolint/hadolint:v2.12.0-alpine AS dockerfile-lint
+
 FROM mcr.microsoft.com/devcontainers/typescript-node:1-20
 
-# renovate: datasource=github-releases depName=hadolint/hadolint
-ENV HADOLINT_VERSION="v2.12.0"
+COPY --from=shellcheck /bin/shellcheck /usr/bin/
+COPY --from=dockerfile-lint /bin/hadolint /usr/bin/hadolint
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         pre-commit \
-        wget \
-        shellcheck \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN wget -q -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/${HADOLINT_VERSION}/hadolint-Linux-x86_64 \
-    && chmod +x /usr/local/bin/hadolint

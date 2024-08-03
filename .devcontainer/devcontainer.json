@@ -2,7 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
   "name": "Node.js & TypeScript",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -17,13 +16,7 @@
     "PRE_COMMIT_HOME": "${containerWorkspaceFolder}/.pre-commit-cache",
     "npm_config_cache": "${containerWorkspaceFolder}/.npm"
   },
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
-  // Use 'postCreateCommand' to run commands after the container is created.
   "postAttachCommand": "bash .devcontainer/commands/post-attach.sh",
-  // Configure tool-specific properties.
   "customizations": {
     "vscode": {
       "extensions": [
@@ -39,6 +32,4 @@
       ]
     }
   }
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
 }

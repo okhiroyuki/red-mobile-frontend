@@ -5,6 +5,7 @@
 .vscode
 public
 src
+.node-version
 .editorconfig
 .gitignore
 .yamllint

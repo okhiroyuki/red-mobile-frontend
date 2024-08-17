@@ -1,0 +1,31 @@
+---
+name: npm publish
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_run:
+    workflows:
+      - Node CI
+      - pre-commit
+    branches:
+      - main
+    types:
+      - completed
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: okhiroyuki/composite-actions
+          path: ./.github/actions/composite-actions
+      - uses: ./.github/actions/composite-actions/setup-node
+      - uses: ./.github/actions/composite-actions/npm-publish
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}

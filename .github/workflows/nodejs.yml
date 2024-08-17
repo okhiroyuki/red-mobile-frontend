@@ -30,6 +30,7 @@ jobs:
         with:
           repository: okhiroyuki/composite-actions
           path: ./.github/actions/composite-actions
+      - uses: ./.github/actions/composite-actions/setup-node
       - name: npm test
         run: npm run test --if-present
         env:

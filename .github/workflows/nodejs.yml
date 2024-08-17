@@ -1,15 +1,18 @@
 ---
 name: Node CI
 
-"on":
+# yamllint disable-line rule:truthy
+on:
   pull_request:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,15 +24,12 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
         with:
-          node-version: "20"
-      - name: npm ci
-        run: npm ci --no-audit --progress=false --silent
+          repository: okhiroyuki/composite-actions
+          path: ./.github/actions/composite-actions
       - name: npm test
         run: npm run test --if-present
         env:

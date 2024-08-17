@@ -26,6 +26,8 @@ jobs:
           repository: okhiroyuki/composite-actions
           path: ./.github/actions/composite-actions
       - uses: ./.github/actions/composite-actions/setup-node
+      - name: bulild
+        run: npm run build
       - uses: ./.github/actions/composite-actions/npm-publish
         with:
           npm-token: ${{ secrets.NPM_TOKEN }}

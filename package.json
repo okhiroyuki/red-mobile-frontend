@@ -31,7 +31,7 @@
     "@tsconfig/node18": "18.2.4",
     "@types/node": "20.17.9",
     "@vitejs/plugin-vue": "5.2.1",
-    "@vue/tsconfig": "0.6.0",
+    "@vue/tsconfig": "0.7.0",
     "axios": "1.7.8",
     "npm-run-all2": "6.2.6",
     "rollup-plugin-visualizer": "5.12.0",
